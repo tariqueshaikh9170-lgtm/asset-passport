@@ -215,10 +215,44 @@ body:has(.modal.open){overflow:hidden;}
 #detailTabRecords .sale-history:not(.collapsed) #saleHistory{max-height:150px!important;overflow:auto!important}
 @media(max-width:600px){#detailTabRecords .detail-actions{grid-template-columns:repeat(3,1fr)!important;gap:6px!important}#detailTabRecords .detail-actions .primary{grid-column:1/-1!important}#detailTabRecords .reminder-card,#detailTabRecords .timeline-card-compact,#detailTabRecords .sale-history{padding:9px 10px!important}#detailTabRecords .compact-summary{font-size:10px!important}}
 </style>
+
+<style>
+/* V94 compact classic authentication */
+#authView{background:linear-gradient(180deg,#061426 0 28%,#f4f8ff 28% 100%);}
+#authView .topbar{height:62px;}
+#authView .topbar .logo{font-size:18px;}
+#authView .topbadge{display:none;}
+#authView .auth-wrap{padding:10px 0 28px;min-height:auto;}
+#authView .auth-card{max-width:560px;display:block;background:#fff;border-radius:24px;overflow:hidden;border:1px solid #dce5f0;box-shadow:0 24px 70px #001b3a22;}
+#authView .auth-head{min-height:0;padding:22px 24px 20px;border-radius:0;background:linear-gradient(145deg,#061b34,#0b3e73 70%,#1768d9);text-align:left;display:block;}
+#authView .auth-head .auth-orbit{display:none;}
+#authView .auth-shield{width:48px;height:56px;margin:0 0 12px;font-size:21px;border-radius:15px 15px 23px 23px;}
+#authView .auth-head .eyebrow{text-align:left;font-size:9px;margin-bottom:4px;}
+#authView .auth-head h1{text-align:left;font-size:28px;margin:0 0 5px;}
+#authView .auth-head p{text-align:left;font-size:12px;line-height:1.4;max-width:430px;}
+#authView .auth-promise{justify-content:flex-start;text-align:left;margin-top:12px;font-size:8px;}
+#authView .auth-body{border:0;border-radius:0;padding:20px 22px 22px;box-shadow:none;}
+#authView .secure-note{margin-bottom:12px;font-size:10px;padding:9px 11px;}
+#authView .tabs{margin-bottom:15px;}
+#authView .tab{padding:10px;font-size:12px;}
+#authView .auth-body h2{font-size:21px!important;}
+#authView .field{margin:11px 0;}
+#authView .field input{height:48px;}
+#authView .primary{height:50px;}
+#authView .auth-divider{margin:13px 0 10px;}
+#authView .oauth-btn{height:42px;font-size:12px;}
+#authView .trust-strip{margin-top:15px;padding-top:13px;}
+#authView .trust-item b{font-size:11px;}
+#authView .trust-item small{font-size:8px;}
+#authView .footer{display:none;}
+#authView .auth-status-note{display:block;margin:-2px 0 12px;padding:9px 11px;border-radius:11px;background:#f8fbff;border:1px solid #dfeaf7;color:#667085;font-size:10px;text-align:center;}
+@media(max-width:760px){#authView{background:linear-gradient(180deg,#061426 0 20%,#f4f8ff 20% 100%)}#authView .topbar{height:56px;padding:0 12px}.container{width:min(100% - 16px,1120px)}#authView .auth-card{border-radius:22px}.auth-head{padding:20px!important}.auth-body{padding:18px!important}}
+@media(max-width:430px){#authView .auth-head{padding:18px!important}#authView .auth-shield{width:42px;height:50px;font-size:19px;margin-bottom:9px}#authView .auth-head h1{font-size:25px}#authView .auth-head p{font-size:11px}#authView .oauth-row{gap:8px}}
+</style>
 </head><body>
 <div id="authView" class="shell"><div class="container"><div class="topbar"><div class="logo"><span class="mark">✦</span><span>Asset Passport</span></div><div class="topbadge">Secure · Global · Trusted</div></div>
 <div class="auth-wrap"><div class="auth-card"><div class="auth-head"><div class="auth-orbit"><span class="orbit-dot d1"></span><span class="orbit-dot d2"></span><span class="orbit-dot d3"></span><span class="orbit-line l1"></span><span class="orbit-line l2"></span></div><div class="auth-shield">✦</div><div class="eyebrow">ASSET IDENTITY PLATFORM</div><h1>Asset Passport</h1><p>One trusted record for every valuable asset — ownership, documents, history and verification.</p><div class="auth-promise"><span>Register</span><i>•</i><span>Protect</span><i>•</i><span>Verify</span><i>•</i><span>Everywhere</span></div></div><div class="auth-body">
-<div class="secure-note"><span class="secure-dot"></span><span>Secure workspace · Private by default</span></div>
+<div class="secure-note"><span class="secure-dot"></span><span>Secure workspace · Private by default</span></div><div id="authBootStatus" class="auth-status-note">Checking secure connection…</div>
 <div class="tabs"><button class="tab active" id="signTab" onclick="setMode(false)">Sign in</button><button class="tab" id="createTab" onclick="setMode(true)">Create account</button></div>
 <div style="text-align:center;margin:-2px 0 17px"><h2 id="authTitle" style="margin:0 0 5px;font-size:24px;letter-spacing:-.03em">Welcome back</h2><div id="authLead" class="sub" style="font-size:12px">Sign in to your secure Asset Passport workspace.</div></div>
 <form onsubmit="event.preventDefault();submitAuth()" autocomplete="on"><div class="field"><label>Email address</label><input id="email" type="email" autocomplete="email" placeholder="you@example.com" required></div>
@@ -313,11 +347,51 @@ const CONFIG=window.ASSET_PASSPORT_CONFIG;let sb=null,signUpMode=false;
 const $=id=>document.getElementById(id);document.addEventListener("DOMContentLoaded",()=>{const b=$("saleBtn");if(b)b.addEventListener("click",e=>{e.preventDefault();e.stopImmediatePropagation();recordSale()})});function msg(id,text,type=""){const e=$(id);e.textContent=text;e.className="status show "+type}function clear(id){const e=$(id);e.className="status";e.textContent=""}function esc(v){return String(v??"").replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
 function setMode(v){signUpMode=v;$('signTab').classList.toggle('active',!v);$('createTab').classList.toggle('active',v);$('authTitle').textContent=v?'Create your account':'Welcome back';$('authLead').textContent=v?'Create your secure Asset Passport workspace.':'Sign in to your secure Asset Passport workspace.';$('authBtn').textContent=v?'Create account →':'Sign in →';$('forgotRow').style.display=v?'none':'flex';$('password').autocomplete=v?'new-password':'current-password';$('authSwitchText').textContent=v?'Already have an account?':'New to Asset Passport?';clear('authStatus')}
 function togglePassword(){const p=$('password'),b=document.querySelector('.peek');p.type=p.type==='password'?'text':'password';b.textContent=p.type==='password'?'Show':'Hide'}function passwordChanged(){if(signUpMode){const n=$('password').value;$('passwordHint').textContent=n.length?((n.length>=8)?'':'Use 8+ characters') : '8+ characters';$('passwordHint').style.color=n.length>=8?'#067647':'#b42318'}}
-async function submitAuth(){clear('authStatus');if(!sb)return msg('authStatus','Secure connection is not ready. Please reopen the app.','err');const email=$('email').value.trim(),password=$('password').value;if(password.length<8)return msg('authStatus','Password must be at least 8 characters.','err');$('authBtn').disabled=true;$('authBtn').innerHTML='<span class="spinner"></span>'+ (signUpMode?'Creating account…':'Signing in…');let r=signUpMode?await sb.auth.signUp({email,password}):await sb.auth.signInWithPassword({email,password});$('authBtn').disabled=false;$('authBtn').textContent=signUpMode?'Create account':'Sign in';if(r.error)return msg('authStatus',r.error.message,'err');if(signUpMode&&!r.data.session)return msg('authStatus','Account created. Check your email to confirm the account, then sign in.','ok');if(signUpMode)msg('authStatus','Account created successfully.','ok')}
-
-async function oauth(provider){if(!sb)return msg('authStatus','Secure connection is not ready.','err');const r=await sb.auth.signInWithOAuth({provider,options:{redirectTo:location.href.split('#')[0]}});if(r.error)msg('authStatus',r.error.message,'err')}
+async function submitAuth(){
+  clear('authStatus');
+  if(!sb)return msg('authStatus','Secure connection is not ready. Refresh this page and try again.','err');
+  const email=$('email').value.trim(),password=$('password').value;
+  if(!email)return msg('authStatus','Enter your email address.','err');
+  if(password.length<8)return msg('authStatus','Password must be at least 8 characters.','err');
+  const btn=$('authBtn'); btn.disabled=true; btn.innerHTML='<span class="spinner"></span>'+(signUpMode?'Creating account…':'Signing in…');
+  try{
+    const r=signUpMode?await sb.auth.signUp({email,password}):await sb.auth.signInWithPassword({email,password});
+    if(r.error){msg('authStatus',r.error.message||'Authentication failed.','err');return;}
+    if(signUpMode&&!r.data.session){msg('authStatus','Account created. Check your email confirmation, then sign in.','ok');return;}
+    if(!r.data.session){msg('authStatus','Authentication completed but no session was returned. Refresh and try again.','err');return;}
+    msg('authStatus','Signed in successfully.','ok');
+    showApp(r.data.session);
+  }catch(e){msg('authStatus',e?.message||'Unable to connect to the secure login service.','err');}
+  finally{btn.disabled=false;btn.textContent=signUpMode?'Create account':'Sign in →';}
+}
+async function oauth(provider){
+  clear('authStatus');
+  if(!sb)return msg('authStatus','Secure connection is not ready. Refresh this page and try again.','err');
+  const btns=document.querySelectorAll('.oauth-btn');btns.forEach(b=>b.disabled=true);
+  try{
+    const redirect=location.origin+location.pathname;
+    const r=await sb.auth.signInWithOAuth({provider,options:{redirectTo:redirect}});
+    if(r.error)msg('authStatus',r.error.message||('Could not start '+provider+' sign-in.'),'err');
+  }catch(e){msg('authStatus',e?.message||('Could not start '+provider+' sign-in.'),'err');}
+  finally{btns.forEach(b=>b.disabled=false);}
+}
 async function resetPassword(){clear('authStatus');const email=$('email').value.trim();if(!email)return msg('authStatus','Enter your email first, then tap Forgot password.','err');const redirect=location.href.split('#')[0];const r=await sb.auth.resetPasswordForEmail(email,{redirectTo:redirect});if(r.error)return msg('authStatus',r.error.message,'err');msg('authStatus','Password reset email sent. Check your inbox.','ok')}
-function init(){if(!CONFIG.supabaseUrl||!CONFIG.supabasePublishableKey)return msg('authStatus','Secure connection is not configured.','err');sb=supabase.createClient(CONFIG.supabaseUrl,CONFIG.supabasePublishableKey);sb.auth.onAuthStateChange((_e,s)=>{if(s)showApp(s);else showAuth()});sb.auth.getSession().then(({data})=>data.session?showApp(data.session):showAuth())}
+async function init(){
+  try{
+    const boot=$('authBootStatus');
+    if(!CONFIG.supabaseUrl||!CONFIG.supabasePublishableKey){if(boot)boot.textContent='Secure connection is not configured.';return msg('authStatus','Secure connection is not configured.','err');}
+    if(typeof supabase==='undefined'){if(boot)boot.textContent='Login library failed to load. Check your connection and refresh.';return msg('authStatus','Login library failed to load.','err');}
+    sb=supabase.createClient(CONFIG.supabaseUrl,CONFIG.supabasePublishableKey,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
+    const {data,error}=await sb.auth.getSession();
+    if(error)throw error;
+    if(boot)boot.textContent='Secure connection ready';
+    if(data.session)showApp(data.session);else showAuth();
+    sb.auth.onAuthStateChange((_e,s)=>{if(s)showApp(s);else showAuth()});
+  }catch(e){
+    const boot=$('authBootStatus');if(boot)boot.textContent='Login connection needs attention';
+    msg('authStatus',e?.message||'Unable to initialize secure login.','err');showAuth();
+  }
+}
 function showAuth(){$('authView').classList.remove('hidden');$('appView').classList.add('hidden')}function showApp(s){$('authView').classList.add('hidden');$('appView').classList.remove('hidden');const email=s.user.email||'Account';$('userEmail').textContent=email;$('avatar').textContent=email[0].toUpperCase();loadAssets();loadActivity()}
 async function signOut(){await sb.auth.signOut()}
 function closeCreate(){$('createModal').classList.remove('open');clear('createStatus')}
