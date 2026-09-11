@@ -1,5 +1,5 @@
-# Asset Passport V81
+# Asset Passport V82
 
-Universal asset passport with secure documents, timeline, public verification, ownership transfer, readiness scoring, print/PDF reports, and private resale/sale records.
+V82 is a reliability patch for the V81 resale/sale record feature.
 
-V81 adds private sale records with price, currency, date, buyer details, notes, optional sold status, passport sale history and activity entries. Run `asset-sales-migration.sql` once in Supabase SQL Editor.
+Use the existing V81 database migration; no new migration is required.
