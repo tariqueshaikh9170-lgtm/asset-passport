@@ -1,19 +1,6 @@
-Asset Passport V69
+# Asset Passport V71
 
-Mobile create-passport modal fixed to keep the complete form visible within the viewport with smooth internal scrolling.
-
-# Asset Passport V67
-
-## New
-- Real asset creation form with category-specific identity fields.
-- Electronics: brand, model, serial, IMEI.
-- Car/Bike: make, model, year, VIN/chassis, registration, mileage.
-- Property: address, unit/plot, property ID/deed reference, area.
-- Furniture: brand, model, serial, material.
-- Watch: brand, model, reference, serial.
-- Machinery: manufacturer, model, serial, year, operating location.
-- Other: identifier, manufacturer/brand, notes.
-- Structured details stored in `public.asset_details` via the included migration.
-
-## Migration
-Run `asset-details-migration.sql` once in the Supabase SQL editor before using the new category-specific fields.
+- Added owner-only Asset Identity panel in passport details.
+- Loads structured electronics, vehicle, property, furniture, watch, machinery and other fields from `asset_details`.
+- Keeps serial/IMEI and other identity details out of the public verification result.
+- Retained public verification, QR, documents, transfer and timeline workflows.
