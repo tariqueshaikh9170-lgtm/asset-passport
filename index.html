@@ -253,7 +253,7 @@ body:has(.modal.open){overflow:hidden;}
 <button class="primary" style="margin-top:18px" id="createBtn" onclick="createAsset()">Create passport</button><div id="createStatus" class="status"></div></div></div>
 <div class="modal" id="transferModal" onclick="if(event.target===this)closeTransfer()"><div class="modal-card"><div class="modal-head"><div><div class="eyebrow" style="color:#667085">Ownership workflow</div><h2 style="margin:6px 0 3px">Transfer passport</h2><div id="transferMeta" class="sub"></div></div><button class="close" onclick="closeTransfer()">×</button></div><div class="transfer-note"><b>Safe transfer</b><span>This creates a transfer request. Legal title remains subject to the relevant government or authorized registry.</span></div><div class="field"><label>Recipient email</label><input id="transferEmail" type="email" placeholder="owner@example.com" autocomplete="email"></div><div class="field"><label>Message (optional)</label><input id="transferMessage" placeholder="Please review and accept this passport transfer"></div><button class="primary" id="transferBtn" onclick="requestTransfer()">Send transfer request</button><div id="transferStatus" class="status"></div></div></div>
 
-<div class="modal" id="saleModal" onclick="if(event.target===this)closeSale()"><div class="modal-card"><div class="modal-head"><div><div class="eyebrow" style="color:#667085">Resale record</div><h2 style="margin:6px 0 3px">Record sale</h2><div id="saleMeta" class="sub"></div></div><button class="close" onclick="closeSale()">×</button></div><div class="sale-note"><b>Sale history</b><span>This records the transaction in your private passport history. It does not itself transfer legal title.</span></div><div class="two"><div class="field"><label>Sale price</label><input id="salePrice" type="number" min="0" step="0.01" inputmode="decimal" placeholder="e.g. 450"></div><div class="field"><label>Currency</label><input id="saleCurrency" maxlength="3" value="QAR" placeholder="QAR"></div></div><div class="field"><label>Sale date</label><input id="saleDate" type="date"></div><div class="field"><label>Buyer name (optional)</label><input id="buyerName" placeholder="Buyer name"></div><div class="field"><label>Buyer email (optional)</label><input id="buyerEmail" type="email" placeholder="buyer@example.com" autocomplete="email"></div><div class="field"><label>Sale notes (optional)</label><input id="saleNotes" placeholder="Condition, included items, agreement notes…"></div><label class="sale-check"><input id="markSold" type="checkbox"><span>Mark this passport as <b>sold</b> after recording</span></label><button class="primary" id="saleBtn" type="button" onclick="event.preventDefault();event.stopPropagation();recordSale(event)">Save sale record</button><div id="saleStatus" class="status"></div><div id="saleSavedHint" class="status">After saving, the record will remain here until you close this window.</div></div></div>
+<div class="modal" id="saleModal"><div class="modal-card"><div class="modal-head"><div><div class="eyebrow" style="color:#667085">Resale record</div><h2 style="margin:6px 0 3px">Record sale</h2><div id="saleMeta" class="sub"></div></div><button class="close" onclick="closeSale()">×</button></div><div class="sale-note"><b>Sale history</b><span>This records the transaction in your private passport history. It does not itself transfer legal title.</span></div><div class="two"><div class="field"><label>Sale price</label><input id="salePrice" type="number" min="0" step="0.01" inputmode="decimal" placeholder="e.g. 450"></div><div class="field"><label>Currency</label><input id="saleCurrency" maxlength="3" value="QAR" placeholder="QAR"></div></div><div class="field"><label>Sale date</label><input id="saleDate" type="date"></div><div class="field"><label>Buyer name (optional)</label><input id="buyerName" placeholder="Buyer name"></div><div class="field"><label>Buyer email (optional)</label><input id="buyerEmail" type="email" placeholder="buyer@example.com" autocomplete="email"></div><div class="field"><label>Sale notes (optional)</label><input id="saleNotes" placeholder="Condition, included items, agreement notes…"></div><label class="sale-check"><input id="markSold" type="checkbox"><span>Mark this passport as <b>sold</b> after recording</span></label><button class="primary" id="saleBtn" type="button">Save sale record</button><div id="saleStatus" class="status"></div><div id="saleSavedHint" class="status">After saving, the record will remain here until you close this window.</div></div></div>
 
 <div class="modal" id="transferInboxModal" onclick="if(event.target===this)closeTransferInbox()"><div class="detail-card"><div class="modal-head"><div><div class="eyebrow" style="color:#667085">Ownership center</div><h2>Transfer requests</h2><div class="sub">Incoming requests to accept, plus transfers you have sent.</div></div><button class="close" onclick="closeTransferInbox()">×</button></div><div class="transfer-center-note"><span class="transfer-center-icon">⇄</span><div><b>Two-sided ownership workflow</b><div>Send a request to the new owner, then the recipient accepts it from their account. Your passport stays unchanged until acceptance.</div></div></div><div id="transferInbox"><div class="empty">Loading transfer requests…</div></div></div></div>
 <div class="modal" id="activityModal" onclick="if(event.target===this)closeActivity()"><div class="detail-card"><div class="modal-head"><div><div class="eyebrow" style="color:#667085">Security & audit</div><h2>Activity log</h2><div class="sub">Recent activity across your Asset Passport workspace.</div></div><button class="close" onclick="closeActivity()">×</button></div><div class="registry-tools"><input id="activitySearch" placeholder="Search activity…" oninput="renderActivity()"><select id="activityFilter" onchange="renderActivity()"><option value="all">All activity</option><option value="asset">Passport</option><option value="document">Documents</option><option value="transfer">Transfers</option><option value="security">Security</option></select></div><div id="activityList"><div class="empty">Loading activity…</div></div></div></div>
@@ -277,7 +277,7 @@ body:has(.modal.open){overflow:hidden;}
 <script>
 window.ASSET_PASSPORT_CONFIG={supabaseUrl:"https://eglmyonjvijoghvewxio.supabase.co",supabasePublishableKey:"sb_publishable_SYSECoEcSha-p7eg_XYRpw_L1GQokr1",verifyFunctionUrl:"https://eglmyonjvijoghvewxio.supabase.co/functions/v1/swift-endpoint",publicVerifyBase:""};
 const CONFIG=window.ASSET_PASSPORT_CONFIG;let sb=null,signUpMode=false;
-const $=id=>document.getElementById(id);function msg(id,text,type=""){const e=$(id);e.textContent=text;e.className="status show "+type}function clear(id){const e=$(id);e.className="status";e.textContent=""}function esc(v){return String(v??"").replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
+const $=id=>document.getElementById(id);document.addEventListener("DOMContentLoaded",()=>{const b=$("saleBtn");if(b)b.addEventListener("click",e=>{e.preventDefault();e.stopImmediatePropagation();recordSale()})});function msg(id,text,type=""){const e=$(id);e.textContent=text;e.className="status show "+type}function clear(id){const e=$(id);e.className="status";e.textContent=""}function esc(v){return String(v??"").replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
 function setMode(v){signUpMode=v;$('signTab').classList.toggle('active',!v);$('createTab').classList.toggle('active',v);$('authTitle').textContent=v?'Create your account':'Welcome back';$('authLead').textContent=v?'Create your secure Asset Passport workspace.':'Sign in to your secure Asset Passport workspace.';$('authBtn').textContent=v?'Create account →':'Sign in →';$('forgotRow').style.display=v?'none':'flex';$('password').autocomplete=v?'new-password':'current-password';$('authSwitchText').textContent=v?'Already have an account?':'New to Asset Passport?';clear('authStatus')}
 function togglePassword(){const p=$('password'),b=document.querySelector('.peek');p.type=p.type==='password'?'text':'password';b.textContent=p.type==='password'?'Show':'Hide'}function passwordChanged(){if(signUpMode){const n=$('password').value;$('passwordHint').textContent=n.length?((n.length>=8)?'':'Use 8+ characters') : '8+ characters';$('passwordHint').style.color=n.length>=8?'#067647':'#b42318'}}
 async function submitAuth(){clear('authStatus');if(!sb)return msg('authStatus','Secure connection is not ready. Please reopen the app.','err');const email=$('email').value.trim(),password=$('password').value;if(password.length<8)return msg('authStatus','Password must be at least 8 characters.','err');$('authBtn').disabled=true;$('authBtn').innerHTML='<span class="spinner"></span>'+ (signUpMode?'Creating account…':'Signing in…');let r=signUpMode?await sb.auth.signUp({email,password}):await sb.auth.signInWithPassword({email,password});$('authBtn').disabled=false;$('authBtn').textContent=signUpMode?'Create account':'Sign in';if(r.error)return msg('authStatus',r.error.message,'err');if(signUpMode&&!r.data.session)return msg('authStatus','Account created. Check your email to confirm the account, then sign in.','ok');if(signUpMode)msg('authStatus','Account created successfully.','ok')}
@@ -373,28 +373,45 @@ async function loadAssetTransfers(assetId){const box=$('assetTransfers');box.inn
 
 function openSale(){const a=window.currentAsset;if(!a)return;$('saleMeta').textContent=a.name+' · Passport '+a.passport_code;$('salePrice').value='';$('saleCurrency').value='QAR';$('saleDate').value=new Date().toISOString().slice(0,10);$('buyerName').value='';$('buyerEmail').value='';$('saleNotes').value='';$('markSold').checked=false;clear('saleStatus');$('saleBtn').disabled=false;$('saleModal').classList.add('open')}
 function closeSale(){$('saleModal').classList.remove('open')}
-async function recordSale(e){
-  if(e){e.preventDefault();e.stopPropagation()}
-  const a=window.currentAsset;if(!a)return;
-  const price=$('salePrice').value.trim();
-  const currency=$('saleCurrency').value.trim().toUpperCase();
-  const date=$('saleDate').value;
-  if(price===''||Number(price)<0)return msg('saleStatus','Enter a valid sale price.','err');
-  if(!/^[A-Z]{3}$/.test(currency))return msg('saleStatus','Currency must be a 3-letter code, e.g. QAR.','err');
-  if(!date)return msg('saleStatus','Choose a sale date.','err');
+async function recordSale(){
+  const a=window.currentAsset;
+  if(!a)return;
+  const priceEl=$("salePrice"), currencyEl=$("saleCurrency"), dateEl=$("saleDate"), btn=$("saleBtn");
+  const price=priceEl.value.trim(), currency=currencyEl.value.trim().toUpperCase(), date=dateEl.value;
+  if(price===""||Number(price)<0){msg("saleStatus","Enter a valid sale price.","err");return}
+  if(!/^[A-Z]{3}$/.test(currency)){msg("saleStatus","Currency must be a 3-letter code, e.g. QAR.","err");return}
+  if(!date){msg("saleStatus","Choose a sale date.","err");return}
   const {data:{user}}=await sb.auth.getUser();
-  if(!user)return showAuth();
-  const btn=$('saleBtn');btn.disabled=true;btn.textContent='Saving…';
-  clear('saleStatus');msg('saleStatus','Saving sale record…','ok');
-  const payload={asset_id:a.id,seller_owner_id:user.id,sale_price:Number(price),currency,sale_date:date,buyer_name:$('buyerName').value.trim()||null,buyer_email:$('buyerEmail').value.trim().toLowerCase()||null,notes:$('saleNotes').value.trim()||null};
+  if(!user){showAuth();return}
+  btn.disabled=true; btn.textContent="Saving…"; clear("saleStatus");
+  msg("saleStatus","Saving sale record…","ok");
+  const payload={asset_id:a.id,seller_owner_id:user.id,sale_price:Number(price),currency,sale_date:date,buyer_name:$("buyerName").value.trim()||null,buyer_email:$("buyerEmail").value.trim().toLowerCase()||null,notes:$("saleNotes").value.trim()||null};
   let r;
-  try{r=await Promise.race([sb.from('asset_sales').insert(payload),new Promise(resolve=>setTimeout(()=>resolve({error:{message:'Request timed out. Please try again.'}}),15000))])}catch(e2){r={error:{message:e2?.message||'Could not save sale record.'}}}
-  if(r.error){btn.disabled=false;btn.textContent='Save sale record';return msg('saleStatus',r.error.message.includes('asset_sales')?'Sale records need the included database migration first.':r.error.message,'err')}
-  // Keep the sale dialog open. Do not run any secondary refresh that can disturb the modal.
-  btn.disabled=false;btn.textContent='Save sale record';
-  msg('saleStatus','Sale record saved successfully.','ok');
-  $('saleSavedHint').textContent='Saved to this passport. You can close this window when ready.';
-  $('saleModal').classList.add('open');
+  try{
+    r=await Promise.race([
+      sb.from("asset_sales").insert(payload).select("id").single(),
+      new Promise(resolve=>setTimeout(()=>resolve({error:{message:"Saving is taking too long. Please check your connection and try again."}}),12000))
+    ]);
+  }catch(err){r={error:{message:err?.message||"Could not save sale record."}}}
+  if(r.error){
+    btn.disabled=false; btn.textContent="Save sale record";
+    msg("saleStatus",r.error.message,"err");
+    return;
+  }
+  if($("markSold").checked){
+    const u=await sb.from("assets").update({status:"sold"}).eq("id",a.id).eq("owner_id",user.id);
+    if(u.error){
+      btn.disabled=false; btn.textContent="Save sale record";
+      msg("saleStatus","Sale saved, but passport status could not be changed to sold: "+u.error.message,"err");
+      await loadSaleHistory(a.id); return;
+    }
+    a.status="sold";
+  }
+  btn.disabled=false; btn.textContent="Save sale record";
+  msg("saleStatus","✓ Sale record saved successfully.","ok");
+  $("saleSavedHint").textContent="Saved to this passport. The sale record is now in Sale history.";
+  await loadSaleHistory(a.id);
+  await loadActivity();
 }
 
 async function loadSaleHistory(assetId){const box=$('saleHistory');if(!box)return;box.innerHTML='<div class="empty">Loading sale history…</div>';const r=await sb.from('asset_sales').select('id,sale_price,currency,sale_date,buyer_name,buyer_email,notes,created_at').eq('asset_id',assetId).order('sale_date',{ascending:false}).order('created_at',{ascending:false});if(r.error){box.innerHTML='<div class="ownership-empty">Sale history needs the included database migration first.</div>';return}const rows=r.data||[];if(!rows.length){box.innerHTML='<div class="empty">No sale records yet.</div>';return}box.innerHTML=rows.map(x=>`<div class="sale-record"><div><b>${esc(x.buyer_name||'Buyer not named')}</b><div class="sale-record-meta">${esc(x.sale_date)}${x.buyer_email?' · '+esc(x.buyer_email):''}</div>${x.notes?`<div class="transfer-message">${esc(x.notes)}</div>`:''}</div><div class="sale-price">${esc(String(x.currency||'QAR'))} ${Number(x.sale_price||0).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}</div></div>`).join('')}
