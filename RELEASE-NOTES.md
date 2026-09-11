@@ -1,7 +1,12 @@
-# V79 Release Notes
-- Integrated Ownership Center into each passport detail view.
-- Shows sent transfer requests for the current passport with recipient, timestamp and status.
-- Pending requests can be cancelled directly from the passport.
-- Added Full ownership center button for incoming requests and all sent requests.
-- Refreshes the current passport transfer status after send/cancel/accept/decline.
-- No new database migration required.
+# Asset Passport V80
+
+## Ownership transfer completion
+- Adds the complete `asset_transfer_requests` database setup migration.
+- Adds secure RLS for senders and recipients.
+- Adds recipient-only accept/decline RPCs.
+- Accepting a request changes the passport owner and records an ownership-transfer timeline event.
+- Passport detail now shows both sent and incoming requests for that passport.
+- No changes to the existing assets, documents, events, or verification schemas.
+
+## Required one-time setup
+Run `asset-transfer-migration.sql` once in the Supabase SQL Editor, then refresh the app.
