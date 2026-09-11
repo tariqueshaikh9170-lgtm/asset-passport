@@ -1,9 +1,7 @@
-# Asset Passport V86
-
-## Warranty & service reminders
-- Added a private reminder tracker inside each passport.
-- Supports warranty, service, inspection, registration, insurance and other reminders.
-- Due dates are highlighted as overdue, due soon, or upcoming.
-- Reminders are linked to the owner and asset with RLS.
-- Added `asset-reminders-migration.sql`.
-- No changes to public verification data.
+# Asset Passport V88
+- Classic compact passport detail layout
+- Sticky action bar inside Records
+- Compact reminder, timeline, and sale-history panels with bounded height
+- Better mobile action grid and tighter spacing
+- Existing V86 reminder database remains compatible
+- No new SQL migration required
