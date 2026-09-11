@@ -1,0 +1,6 @@
+window.ASSET_PASSPORT_CONFIG = {
+  supabaseUrl: "https://YOUR_PROJECT.supabase.co",
+  supabasePublishableKey: "YOUR_PUBLISHABLE_KEY",
+  verifyFunctionUrl: "https://YOUR_PROJECT.supabase.co/functions/v1/swift-endpoint",
+  publicVerifyBase: "https://your-domain.com"
+};

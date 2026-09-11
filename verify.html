@@ -1,0 +1,23 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Verify Asset Passport</title><style>body{margin:0;background:#f5f7fb;font-family:system-ui;padding:20px;color:#101828}.box{max-width:560px;margin:8vh auto;background:#fff;border:1px solid #e4e7ec;border-radius:22px;padding:24px}h1{margin:0 0 8px}.code{font-family:monospace;font-weight:900}.ok{background:#ecfdf3;color:#067647;padding:14px;border-radius:12px;margin-top:14px}.bad{background:#fef3f2;color:#b42318;padding:14px;border-radius:12px;margin-top:14px}.muted{color:#667085;font-size:13px}</style></head><body><main class="box"><h1>Asset Passport</h1><p class="muted">Public verification</p><div id="out">Checking passport…</div></main><script>window.ASSET_PASSPORT_CONFIG = {
+  supabaseUrl: "https://eglmyonjvijoghvewxio.supabase.co",
+  supabasePublishableKey: "sb_publishable_SYSECoEcSha-p7eg_XYRpw_L1GQokr1",
+  verifyFunctionUrl: "https://eglmyonjvijoghvewxio.supabase.co/functions/v1/swift-endpoint",
+  publicVerifyBase: ""
+};</script><script>
+const C=window.ASSET_PASSPORT_CONFIG||{};
+const code=(new URLSearchParams(location.search).get('code')||'').trim().toUpperCase();
+const out=document.getElementById('out');
+function esc(v){return String(v??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));}
+(async()=>{
+  if(!code){out.innerHTML='<div class="bad">No Passport Code supplied.</div>';return;}
+  if(!C.verifyFunctionUrl){out.innerHTML='<div class="bad">Verification service is not configured.</div>';return;}
+  try{
+    const u=new URL(C.verifyFunctionUrl);u.searchParams.set('code',code);
+    const r=await fetch(u);const j=await r.json();
+    if(!r.ok||!j.verified){out.innerHTML='<div class="bad"><b>Not verified</b><br>'+esc(j.error||'Passport not found')+'</div>';return;}
+    const p=j.passport||j;
+    if(!p||!p.name||!p.passport_code)throw new Error('Invalid verification response');
+    out.innerHTML='<div class="ok"><b>✓ VERIFIED</b><br><br><strong>'+esc(p.name)+'</strong><br>'+esc(p.asset_type)+' · '+esc(p.status)+'<br><span class="code">'+esc(p.passport_code)+'</span></div><p class="muted">Only public-safe registry fields are shown.</p>';
+  }catch(e){out.innerHTML='<div class="bad">Verification service unavailable.</div>';}
+})();
+</script></body></html>
