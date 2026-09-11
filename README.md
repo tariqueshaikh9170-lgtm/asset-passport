@@ -1,10 +1,5 @@
-# Asset Passport V80
+# Asset Passport V81
 
-V80 completes the ownership transfer workflow with a secure transfer-request table, RLS, accept/decline RPCs, ownership handoff, and transfer history.
+Universal asset passport with secure documents, timeline, public verification, ownership transfer, readiness scoring, print/PDF reports, and private resale/sale records.
 
-## Setup
-1. Deploy the files.
-2. In Supabase SQL Editor, run `asset-transfer-migration.sql` once.
-3. Refresh the app and test transfer with two authenticated accounts.
-
-Legal title for regulated assets remains subject to the relevant government or authorized registry.
+V81 adds private sale records with price, currency, date, buyer details, notes, optional sold status, passport sale history and activity entries. Run `asset-sales-migration.sql` once in Supabase SQL Editor.

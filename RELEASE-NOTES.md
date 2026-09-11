@@ -1,12 +1,8 @@
-# Asset Passport V80
+# V81 Release Notes
 
-## Ownership transfer completion
-- Adds the complete `asset_transfer_requests` database setup migration.
-- Adds secure RLS for senders and recipients.
-- Adds recipient-only accept/decline RPCs.
-- Accepting a request changes the passport owner and records an ownership-transfer timeline event.
-- Passport detail now shows both sent and incoming requests for that passport.
-- No changes to the existing assets, documents, events, or verification schemas.
-
-## Required one-time setup
-Run `asset-transfer-migration.sql` once in the Supabase SQL Editor, then refresh the app.
+- Added private resale/sale records.
+- Added sale price, currency, date, buyer name/email and notes.
+- Added optional sold-status update.
+- Added sale history inside passport detail.
+- Added sale entries to activity log.
+- Added RLS migration: `asset-sales-migration.sql`.
