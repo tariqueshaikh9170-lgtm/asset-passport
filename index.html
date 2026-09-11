@@ -248,10 +248,25 @@ body:has(.modal.open){overflow:hidden;}
 #authView .auth-status-note{display:block;margin:-2px 0 12px;padding:9px 11px;border-radius:11px;background:#f8fbff;border:1px solid #dfeaf7;color:#667085;font-size:10px;text-align:center;}
 @media(max-width:760px){#authView{background:linear-gradient(180deg,#061426 0 20%,#f4f8ff 20% 100%)}#authView .topbar{height:56px;padding:0 12px}.container{width:min(100% - 16px,1120px)}#authView .auth-card{border-radius:22px}.auth-head{padding:20px!important}.auth-body{padding:18px!important}}
 @media(max-width:430px){#authView .auth-head{padding:18px!important}#authView .auth-shield{width:42px;height:50px;font-size:19px;margin-bottom:9px}#authView .auth-head h1{font-size:25px}#authView .auth-head p{font-size:11px}#authView .oauth-row{gap:8px}}
+/* V95 auth cleanup: compact classic layout + reliable interaction feedback */
+.auth-brand-inside{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px;border-bottom:1px solid #e7edf4;background:#fff;border-radius:24px 24px 0 0}
+.auth-brand-inside .logo{font-size:17px;font-weight:800;display:flex;align-items:center;gap:9px}.auth-brand-inside .mark{width:34px;height:34px;border-radius:11px;font-size:18px}
+.auth-brand-inside .topbadge{font-size:10px;padding:7px 10px;white-space:nowrap}
+#authView .auth-head{padding:22px 24px 18px!important}
+#authView .auth-head .auth-shield{margin-bottom:7px}
+#authView .auth-head h1{margin:3px 0 6px}
+#authView .auth-head p{margin:0 auto 10px}
+#authView .auth-body{padding:18px 24px 22px!important}
+#authView .auth-status-note{margin:0 0 10px}
+#authView .tabs{margin-bottom:15px}
+#authView .trust-strip{margin-top:13px}
+.auth-action-working{opacity:.75;pointer-events:none}
+@media(max-width:760px){#authView{background:linear-gradient(180deg,#061426 0 9%,#f4f8ff 9% 100%)}#authView .container{width:100%;padding:0 10px}#authView .auth-wrap{margin-top:10px}#authView .auth-card{border-radius:24px;overflow:hidden}#authView .auth-brand-inside{padding:11px 14px}#authView .auth-brand-inside .topbadge{display:none}#authView .auth-head{padding:17px 18px 14px!important}#authView .auth-body{padding:15px 18px 18px!important}}
+@media(max-width:430px){#authView .auth-head h1{font-size:24px}#authView .auth-head p{font-size:11px;line-height:1.45}#authView .auth-body .field{margin-bottom:11px}#authView .auth-body .primary{height:48px}}
 </style>
 </head><body>
-<div id="authView" class="shell"><div class="container"><div class="topbar"><div class="logo"><span class="mark">✦</span><span>Asset Passport</span></div><div class="topbadge">Secure · Global · Trusted</div></div>
-<div class="auth-wrap"><div class="auth-card"><div class="auth-head"><div class="auth-orbit"><span class="orbit-dot d1"></span><span class="orbit-dot d2"></span><span class="orbit-dot d3"></span><span class="orbit-line l1"></span><span class="orbit-line l2"></span></div><div class="auth-shield">✦</div><div class="eyebrow">ASSET IDENTITY PLATFORM</div><h1>Asset Passport</h1><p>One trusted record for every valuable asset — ownership, documents, history and verification.</p><div class="auth-promise"><span>Register</span><i>•</i><span>Protect</span><i>•</i><span>Verify</span><i>•</i><span>Everywhere</span></div></div><div class="auth-body">
+<div id="authView" class="shell"><div class="container">
+<div class="auth-wrap"><div class="auth-card"><div class="auth-brand-inside"><div class="logo"><span class="mark">✦</span><span>Asset Passport</span></div><span class="topbadge">Secure · Global · Trusted</span></div><div class="auth-head"><div class="auth-orbit"><span class="orbit-dot d1"></span><span class="orbit-dot d2"></span><span class="orbit-dot d3"></span><span class="orbit-line l1"></span><span class="orbit-line l2"></span></div><div class="auth-shield">✦</div><div class="eyebrow">ASSET IDENTITY PLATFORM</div><h1>Asset Passport</h1><p>One trusted record for every valuable asset — ownership, documents, history and verification.</p><div class="auth-promise"><span>Register</span><i>•</i><span>Protect</span><i>•</i><span>Verify</span><i>•</i><span>Everywhere</span></div></div><div class="auth-body">
 <div class="secure-note"><span class="secure-dot"></span><span>Secure workspace · Private by default</span></div><div id="authBootStatus" class="auth-status-note">Checking secure connection…</div>
 <div class="tabs"><button class="tab active" id="signTab" onclick="setMode(false)">Sign in</button><button class="tab" id="createTab" onclick="setMode(true)">Create account</button></div>
 <div style="text-align:center;margin:-2px 0 17px"><h2 id="authTitle" style="margin:0 0 5px;font-size:24px;letter-spacing:-.03em">Welcome back</h2><div id="authLead" class="sub" style="font-size:12px">Sign in to your secure Asset Passport workspace.</div></div>
@@ -353,28 +368,39 @@ async function submitAuth(){
   const email=$('email').value.trim(),password=$('password').value;
   if(!email)return msg('authStatus','Enter your email address.','err');
   if(password.length<8)return msg('authStatus','Password must be at least 8 characters.','err');
-  const btn=$('authBtn'); btn.disabled=true; btn.innerHTML='<span class="spinner"></span>'+(signUpMode?'Creating account…':'Signing in…');
+  const btn=$('authBtn');btn.disabled=true;btn.classList.add('auth-action-working');btn.innerHTML='<span class="spinner"></span>'+(signUpMode?'Creating account…':'Signing in…');
   try{
-    const r=signUpMode?await sb.auth.signUp({email,password}):await sb.auth.signInWithPassword({email,password});
-    if(r.error){msg('authStatus',r.error.message||'Authentication failed.','err');return;}
-    if(signUpMode&&!r.data.session){msg('authStatus','Account created. Check your email confirmation, then sign in.','ok');return;}
-    if(!r.data.session){msg('authStatus','Authentication completed but no session was returned. Refresh and try again.','err');return;}
-    msg('authStatus','Signed in successfully.','ok');
+    const op=signUpMode?sb.auth.signUp({email,password}):sb.auth.signInWithPassword({email,password});
+    const r=await Promise.race([op,new Promise((_,reject)=>setTimeout(()=>reject(new Error('Secure login timed out. Check your internet connection and try again.')),15000))]);
+    if(r.error){
+      const m=String(r.error.message||'Authentication failed.');
+      msg('authStatus',m.includes('Invalid login credentials')?'Email or password is incorrect.':m,'err');return;
+    }
+    if(signUpMode&&!r.data.session){msg('authStatus','Account created. Check your email confirmation, then sign in.','ok');return}
+    if(!r.data.session){msg('authStatus','Login completed but no session was returned. Refresh once and try again.','err');return}
     showApp(r.data.session);
-  }catch(e){msg('authStatus',e?.message||'Unable to connect to the secure login service.','err');}
-  finally{btn.disabled=false;btn.textContent=signUpMode?'Create account':'Sign in →';}
+  }catch(e){msg('authStatus',e?.message||'Unable to connect to the secure login service.','err')}
+  finally{btn.disabled=false;btn.classList.remove('auth-action-working');btn.textContent=signUpMode?'Create account →':'Sign in →'}
 }
+
 async function oauth(provider){
   clear('authStatus');
   if(!sb)return msg('authStatus','Secure connection is not ready. Refresh this page and try again.','err');
-  const btns=document.querySelectorAll('.oauth-btn');btns.forEach(b=>b.disabled=true);
+  const btns=[...document.querySelectorAll('.oauth-btn')];btns.forEach(b=>{b.disabled=true;b.classList.add('auth-action-working')});
   try{
     const redirect=location.origin+location.pathname;
-    const r=await sb.auth.signInWithOAuth({provider,options:{redirectTo:redirect}});
-    if(r.error)msg('authStatus',r.error.message||('Could not start '+provider+' sign-in.'),'err');
-  }catch(e){msg('authStatus',e?.message||('Could not start '+provider+' sign-in.'),'err');}
-  finally{btns.forEach(b=>b.disabled=false);}
+    const r=await Promise.race([
+      sb.auth.signInWithOAuth({provider,options:{redirectTo:redirect}}),
+      new Promise((_,reject)=>setTimeout(()=>reject(new Error('The secure sign-in request timed out. Check your internet connection and try again.')),12000))
+    ]);
+    if(r.error) throw r.error;
+  }catch(e){
+    const raw=String(e?.message||e||'Could not start sign-in.');
+    const providerName=provider==='google'?'Google':'Apple';
+    msg('authStatus',raw.includes('provider')||raw.includes('not enabled')?providerName+' sign-in is not enabled in the Supabase project yet. Use email/password or enable '+providerName+' in Supabase Auth → Providers.':raw,'err');
+  }finally{btns.forEach(b=>{b.disabled=false;b.classList.remove('auth-action-working')})}
 }
+
 async function resetPassword(){clear('authStatus');const email=$('email').value.trim();if(!email)return msg('authStatus','Enter your email first, then tap Forgot password.','err');const redirect=location.href.split('#')[0];const r=await sb.auth.resetPasswordForEmail(email,{redirectTo:redirect});if(r.error)return msg('authStatus',r.error.message,'err');msg('authStatus','Password reset email sent. Check your inbox.','ok')}
 async function init(){
   try{
@@ -384,7 +410,7 @@ async function init(){
     sb=supabase.createClient(CONFIG.supabaseUrl,CONFIG.supabasePublishableKey,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
     const {data,error}=await sb.auth.getSession();
     if(error)throw error;
-    if(boot)boot.textContent='Secure connection ready';
+    if(boot)boot.textContent='Secure connection ready · Email login available';
     if(data.session)showApp(data.session);else showAuth();
     sb.auth.onAuthStateChange((_e,s)=>{if(s)showApp(s);else showAuth()});
   }catch(e){
