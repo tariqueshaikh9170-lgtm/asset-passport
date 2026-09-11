@@ -1,5 +1,2 @@
-# Asset Passport V77
-
-V77 adds a two-sided Ownership Center on top of the existing transfer request workflow.
-
-No new database migration is required.
+# Asset Passport V78
+Ownership workflow refinement: status tracking, cancellation, duplicate-pending protection, and safer transfer UX.
