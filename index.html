@@ -741,4 +741,70 @@ init();
  document.addEventListener('DOMContentLoaded',run);
 })();
 </script>
+
+<style id="v99-unified-classic">
+/* V99 — unified classic mobile workspace. */
+.v97-record-nav{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;align-items:center!important}
+.v97-record-nav button{width:100%!important;min-width:0!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+.v97-shell{width:100%!important}
+.v97-panel>.reminder-card,.v97-panel>.timeline-card-compact,.v97-panel>.inline-sale-history{box-sizing:border-box!important;width:100%!important;overflow:hidden!important}
+.v97-panel .reminder-head,.v97-panel .timeline-head,.v97-panel .sale-history-head{display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;align-items:center!important;gap:10px!important}
+.v97-panel .reminder-head>div:first-child,.v97-panel .timeline-head>div:first-child,.v97-panel .sale-history-head>div:first-child{min-width:0!important;width:auto!important}
+.v97-panel .reminder-head h3,.v97-panel .timeline-head h3,.v97-panel .sale-history-head h3{font-size:16px!important;line-height:1.18!important;white-space:normal!important;overflow:visible!important}
+.v97-panel .reminder-head .sub,.v97-panel .timeline-head .sub,.v97-panel .sale-history-head .sub{white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+.v97-panel .reminder-head>button,.v97-panel .timeline-head>button{width:auto!important;min-width:92px!important;height:40px!important;margin:0!important;padding:0 14px!important;font-size:11px!important;white-space:nowrap!important}
+.v97-panel .sale-head-actions{display:flex!important;align-items:center!important;gap:6px!important;width:auto!important}
+.v97-panel .sale-head-actions button{width:auto!important;margin:0!important;white-space:nowrap!important}
+.v97-panel #reminderList,.v97-panel #timeline,.v97-panel #saleHistory{max-height:145px!important;overflow:auto!important}
+.v97-panel #reminderList .reminder-item,.v97-panel #timeline .timeline-item,.v97-panel #saleHistory .sale-record{padding:10px 0!important}
+.v97-tool-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important;box-sizing:border-box!important;width:100%!important;padding:8px!important;border-radius:15px!important;background:#f7faff!important}
+.v97-tool-grid button{width:100%!important;min-width:0!important;height:44px!important;min-height:44px!important;border-radius:11px!important;font-size:11px!important;padding:0 8px!important;white-space:nowrap!important}
+.v97-tool-grid button.primary{grid-column:1/-1!important}
+.v99-record-card{border:1px solid #dfe6ee!important;border-radius:15px!important;background:#fff!important;padding:14px!important;box-sizing:border-box!important}
+.v99-card-title{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.v99-card-icon{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:#eef6ff;color:#0b67b8;font-size:19px;flex:0 0 auto}
+.v99-card-title h3{margin:0!important;font-size:16px!important}
+.v99-card-title .sub{margin-top:2px!important;font-size:10px!important}
+.v99-reminder-item{border:1px solid #e2e8f0;border-radius:13px;padding:11px!important;background:#fbfdff!important}
+@media(max-width:600px){
+ .v97-record-nav{position:sticky!important;top:0!important;z-index:30!important}
+ .v97-record-nav button{height:36px!important;font-size:10px!important}
+ .v97-panel>.reminder-card,.v97-panel>.timeline-card-compact,.v97-panel>.inline-sale-history{padding:11px!important}
+ .v97-panel .reminder-head,.v97-panel .timeline-head,.v97-panel .sale-history-head{grid-template-columns:minmax(0,1fr) auto!important;gap:7px!important}
+ .v97-panel .reminder-head>button,.v97-panel .timeline-head>button{min-width:78px!important;height:38px!important;padding:0 10px!important}
+ .v97-tool-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(max-width:430px){
+ .v97-record-nav{gap:3px!important;padding:4px!important}
+ .v97-record-nav button{height:34px!important;font-size:9px!important}
+ .v97-panel .reminder-head h3,.v97-panel .timeline-head h3,.v97-panel .sale-history-head h3{font-size:14px!important}
+ .v97-panel .reminder-head>button,.v97-panel .timeline-head>button{min-width:72px!important;height:36px!important;font-size:10px!important;padding:0 8px!important}
+ .v97-panel .reminder-head .sub,.v97-panel .timeline-head .sub,.v97-panel .sale-history-head .sub{font-size:9px!important}
+ .v97-tool-grid{gap:6px!important;padding:6px!important}
+ .v97-tool-grid button{height:42px!important;min-height:42px!important;font-size:10px!important}
+}
+</style>
+<script id="v99-unified-classic-js">
+(function(){
+ function enhance(){
+  const panel=document.getElementById('detailTabRecords');
+  if(!panel||panel.dataset.v99==='1') return;
+  const nav=panel.querySelector('.v97-record-nav');
+  if(!nav) return;
+  panel.dataset.v99='1';
+  const labels={reminders:['Reminders','🔔'],history:['History','◷'],sales:['Sales','◇'],tools:['Tools','▣']};
+  nav.querySelectorAll('button').forEach(b=>{const k=b.dataset.v97;if(labels[k]) b.innerHTML=labels[k][1]+' <span>'+labels[k][0]+'</span>';});
+  const add=panel.querySelector('.reminder-head>button');
+  if(add) add.textContent='+ Add reminder';
+  const timelineAdd=panel.querySelector('.timeline-head>button');
+  if(timelineAdd) timelineAdd.textContent='+ Add event';
+  const saleAdd=panel.querySelector('.sale-head-actions .secondary');
+  if(saleAdd) saleAdd.textContent='+ Record sale';
+ }
+ const run=()=>{enhance();setTimeout(enhance,100);setTimeout(enhance,400);};
+ const old=window.openDetail;
+ if(typeof old==='function') window.openDetail=async function(){await old.apply(this,arguments);run();};
+ document.addEventListener('DOMContentLoaded',run);
+})();
+</script>
 </body></html>
