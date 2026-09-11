@@ -1,9 +1,9 @@
-# Asset Passport V84
+# Asset Passport V86
 
-## Sale Record — final save fix
-- Save button is explicitly non-submit.
-- Click propagation is stopped so the detail modal cannot close it.
-- Sale save performs only the database insert; secondary refreshes cannot disturb the modal.
-- Success remains visible inside the sale dialog.
-- Sale dialog is explicitly kept open after a successful insert.
-- No database migration required.
+## Warranty & service reminders
+- Added a private reminder tracker inside each passport.
+- Supports warranty, service, inspection, registration, insurance and other reminders.
+- Due dates are highlighted as overdue, due soon, or upcoming.
+- Reminders are linked to the owner and asset with RLS.
+- Added `asset-reminders-migration.sql`.
+- No changes to public verification data.
