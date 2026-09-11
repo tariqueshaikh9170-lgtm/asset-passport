@@ -155,6 +155,25 @@ body:has(.modal.open){overflow:hidden;}
 .mobile-add{appearance:none!important;-webkit-appearance:none!important;width:48px!important;height:48px!important;min-width:48px!important;padding:0!important;margin:auto!important;border:0!important;outline:0!important;border-radius:50%!important;background:linear-gradient(145deg,#071a31,#1768d9)!important;color:#fff!important;font-size:27px!important;line-height:1!important;display:grid!important;place-items:center!important;box-shadow:0 10px 26px rgba(23,104,217,.38)!important}
 @media(min-width:761px){.mobile-nav{display:none!important}}
 @media(max-width:760px){body{padding-bottom:88px!important}.premium-main{padding-bottom:105px!important}.app-shell .appbar{z-index:10000!important}.mobile-nav{display:grid!important}.mobile-nav-item:active,.mobile-add:active{transform:scale(.96)!important}}
+
+/* V69 — mobile create modal: keep the complete form inside the visible viewport */
+@media(max-width:760px){
+  .modal{align-items:flex-start!important;justify-content:center!important;padding:10px 10px 12px!important;overflow:hidden!important;}
+  .modal .modal-card{width:100%!important;max-width:560px!important;max-height:calc(100dvh - 22px)!important;height:auto!important;overflow-y:auto!important;overscroll-behavior:contain!important;-webkit-overflow-scrolling:touch!important;border-radius:22px!important;padding:18px!important;margin:0!important;}
+  .modal .modal-head{position:relative!important;}
+  .modal .close{position:sticky!important;top:0!important;z-index:3!important;flex:0 0 auto!important;}
+  #createModal .modal-card{padding:18px!important;}
+  #createModal .modal-card .primary{margin-bottom:2px;}
+}
+@media(max-width:430px){
+  .modal{padding:7px 8px 10px!important;}
+  .modal .modal-card{max-height:calc(100dvh - 17px)!important;border-radius:20px!important;padding:16px!important;}
+  #createModal .modal-card{padding:16px!important;}
+  #createModal .modal-head h2{font-size:24px!important;line-height:1.08!important;}
+  #createModal .modal-head .sub{font-size:11px!important;line-height:1.4!important;}
+  #createModal .field label{font-size:11px!important;}
+  #createModal .field input,#createModal .field select{height:48px!important;}
+}
 </style>
 </head><body>
 <div id="authView" class="shell"><div class="container"><div class="topbar"><div class="logo"><span class="mark">✦</span><span>Asset Passport</span></div><div class="topbadge">Secure · Global · Trusted</div></div>

@@ -1,3 +1,7 @@
+Asset Passport V69
+
+Mobile create-passport modal fixed to keep the complete form visible within the viewport with smooth internal scrolling.
+
 # Asset Passport V67
 
 ## New
