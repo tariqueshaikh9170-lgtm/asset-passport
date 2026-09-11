@@ -696,178 +696,65 @@ init();
   document.addEventListener('DOMContentLoaded',()=>{setTimeout(build,300);});
 })();
 </script>
+</body></html>
 
-<style id="v98-classic-polish">
-/* V98 — classic compact workspace polish: one section visible, less scrolling. */
-.v97-record-nav{margin:10px 0 8px!important;padding:4px!important;gap:4px!important;background:#f5f7fa!important;border-radius:12px!important}
-.v97-record-nav button{height:36px!important;border-radius:9px!important;font-size:11px!important}
-.v97-record-nav button.active{color:#0b67b8!important;background:#fff!important;box-shadow:0 2px 8px rgba(15,23,42,.08)!important}
-.v97-shell{min-height:0!important}
-.v97-panel>.reminder-card,.v97-panel>.timeline-card-compact,.v97-panel>.inline-sale-history{border-radius:14px!important;padding:11px!important}
-.v97-panel .reminder-head,.v97-panel .timeline-head,.v97-panel .sale-history-head{margin-bottom:6px!important}
-.v97-panel #reminderList,.v97-panel #timeline,.v97-panel #saleHistory{max-height:138px!important;overflow:auto!important}
-.v97-panel #reminderList .reminder-item,.v97-panel #timeline .timeline-item,.v97-panel #saleHistory .sale-record{padding:8px 0!important}
-.v97-panel .empty{padding:18px 8px!important}
-.v98-section-link{width:100%;height:38px;border:1px solid #dfe6ee;background:#f8fbff;border-radius:10px;color:#0b67b8;font-size:11px;font-weight:800;margin-top:6px}
-.v98-section-count{font-size:10px;color:#667085;font-weight:700}
-@media(max-width:600px){
- .v97-record-nav{position:sticky!important;top:0!important;z-index:30!important}
- .v97-record-nav button{height:35px!important;font-size:10px!important}
- .v97-panel #reminderList,.v97-panel #timeline,.v97-panel #saleHistory{max-height:125px!important}
- .v97-panel>.reminder-card,.v97-panel>.timeline-card-compact,.v97-panel>.inline-sale-history{padding:9px!important}
-}
-@media(max-width:430px){.v97-record-nav button{height:34px!important;font-size:9px!important}.v98-section-link{height:36px;font-size:10px}}
-</style>
-<script id="v98-classic-polish-js">
-(function(){
- function polish(){
-  const panel=document.getElementById('detailTabRecords');
-  if(!panel || panel.dataset.v98Polished==='1') return;
-  const nav=panel.querySelector('.v97-record-nav');
-  if(!nav) return;
-  panel.dataset.v98Polished='1';
-  // Keep the original section navigation, but remove the redundant full-history control from the compact Sales header.
-  const sale=panel.querySelector('#saleHistory');
-  if(sale){
-    const more=panel.querySelector('.v97-more');
-    if(more) more.textContent='View complete history →';
-  }
- }
- const run=()=>{polish();setTimeout(polish,150);setTimeout(polish,500);};
- const oldOpen=window.openDetail;
- if(typeof oldOpen==='function'){
-  window.openDetail=async function(){await oldOpen.apply(this,arguments);run();};
- }
- document.addEventListener('DOMContentLoaded',run);
-})();
-</script>
 
-<style id="v99-unified-classic">
-/* V99 — unified classic mobile workspace. */
-.v97-record-nav{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;align-items:center!important}
-.v97-record-nav button{width:100%!important;min-width:0!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
-.v97-shell{width:100%!important}
-.v97-panel>.reminder-card,.v97-panel>.timeline-card-compact,.v97-panel>.inline-sale-history{box-sizing:border-box!important;width:100%!important;overflow:hidden!important}
-.v97-panel .reminder-head,.v97-panel .timeline-head,.v97-panel .sale-history-head{display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;align-items:center!important;gap:10px!important}
-.v97-panel .reminder-head>div:first-child,.v97-panel .timeline-head>div:first-child,.v97-panel .sale-history-head>div:first-child{min-width:0!important;width:auto!important}
-.v97-panel .reminder-head h3,.v97-panel .timeline-head h3,.v97-panel .sale-history-head h3{font-size:16px!important;line-height:1.18!important;white-space:normal!important;overflow:visible!important}
-.v97-panel .reminder-head .sub,.v97-panel .timeline-head .sub,.v97-panel .sale-history-head .sub{white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
-.v97-panel .reminder-head>button,.v97-panel .timeline-head>button{width:auto!important;min-width:92px!important;height:40px!important;margin:0!important;padding:0 14px!important;font-size:11px!important;white-space:nowrap!important}
-.v97-panel .sale-head-actions{display:flex!important;align-items:center!important;gap:6px!important;width:auto!important}
-.v97-panel .sale-head-actions button{width:auto!important;margin:0!important;white-space:nowrap!important}
-.v97-panel #reminderList,.v97-panel #timeline,.v97-panel #saleHistory{max-height:145px!important;overflow:auto!important}
-.v97-panel #reminderList .reminder-item,.v97-panel #timeline .timeline-item,.v97-panel #saleHistory .sale-record{padding:10px 0!important}
-.v97-tool-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important;box-sizing:border-box!important;width:100%!important;padding:8px!important;border-radius:15px!important;background:#f7faff!important}
-.v97-tool-grid button{width:100%!important;min-width:0!important;height:44px!important;min-height:44px!important;border-radius:11px!important;font-size:11px!important;padding:0 8px!important;white-space:nowrap!important}
-.v97-tool-grid button.primary{grid-column:1/-1!important}
-.v99-record-card{border:1px solid #dfe6ee!important;border-radius:15px!important;background:#fff!important;padding:14px!important;box-sizing:border-box!important}
-.v99-card-title{display:flex;align-items:center;gap:10px;margin-bottom:10px}
-.v99-card-icon{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:#eef6ff;color:#0b67b8;font-size:19px;flex:0 0 auto}
-.v99-card-title h3{margin:0!important;font-size:16px!important}
-.v99-card-title .sub{margin-top:2px!important;font-size:10px!important}
-.v99-reminder-item{border:1px solid #e2e8f0;border-radius:13px;padding:11px!important;background:#fbfdff!important}
-@media(max-width:600px){
- .v97-record-nav{position:sticky!important;top:0!important;z-index:30!important}
- .v97-record-nav button{height:36px!important;font-size:10px!important}
- .v97-panel>.reminder-card,.v97-panel>.timeline-card-compact,.v97-panel>.inline-sale-history{padding:11px!important}
- .v97-panel .reminder-head,.v97-panel .timeline-head,.v97-panel .sale-history-head{grid-template-columns:minmax(0,1fr) auto!important;gap:7px!important}
- .v97-panel .reminder-head>button,.v97-panel .timeline-head>button{min-width:78px!important;height:38px!important;padding:0 10px!important}
- .v97-tool-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
-}
-@media(max-width:430px){
- .v97-record-nav{gap:3px!important;padding:4px!important}
- .v97-record-nav button{height:34px!important;font-size:9px!important}
- .v97-panel .reminder-head h3,.v97-panel .timeline-head h3,.v97-panel .sale-history-head h3{font-size:14px!important}
- .v97-panel .reminder-head>button,.v97-panel .timeline-head>button{min-width:72px!important;height:36px!important;font-size:10px!important;padding:0 8px!important}
- .v97-panel .reminder-head .sub,.v97-panel .timeline-head .sub,.v97-panel .sale-history-head .sub{font-size:9px!important}
- .v97-tool-grid{gap:6px!important;padding:6px!important}
- .v97-tool-grid button{height:42px!important;min-height:42px!important;font-size:10px!important}
-}
+<style id="v97-classic-workspace">
+/* V97 — classic, compact passport workspace. One focused record panel at a time. */
+.v97-record-nav{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:8px 0 10px;padding:5px;background:#f3f6fa;border:1px solid #dfe6ee;border-radius:14px}
+.v97-record-nav button{border:1px solid transparent;background:transparent;border-radius:10px;height:38px;color:#667085;font:700 11px/1 inherit;cursor:pointer}
+.v97-record-nav button.active{background:#fff;color:#0b67b8;border-color:#e1e8f0;box-shadow:0 2px 7px rgba(15,23,42,.07)}
+.v97-record-nav .v97-count{display:inline-flex;min-width:17px;height:17px;margin-left:3px;padding:0 4px;align-items:center;justify-content:center;border-radius:999px;background:#eaf3ff;color:#0b67b8;font-size:9px}
+.v97-tool-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:0 0 10px;padding:7px;background:#f8fafc;border:1px solid #e4e9ef;border-radius:13px}
+.v97-tool-grid button{height:40px!important;min-height:40px!important;font-size:10px!important;padding:0 6px!important}
+.v97-panel{display:none!important}
+.v97-panel.active{display:block!important}
+.v97-panel>.reminder-card,.v97-panel>.timeline-card-compact,.v97-panel>.inline-sale-history{margin:0!important;padding:12px!important;border:1px solid #dfe6ee!important;border-radius:15px!important;background:#fff!important;box-shadow:none!important}
+.v97-panel .reminder-head,.v97-panel .timeline-head,.v97-panel .sale-history-head{min-height:40px!important;margin:0 0 7px!important}
+.v97-panel h3{font-size:15px!important;margin:0!important}.v97-panel .sub{font-size:10px!important}
+.v97-panel #reminderList,.v97-panel #timeline{max-height:170px!important;overflow:auto!important;padding-right:3px}
+.v97-panel #saleHistory{max-height:115px!important;overflow:auto!important;padding-right:3px}
+.v97-panel #saleHistory .sale-record:nth-child(n+2){display:none!important}
+.v97-panel #reminderList .reminder-item,.v97-panel #timeline .timeline-item,.v97-panel #saleHistory .sale-record{padding:9px 0!important;min-height:0!important}
+.v97-panel #saleHistory .sale-record b,.v97-panel #timeline .timeline-item b,.v97-panel #reminderList .reminder-item b{font-size:11px!important}
+.v97-panel #saleHistory .sale-record-meta,.v97-panel #timeline .timeline-item small,.v97-panel #reminderList .reminder-meta{font-size:9px!important}
+.v97-panel #saleHistory .sale-price,.v97-panel #reminderList .reminder-due{font-size:10px!important}
+.v97-more{width:100%;height:34px;border:1px solid #dfe6ee;background:#f8fbff;border-radius:10px;color:#0b67b8;font-size:10px;font-weight:800;margin-top:5px}
+.v97-panel .sale-head-actions .text-btn{font-size:10px!important;padding:6px!important}
+@media(max-width:600px){.v97-record-nav{position:sticky;top:0;z-index:20}.v97-record-nav button{height:36px;font-size:10px}.v97-tool-grid{grid-template-columns:repeat(2,1fr)}.v97-panel>.reminder-card,.v97-panel>.timeline-card-compact,.v97-panel>.inline-sale-history{padding:10px!important}.v97-panel #reminderList,.v97-panel #timeline{max-height:155px!important}.v97-panel #saleHistory{max-height:105px!important}}
+@media(max-width:430px){.v97-record-nav{gap:4px;padding:4px}.v97-record-nav button{height:34px;font-size:9px}.v97-record-nav .v97-count{display:none}.v97-tool-grid{gap:5px;padding:6px}}
 </style>
-<script id="v99-unified-classic-js">
+<script id="v97-classic-workspace-js">
 (function(){
- function enhance(){
-  const panel=document.getElementById('detailTabRecords');
-  if(!panel||panel.dataset.v99==='1') return;
-  const nav=panel.querySelector('.v97-record-nav');
-  if(!nav) return;
-  panel.dataset.v99='1';
-  const labels={reminders:['Reminders','🔔'],history:['History','◷'],sales:['Sales','◇'],tools:['Tools','▣']};
-  nav.querySelectorAll('button').forEach(b=>{const k=b.dataset.v97;if(labels[k]) b.innerHTML=labels[k][1]+' <span>'+labels[k][0]+'</span>';});
-  const add=panel.querySelector('.reminder-head>button');
-  if(add) add.textContent='+ Add reminder';
-  const timelineAdd=panel.querySelector('.timeline-head>button');
-  if(timelineAdd) timelineAdd.textContent='+ Add event';
-  const saleAdd=panel.querySelector('.sale-head-actions .secondary');
-  if(saleAdd) saleAdd.textContent='+ Record sale';
- }
- const run=()=>{enhance();setTimeout(enhance,100);setTimeout(enhance,400);};
- const old=window.openDetail;
- if(typeof old==='function') window.openDetail=async function(){await old.apply(this,arguments);run();};
- document.addEventListener('DOMContentLoaded',run);
-})();
-</script>
-</body></html><style id="v99-action-hierarchy">
-/* V99 — action hierarchy: each tool has a distinct visual role instead of identical buttons. */
-.v97-tool-grid{
-  display:grid!important;
-  grid-template-columns:repeat(6,minmax(0,1fr));
-  gap:8px!important;
-  padding:10px!important;
-  margin:0 0 12px!important;
-  border:1px solid #dfe7f0!important;
-  border-radius:16px!important;
-  background:#f8fbff!important;
-}
-.v97-tool-grid button{
-  min-height:54px!important;
-  border-radius:13px!important;
-  font-size:11px!important;
-  font-weight:800!important;
-  padding:8px 7px!important;
-  line-height:1.2!important;
-  transition:transform .15s ease,box-shadow .15s ease,background .15s ease!important;
-}
-.v97-tool-grid button:hover{transform:translateY(-1px)}
-.v97-tool-grid button:nth-child(1){
-  grid-column:span 6;
-  min-height:48px!important;
-  color:#fff!important;
-  background:linear-gradient(110deg,#062844,#086dd6)!important;
-  border:0!important;
-  box-shadow:0 8px 18px rgba(0,88,190,.18)!important;
-  font-size:12px!important;
-}
-.v97-tool-grid button:nth-child(2){background:#fff!important;border:1px solid #cfe0f2!important;color:#17324f!important}
-.v97-tool-grid button:nth-child(3){background:#f5f7fa!important;border:1px solid #d9e0e8!important;color:#34465b!important}
-.v97-tool-grid button:nth-child(4){background:#eef7ff!important;border:1px solid #bcdcff!important;color:#0767b8!important}
-.v97-tool-grid button:nth-child(5){background:#f7f5ff!important;border:1px solid #ddd7fb!important;color:#5146a8!important}
-.v97-tool-grid button:nth-child(6){background:#f5fbf7!important;border:1px solid #ccebd7!important;color:#08783f!important}
-.v99-action-icon{display:block;font-size:17px;line-height:1;margin-bottom:4px}
-.v99-action-label{display:block}
-@media(max-width:600px){
- .v97-tool-grid{grid-template-columns:repeat(2,1fr)!important;gap:7px!important;padding:8px!important}
- .v97-tool-grid button:nth-child(1){grid-column:1/-1}
- .v97-tool-grid button{min-height:52px!important;font-size:10px!important}
-}
-</style>
-<script id="v99-action-hierarchy-js">
-(function(){
-  function polish(){
-    document.querySelectorAll('.v97-tool-grid').forEach(function(grid){
-      const items=[['✓','Verify'],['↗','Share'],['⎙','Print / PDF'],['▣','QR Passport'],['▤','Documents'],['◇','Record sale']];
-      grid.querySelectorAll('button').forEach(function(btn,i){
-        if(!items[i] || btn.dataset.v99==='1') return;
-        btn.dataset.v99='1';
-        btn.innerHTML='<span class="v99-action-icon">'+items[i][0]+'</span><span class="v99-action-label">'+items[i][1]+'</span>';
-        btn.setAttribute('aria-label',items[i][1]);
-      });
-    });
+  function build(){
+    const panel=document.getElementById('detailTabRecords');
+    if(!panel || panel.dataset.v97Built==='1') return;
+    const actions=panel.querySelector('.detail-actions');
+    const reminder=panel.querySelector('.reminder-card');
+    const timeline=panel.querySelector('.timeline-card-compact');
+    const sale=panel.querySelector('.inline-sale-history');
+    if(!actions||!reminder||!timeline||!sale) return;
+    panel.dataset.v97Built='1';
+    const nav=document.createElement('div'); nav.className='v97-record-nav';
+    nav.innerHTML='<button type="button" data-v97="reminders">Reminders</button><button type="button" data-v97="history">History</button><button type="button" data-v97="sales">Sales</button><button type="button" data-v97="tools">Tools</button>';
+    const tools=document.createElement('div'); tools.className='v97-tool-grid v97-panel'; tools.dataset.v97Panel='tools';
+    tools.innerHTML='<button type="button" class="primary" onclick="verifyDetail()">✓ Verify</button><button type="button" class="secondary" onclick="shareDetail()">Share</button><button type="button" class="secondary" onclick="printPassport()">Print / PDF</button><button type="button" class="secondary" onclick="openQR()">QR Passport</button><button type="button" class="secondary" onclick="openDocs()">Documents</button><button type="button" class="secondary" onclick="openSale()">Record sale</button>';
+    const shell=document.createElement('div'); shell.className='v97-shell';
+    function wrap(key,node){const p=document.createElement('div');p.className='v97-panel';p.dataset.v97Panel=key;p.appendChild(node);return p}
+    const p1=wrap('reminders',reminder),p2=wrap('history',timeline),p3=wrap('sales',sale);
+    shell.append(p1,p2,p3);
+    panel.innerHTML=''; panel.append(nav,tools,shell);
+    const set=(key)=>{nav.querySelectorAll('button').forEach(b=>b.classList.toggle('active',b.dataset.v97===key));panel.querySelectorAll('.v97-panel').forEach(p=>p.classList.toggle('active',p.dataset.v97Panel===key));};
+    nav.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>set(b.dataset.v97)));
+    // Keep sale preview genuinely compact and provide one clear path to the complete history.
+    const more=()=>{const box=panel.querySelector('#saleHistory'); if(!box||box.querySelector('.v97-more'))return; const n=box.querySelectorAll('.sale-record').length; if(n>1){const b=document.createElement('button');b.type='button';b.className='v97-more';b.textContent='View complete sale history →';b.onclick=()=>openSaleHistory();box.appendChild(b)}};
+    set('reminders'); setTimeout(more,250); setTimeout(more,900);
   }
   const old=window.openDetail;
   if(typeof old==='function'){
-    window.openDetail=async function(){await old.apply(this,arguments);setTimeout(polish,0);setTimeout(polish,300);};
+    window.openDetail=async function(){await old.apply(this,arguments);setTimeout(build,0);setTimeout(build,250);};
   }
-  document.addEventListener('DOMContentLoaded',function(){setTimeout(polish,400);});
+  document.addEventListener('DOMContentLoaded',()=>{setTimeout(build,300);});
 })();
 </script>
+</body></html>
