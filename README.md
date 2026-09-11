@@ -1,4 +1,4 @@
-# Asset Passport V61
+# Asset Passport V67
 
 V61 adds a recipient-side ownership transfer inbox and atomic accept/decline workflow.
 
