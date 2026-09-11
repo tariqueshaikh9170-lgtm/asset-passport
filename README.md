@@ -1,5 +1,3 @@
-# Asset Passport V82
-
-V82 is a reliability patch for the V81 resale/sale record feature.
-
-Use the existing V81 database migration; no new migration is required.
+# Asset Passport V84
+Final reliability fix for the Sale Record workflow.
+No new SQL migration is required; V81 sale migration remains the database setup.

@@ -1,8 +1,9 @@
-# Asset Passport V82
+# Asset Passport V84
 
-## Sale record reliability fix
-- Fixed the sale save button remaining disabled when an ancillary activity/history refresh stalled.
-- Added visible "Saving sale record…" feedback.
-- Added timeout handling for the sale insert and optional sold-status update.
-- Sale success is shown immediately after the sale record is stored; background refreshes no longer block the modal.
-- No database schema changes from V81.
+## Sale Record — final save fix
+- Save button is explicitly non-submit.
+- Click propagation is stopped so the detail modal cannot close it.
+- Sale save performs only the database insert; secondary refreshes cannot disturb the modal.
+- Success remains visible inside the sale dialog.
+- Sale dialog is explicitly kept open after a successful insert.
+- No database migration required.
