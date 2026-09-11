@@ -246,7 +246,7 @@ body:has(.modal.open){overflow:hidden;}
   </div>
 </div>
 
-<div class="modal" id="detailModal" onclick="if(event.target===this)closeDetail()"><div class="detail-card compact-detail"><div class="modal-head detail-sticky-head"><div><div class="eyebrow" style="color:#667085">Asset passport</div><h2 id="detailTitle">Passport</h2><div id="detailMeta" class="sub"></div></div><button class="close" onclick="closeDetail()">×</button></div><div class="detail-code"><span>Passport code</span><b id="detailCode">PP-00000000</b><button class="secondary" onclick="copyText($('detailCode').textContent)">Copy</button></div><div class="detail-grid compact-stats"><div class="detail-stat"><small>Status</small><b id="detailStatus">—</b></div><div class="detail-stat"><small>Verification</small><b id="detailPublic">—</b></div><div class="detail-stat"><small>Category</small><b id="detailType">—</b></div><div class="detail-stat"><small>Created</small><b id="detailCreated">—</b></div></div><div class="detail-tabs" role="tablist" aria-label="Passport sections"><button class="detail-tab active" data-tab="overview" onclick="switchDetailTab('overview')">Overview</button><button class="detail-tab" data-tab="records" onclick="switchDetailTab('records')">Records</button><button class="detail-tab" data-tab="ownership" onclick="switchDetailTab('ownership')">Ownership</button></div><div class="detail-tab-panel active" id="detailTabOverview"><div class="asset-identity"><div class="asset-identity-head"><div><h3>Asset identity</h3><div class="sub">Structured details saved with this passport.</div></div><span class="pill green">Owner only</span></div><div id="assetIdentityBody"><div class="identity-empty">Loading asset details…</div></div></div><div class="readiness-card"><div class="readiness-head"><div><h3>Passport readiness</h3><div class="sub">Completeness before sharing or transferring.</div></div><div class="readiness-score" id="readinessScore">—%</div></div><div class="readiness-bar"><div class="readiness-fill" id="readinessFill"></div></div><div id="readinessList" class="readiness-list"><div class="readiness-item"><b>Checking…</b>Loading passport records.</div></div></div></div><div class="detail-tab-panel" id="detailTabRecords"><div class="detail-actions compact-actions"><button class="primary" onclick="verifyDetail()">✓ Verify</button><button class="secondary" onclick="shareDetail()">Share</button><button class="secondary" onclick="printPassport()">Print / PDF</button><button class="secondary" onclick="openQR()">QR Passport</button><button class="secondary" onclick="openDocs()">Documents</button><button class="secondary" onclick="openSale()">Record sale</button></div><div class="reminder-card"><div class="reminder-head"><div><h3>Warranty & service reminders</h3><div class="sub">Warranty, service, inspection and expiry dates.</div></div><button class="secondary" onclick="toggleReminderForm()">+ Add</button></div><div id="reminderForm" class="reminder-form hidden"><div class="two"><div class="field"><label>Reminder type</label><select id="reminderType"><option value="warranty">Warranty</option><option value="service">Service</option><option value="inspection">Inspection</option><option value="registration">Registration</option><option value="insurance">Insurance</option><option value="other">Other</option></select></div><div class="field"><label>Due date</label><input id="reminderDate" type="date"></div></div><div class="field"><label>Title</label><input id="reminderTitle" placeholder="e.g. Warranty expires"></div><div class="field"><label>Notes (optional)</label><input id="reminderNotes" placeholder="Provider, coverage, service interval…"></div><button class="primary" onclick="addReminder()">Save reminder</button><div id="reminderStatus" class="status"></div></div><div id="reminderList" class="reminder-list"><div class="reminder-empty">Loading reminders…</div></div></div><div class="timeline-card-compact"><div class="timeline-head"><div><h3>Passport timeline</h3><div class="sub">Service, repair and inspection history.</div></div><button class="secondary" onclick="openEventForm()">+ Add event</button></div><div id="eventForm" class="event-form hidden"><div class="two"><div class="field"><label>Event type</label><select id="eventType"><option value="service">Service</option><option value="repair">Repair</option><option value="inspection">Inspection</option><option value="ownership_transfer">Ownership transfer</option><option value="note">Note</option></select></div><div class="field"><label>Date</label><input id="eventDate" type="date"></div></div><div class="field"><label>Details</label><input id="eventText" placeholder="e.g. Annual service completed"></div><button class="primary" onclick="addEvent()">Save event</button><div id="eventStatus" class="status"></div></div><div id="timeline"><div class="empty">Loading timeline…</div></div></div><div class="sale-history inline-sale-history"><div class="sale-history-head"><div><h3>Sale history</h3><div class="sub">Private transaction records.</div></div><button class="secondary" onclick="openSale()">+ Record sale</button></div><div id="saleHistory"><div class="empty">Loading sale history…</div></div></div></div><div class="detail-tab-panel" id="detailTabOwnership"><div class="ownership-card"><div class="ownership-head"><div><h3>Ownership center</h3><div class="sub">Transfer this passport securely to another owner.</div></div><button class="secondary" onclick="openTransferInbox()">Full center</button></div><div class="ownership-primary"><button class="primary" onclick="openTransfer()">Transfer ownership</button></div><div id="assetTransfers"><div class="empty">Loading ownership status…</div></div></div></div></div></div>
+<div class="modal" id="detailModal" onclick="if(event.target===this)closeDetail()"><div class="detail-card compact-detail"><div class="modal-head detail-sticky-head"><div><div class="eyebrow" style="color:#667085">Asset passport</div><h2 id="detailTitle">Passport</h2><div id="detailMeta" class="sub"></div></div><button class="close" onclick="closeDetail()">×</button></div><div class="detail-code"><span>Passport code</span><b id="detailCode">PP-00000000</b><button class="secondary" onclick="copyText($('detailCode').textContent)">Copy</button></div><div class="detail-grid compact-stats"><div class="detail-stat"><small>Status</small><b id="detailStatus">—</b></div><div class="detail-stat"><small>Verification</small><b id="detailPublic">—</b></div><div class="detail-stat"><small>Category</small><b id="detailType">—</b></div><div class="detail-stat"><small>Created</small><b id="detailCreated">—</b></div></div><div class="detail-tabs" role="tablist" aria-label="Passport sections"><button class="detail-tab active" data-tab="overview" onclick="switchDetailTab('overview')">Overview</button><button class="detail-tab" data-tab="records" onclick="switchDetailTab('records')">Workspace</button><button class="detail-tab" data-tab="ownership" onclick="switchDetailTab('ownership')">Ownership</button></div><div class="detail-tab-panel active" id="detailTabOverview"><div class="asset-identity"><div class="asset-identity-head"><div><h3>Asset identity</h3><div class="sub">Structured details saved with this passport.</div></div><span class="pill green">Owner only</span></div><div id="assetIdentityBody"><div class="identity-empty">Loading asset details…</div></div></div><div class="readiness-card"><div class="readiness-head"><div><h3>Passport readiness</h3><div class="sub">Completeness before sharing or transferring.</div></div><div class="readiness-score" id="readinessScore">—%</div></div><div class="readiness-bar"><div class="readiness-fill" id="readinessFill"></div></div><div id="readinessList" class="readiness-list"><div class="readiness-item"><b>Checking…</b>Loading passport records.</div></div></div></div><div class="detail-tab-panel" id="detailTabRecords"><div class="detail-actions compact-actions"><button class="primary" onclick="verifyDetail()">✓ Verify</button><button class="secondary" onclick="shareDetail()">Share</button><button class="secondary" onclick="printPassport()">Print / PDF</button><button class="secondary" onclick="openQR()">QR Passport</button><button class="secondary" onclick="openDocs()">Documents</button><button class="secondary" onclick="openSale()">Record sale</button></div><div class="reminder-card"><div class="reminder-head"><div><h3>Warranty & service reminders</h3><div class="sub">Warranty, service, inspection and expiry dates.</div></div><button class="secondary" onclick="toggleReminderForm()">+ Add</button></div><div id="reminderForm" class="reminder-form hidden"><div class="two"><div class="field"><label>Reminder type</label><select id="reminderType"><option value="warranty">Warranty</option><option value="service">Service</option><option value="inspection">Inspection</option><option value="registration">Registration</option><option value="insurance">Insurance</option><option value="other">Other</option></select></div><div class="field"><label>Due date</label><input id="reminderDate" type="date"></div></div><div class="field"><label>Title</label><input id="reminderTitle" placeholder="e.g. Warranty expires"></div><div class="field"><label>Notes (optional)</label><input id="reminderNotes" placeholder="Provider, coverage, service interval…"></div><button class="primary" onclick="addReminder()">Save reminder</button><div id="reminderStatus" class="status"></div></div><div id="reminderList" class="reminder-list"><div class="reminder-empty">Loading reminders…</div></div></div><div class="timeline-card-compact"><div class="timeline-head"><div><h3>Passport timeline</h3><div class="sub">Service, repair and inspection history.</div></div><button class="secondary" onclick="openEventForm()">+ Add event</button></div><div id="eventForm" class="event-form hidden"><div class="two"><div class="field"><label>Event type</label><select id="eventType"><option value="service">Service</option><option value="repair">Repair</option><option value="inspection">Inspection</option><option value="ownership_transfer">Ownership transfer</option><option value="note">Note</option></select></div><div class="field"><label>Date</label><input id="eventDate" type="date"></div></div><div class="field"><label>Details</label><input id="eventText" placeholder="e.g. Annual service completed"></div><button class="primary" onclick="addEvent()">Save event</button><div id="eventStatus" class="status"></div></div><div id="timeline"><div class="empty">Loading timeline…</div></div></div><div class="sale-history inline-sale-history"><div class="sale-history-head"><div><h3>Sale history</h3><div class="sub">Private transaction records.</div></div><div class="sale-head-actions"><button class="secondary" onclick="openSale()">+ Record sale</button><button class="text-btn" onclick="openSaleHistory()">View all</button></div></div><div id="saleHistory"><div class="empty">Loading sale history…</div></div></div></div><div class="detail-tab-panel" id="detailTabOwnership"><div class="ownership-card"><div class="ownership-head"><div><h3>Ownership center</h3><div class="sub">Transfer this passport securely to another owner.</div></div><button class="secondary" onclick="openTransferInbox()">Full center</button></div><div class="ownership-primary"><button class="primary" onclick="openTransfer()">Transfer ownership</button></div><div id="assetTransfers"><div class="empty">Loading ownership status…</div></div></div></div></div></div>
 <div class="modal" id="qrModal" onclick="if(event.target===this)closeQR()"><div class="modal-card qr-card"><div class="modal-head"><div><div class="eyebrow" style="color:#667085">Portable verification</div><h2 style="margin:6px 0 3px">Passport QR</h2><div class="sub">Scan to verify this asset record.</div></div><button class="close" onclick="closeQR()">×</button></div><div class="qr-preview"><div class="qr-brand"><span class="mark">✦</span><div><b>Asset Passport</b><small>Verified asset record</small></div></div><div id="qrCode" class="qr-code"></div><div id="qrAssetName" class="qr-name">Passport</div><div id="qrAssetCode" class="qr-pass">PP-00000000</div><div class="qr-note">Public verification shows only the fields allowed by the registry.</div></div><div class="qr-actions"><button class="primary" onclick="shareQR()">Share passport</button><button class="secondary" onclick="copyQRLink()">Copy verification link</button></div><div id="qrStatus" class="status"></div></div></div>
 <nav class="mobile-nav" aria-label="Primary navigation">
   <button class="mobile-nav-item active" onclick="window.scrollTo({top:0,behavior:'smooth'})"><span>⌂</span><small>Home</small></button>
@@ -263,6 +263,7 @@ body:has(.modal.open){overflow:hidden;}
 <button class="primary" style="margin-top:18px" id="createBtn" onclick="createAsset()">Create passport</button><div id="createStatus" class="status"></div></div></div>
 <div class="modal" id="transferModal" onclick="if(event.target===this)closeTransfer()"><div class="modal-card"><div class="modal-head"><div><div class="eyebrow" style="color:#667085">Ownership workflow</div><h2 style="margin:6px 0 3px">Transfer passport</h2><div id="transferMeta" class="sub"></div></div><button class="close" onclick="closeTransfer()">×</button></div><div class="transfer-note"><b>Safe transfer</b><span>This creates a transfer request. Legal title remains subject to the relevant government or authorized registry.</span></div><div class="field"><label>Recipient email</label><input id="transferEmail" type="email" placeholder="owner@example.com" autocomplete="email"></div><div class="field"><label>Message (optional)</label><input id="transferMessage" placeholder="Please review and accept this passport transfer"></div><button class="primary" id="transferBtn" onclick="requestTransfer()">Send transfer request</button><div id="transferStatus" class="status"></div></div></div>
 
+<div class="modal" id="saleHistoryModal"><div class="modal-card sale-history-modal-card"><div class="modal-head"><div><div class="eyebrow" style="color:#667085">Private records</div><h2 style="margin:6px 0 3px">Sale history</h2><div class="sub">Complete transaction history for this passport.</div></div><button class="close" onclick="closeSaleHistory()">×</button></div><div id="saleHistoryFull" class="sale-history-full"><div class="empty">Loading…</div></div></div></div>
 <div class="modal" id="saleModal"><div class="modal-card"><div class="modal-head"><div><div class="eyebrow" style="color:#667085">Resale record</div><h2 style="margin:6px 0 3px">Record sale</h2><div id="saleMeta" class="sub"></div></div><button class="close" onclick="closeSale()">×</button></div><div class="sale-note"><b>Sale history</b><span>This records the transaction in your private passport history. It does not itself transfer legal title.</span></div><div class="two"><div class="field"><label>Sale price</label><input id="salePrice" type="number" min="0" step="0.01" inputmode="decimal" placeholder="e.g. 450"></div><div class="field"><label>Currency</label><input id="saleCurrency" maxlength="3" value="QAR" placeholder="QAR"></div></div><div class="field"><label>Sale date</label><input id="saleDate" type="date"></div><div class="field"><label>Buyer name (optional)</label><input id="buyerName" placeholder="Buyer name"></div><div class="field"><label>Buyer email (optional)</label><input id="buyerEmail" type="email" placeholder="buyer@example.com" autocomplete="email"></div><div class="field"><label>Sale notes (optional)</label><input id="saleNotes" placeholder="Condition, included items, agreement notes…"></div><label class="sale-check"><input id="markSold" type="checkbox"><span>Mark this passport as <b>sold</b> after recording</span></label><button class="primary" id="saleBtn" type="button">Save sale record</button><div id="saleStatus" class="status"></div><div id="saleSavedHint" class="status">After saving, the record will remain here until you close this window.</div></div></div>
 
 <div class="modal" id="transferInboxModal" onclick="if(event.target===this)closeTransferInbox()"><div class="detail-card"><div class="modal-head"><div><div class="eyebrow" style="color:#667085">Ownership center</div><h2>Transfer requests</h2><div class="sub">Incoming requests to accept, plus transfers you have sent.</div></div><button class="close" onclick="closeTransferInbox()">×</button></div><div class="transfer-center-note"><span class="transfer-center-icon">⇄</span><div><b>Two-sided ownership workflow</b><div>Send a request to the new owner, then the recipient accepts it from their account. Your passport stays unchanged until acceptance.</div></div></div><div id="transferInbox"><div class="empty">Loading transfer requests…</div></div></div></div>
@@ -381,6 +382,8 @@ function openQR(){const a=window.currentAsset;if(!a)return;const link=verifyUrl(
 
 async function loadAssetTransfers(assetId){const box=$('assetTransfers');box.innerHTML='<div class="empty">Loading ownership status…</div>';const {data:{user}}=await sb.auth.getUser();if(!user){box.innerHTML='<div class="ownership-empty">Sign in to view ownership requests.</div>';return}const [out,inc]=await Promise.all([sb.from('asset_transfer_requests').select('id,recipient_email,message,status,created_at').eq('asset_id',assetId).eq('from_owner_id',user.id).order('created_at',{ascending:false}).limit(8),sb.from('asset_transfer_requests').select('id,recipient_email,message,status,created_at').eq('asset_id',assetId).eq('recipient_email',String(user.email||'').toLowerCase()).order('created_at',{ascending:false}).limit(8)]);if(out.error||inc.error){box.innerHTML='<div class="ownership-empty">Ownership requests could not be loaded yet. Run the transfer setup SQL included with V80, then refresh.</div>';return}const rows=[...(out.data||[]).map(r=>({...r,direction:'sent'})),...(inc.data||[]).map(r=>({...r,direction:'incoming'}))].sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));if(!rows.length){box.innerHTML='<div class="ownership-empty">No transfer requests for this passport yet.</div>';return}const cls=s=>['pending','accepted','declined','cancelled'].includes(String(s))?String(s):'accepted';box.innerHTML=rows.map(r=>`<div class="ownership-row"><div class="ownership-copy"><b>${r.direction==='incoming'?'Incoming transfer request':'Sent to '+esc(r.recipient_email||'recipient')}</b>${r.message?`<div class="transfer-message">${esc(r.message)}</div>`:''}<small>${esc(new Date(r.created_at).toLocaleString())}</small></div><div class="ownership-actions"><span class="ownership-pill ${cls(r.status)}">${esc(String(r.status||'pending').replaceAll('_',' '))}</span>${r.direction==='sent'&&r.status==='pending'?`<button class="secondary" onclick="cancelTransfer('${esc(r.id)}')">Cancel</button>`:''}</div></div>`).join('')}
 
+function openSaleHistory(){const rows=window.currentSaleHistoryRows||[];const box=$('saleHistoryFull');if(!box)return;box.innerHTML=rows.length?rows.map(x=>`<div class="sale-record"><div><b>${esc(x.buyer_name||'Buyer not named')}</b><div class="sale-record-meta">${esc(x.sale_date)}${x.buyer_email?' · '+esc(x.buyer_email):''}</div>${x.notes?`<div class="transfer-message">${esc(x.notes)}</div>`:''}</div><div class="sale-price">${esc(String(x.currency||'QAR'))} ${Number(x.sale_price||0).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}</div></div>`).join(''):'<div class="empty">No sale records yet.</div>';$('saleHistoryModal').classList.add('open')}function closeSaleHistory(){$('saleHistoryModal').classList.remove('open')}
+
 function openSale(){const a=window.currentAsset;if(!a)return;$('saleMeta').textContent=a.name+' · Passport '+a.passport_code;$('salePrice').value='';$('saleCurrency').value='QAR';$('saleDate').value=new Date().toISOString().slice(0,10);$('buyerName').value='';$('buyerEmail').value='';$('saleNotes').value='';$('markSold').checked=false;clear('saleStatus');$('saleBtn').disabled=false;$('saleModal').classList.add('open')}
 function closeSale(){$('saleModal').classList.remove('open')}
 async function recordSale(){
@@ -424,7 +427,7 @@ async function recordSale(){
   await loadActivity();
 }
 
-async function loadSaleHistory(assetId){const box=$('saleHistory');if(!box)return;box.innerHTML='<div class="empty">Loading sale history…</div>';const r=await sb.from('asset_sales').select('id,sale_price,currency,sale_date,buyer_name,buyer_email,notes,created_at').eq('asset_id',assetId).order('sale_date',{ascending:false}).order('created_at',{ascending:false});if(r.error){box.innerHTML='<div class="ownership-empty">Sale history needs the included database migration first.</div>';return}const rows=r.data||[];if(!rows.length){box.innerHTML='<div class="empty">No sale records yet.</div>';return}box.innerHTML=rows.map(x=>`<div class="sale-record"><div><b>${esc(x.buyer_name||'Buyer not named')}</b><div class="sale-record-meta">${esc(x.sale_date)}${x.buyer_email?' · '+esc(x.buyer_email):''}</div>${x.notes?`<div class="transfer-message">${esc(x.notes)}</div>`:''}</div><div class="sale-price">${esc(String(x.currency||'QAR'))} ${Number(x.sale_price||0).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}</div></div>`).join('')}
+async function loadSaleHistory(assetId){const box=$('saleHistory');if(!box)return;box.innerHTML='<div class="empty">Loading sale history…</div>';const r=await sb.from('asset_sales').select('id,sale_price,currency,sale_date,buyer_name,buyer_email,notes,created_at').eq('asset_id',assetId).order('sale_date',{ascending:false}).order('created_at',{ascending:false});if(r.error){box.innerHTML='<div class="ownership-empty">Sale history needs the included database migration first.</div>';return}const rows=r.data||[];if(!rows.length){box.innerHTML='<div class="empty">No sale records yet.</div>';return}box.innerHTML=rows.slice(0,2).map(x=>`<div class="sale-record"><div><b>${esc(x.buyer_name||'Buyer not named')}</b><div class="sale-record-meta">${esc(x.sale_date)}${x.buyer_email?' · '+esc(x.buyer_email):''}</div></div><div class="sale-price">${esc(String(x.currency||'QAR'))} ${Number(x.sale_price||0).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}</div></div>`).join('') + (rows.length>2?`<button class="sale-more" onclick="openSaleHistory()">View ${rows.length-2} more sale record${rows.length-2===1?'':'s'} →</button>`:'');window.currentSaleHistoryRows=rows;
 
 function openTransfer(){const a=window.currentAsset;if(!a)return;$("transferMeta").textContent=a.name+" · Passport "+a.passport_code;$("transferEmail").value="";$("transferMessage").value="";clear("transferStatus");$("transferModal").classList.add("open")}
 function closeTransfer(){$("transferModal").classList.remove("open")}
@@ -490,64 +493,109 @@ init();
 @media(max-width:430px){.compact-detail{padding:10px!important}.detail-sticky-head h2{font-size:21px!important}.detail-code{margin:7px 0!important}.premium-hero{min-height:315px!important}.premium-hero h1{font-size:28px!important}.premium-kpis{gap:7px!important}.premium-kpis .kpi{padding:12px!important}.kpi-num{font-size:24px!important}}
 </style>
 
-</body></html><style id="v88-classic-dense">
-/* V88 — Classic Dense workspace: reduce vertical travel without hiding functionality */
-.detail-tab-panel.active{animation:v88fade .12s ease}
-@keyframes v88fade{from{opacity:.7;transform:translateY(2px)}to{opacity:1;transform:none}}
-.detail-actions.compact-actions{position:sticky;top:0;z-index:3;background:#fff;padding:6px 0 8px!important;margin:0!important;border-bottom:1px solid #eef2f6}
-.reminder-card,.timeline-card-compact,.inline-sale-history,.ownership-card,.asset-identity,.readiness-card{border:1px solid #e0e6ee!important;box-shadow:none!important}
-.reminder-card,.timeline-card-compact,.inline-sale-history{padding:12px!important;border-radius:14px!important}
-.reminder-head,.timeline-head,.sale-history-head{min-height:38px!important;margin-bottom:7px!important}
-.reminder-head h3,.timeline-head h3,.sale-history-head h3{font-size:15px!important;margin:0!important}
-.reminder-head .sub,.timeline-head .sub,.sale-history-head .sub{font-size:10px!important}
-.reminder-head .secondary,.timeline-head .secondary,.sale-history-head .secondary{height:36px!important;padding:0 10px!important;font-size:11px!important}
-#reminderList,#timeline,#saleHistory{max-height:138px;overflow:auto;padding-right:2px;scrollbar-width:thin}
-#timeline{max-height:150px}
-#saleHistory{max-height:128px}
-.reminder-item{padding:9px 0!important;border-top:1px solid #edf1f5!important;min-height:46px!important}
-.reminder-item:first-child{border-top:0!important}
-.reminder-copy b{font-size:12px!important}.reminder-meta{font-size:10px!important}.reminder-due{font-size:10px!important;padding:5px 8px!important}
-.timeline-item{padding:8px 0!important}.timeline-item b{font-size:12px!important}.timeline-item small{font-size:9px!important}
-.sale-record{padding:9px 0!important;min-height:45px!important}.sale-record b{font-size:12px!important}.sale-record-meta{font-size:9px!important}.sale-price{font-size:12px!important}
-/* Keep secondary forms out of the normal flow until explicitly opened. */
-.reminder-form,.event-form{margin-top:9px!important;padding:10px!important;border-radius:12px!important;background:#f8fafc!important;border:1px solid #e5ebf2!important}
-.reminder-form .field,.event-form .field{margin:8px 0!important}.reminder-form .field input,.reminder-form .field select,.event-form .field input,.event-form .field select{height:44px!important;font-size:12px!important}
-.reminder-form .primary,.event-form .primary{height:44px!important;font-size:12px!important}
-/* One-line action rail on wider screens; two compact rows on phones. */
-@media(min-width:761px){
- .compact-actions{grid-template-columns:repeat(6,1fr)!important}
- .compact-actions .primary{grid-column:auto!important}
-}
+
+<style id="v89-sale-compact">
+/* V89 — Sale history is a compact preview; full history opens in its own scrollable panel. */
+.inline-sale-history{margin-top:10px!important;padding:12px!important;border:1px solid #e0e6ee!important;border-radius:14px!important;background:#fff!important}
+.sale-history-head{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:10px!important}
+.sale-head-actions{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.sale-head-actions .secondary{height:34px!important;padding:0 10px!important;font-size:11px!important}
+.sale-head-actions .text-btn{font-size:10px!important;padding:7px 6px!important}
+#saleHistory{max-height:none!important;overflow:visible!important}
+#saleHistory .sale-record{padding:8px 0!important;min-height:42px!important}
+#saleHistory .sale-record:nth-child(n+3){display:none!important}
+#saleHistory .sale-record b{font-size:11px!important}
+#saleHistory .sale-record-meta{font-size:9px!important}
+#saleHistory .sale-price{font-size:11px!important}
+.sale-more{width:100%;height:32px;margin-top:5px;border:1px solid #e0e7ef;background:#f8fbff;border-radius:9px;color:#1768d9;font-size:10px;font-weight:800}
+.sale-history-modal-card{max-width:680px!important}
+.sale-history-full{max-height:55vh;overflow:auto;padding-right:3px}
+.sale-history-full .sale-record{padding:12px 0!important}
+@media(max-width:760px){.sale-history-head{align-items:center!important}.sale-head-actions .text-btn{display:block!important}.sale-history-modal-card{width:100%!important}.sale-history-full{max-height:60dvh}.inline-sale-history h3{font-size:14px!important}}
+</style>
+</body></html>
+<style id="v91-compact-classic">
+/* V91 — compact classic passport workspace. Keep the main page short and make each record area a focused view. */
+.v91-nav{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:10px 0 8px;padding:5px;background:#f4f7fb;border:1px solid #e2e8f0;border-radius:13px}
+.v91-nav button{height:38px;border:0;border-radius:9px;background:transparent;color:#667085;font-size:11px;font-weight:800;cursor:pointer}
+.v91-nav button.active{background:#fff;color:#1768d9;box-shadow:0 1px 5px rgba(15,23,42,.08)}
+.v91-nav .nav-icon{display:inline-block;margin-right:4px;font-size:12px}
+.v91-tools{display:none!important;grid-template-columns:repeat(3,1fr);gap:6px;margin:0 0 8px;padding:7px;background:#f8fafc;border:1px solid #e5ebf2;border-radius:12px}
+.v91-tools.active{display:grid!important}
+.v91-tools button{min-height:38px!important;height:38px!important;font-size:10px!important;padding:0 7px!important}
+.v91-record-shell{min-height:0}
+.v91-panel{display:none}
+.v91-panel.active{display:block}
+.v91-panel>.reminder-card,.v91-panel>.timeline-card-compact,.v91-panel>.inline-sale-history{margin-top:0!important}
+.v91-panel .reminder-card,.v91-panel .timeline-card-compact,.v91-panel .inline-sale-history{padding:12px!important;border-radius:14px!important;border:1px solid #e0e6ee!important;box-shadow:none!important;background:#fff!important}
+.v91-panel .reminder-head,.v91-panel .timeline-head,.v91-panel .sale-history-head{min-height:38px!important;margin-bottom:6px!important}
+.v91-panel h3{font-size:14px!important;margin:0!important}
+.v91-panel .sub{font-size:10px!important}
+.v91-panel .secondary{height:34px!important;padding:0 9px!important;font-size:10px!important}
+/* Never let lists stretch the passport modal. Only the active list scrolls. */
+.v91-panel #reminderList,.v91-panel #timeline,.v91-panel #saleHistory{max-height:150px!important;overflow:auto!important;padding-right:3px;scrollbar-width:thin}
+.v91-panel #reminderList .reminder-item,.v91-panel #timeline .timeline-item,.v91-panel #saleHistory .sale-record{padding:8px 0!important;min-height:0!important}
+.v91-panel #saleHistory .sale-record:nth-child(n+3){display:none!important}
+.v91-panel #saleHistory .sale-record b,.v91-panel #timeline .timeline-item b,.v91-panel #reminderList .reminder-item b{font-size:11px!important}
+.v91-panel #saleHistory .sale-record-meta,.v91-panel #timeline .timeline-item small,.v91-panel #reminderList .reminder-meta{font-size:9px!important}
+.v91-panel #saleHistory .sale-price,.v91-panel #reminderList .reminder-due{font-size:10px!important}
+.v91-panel .sale-history-head{align-items:center!important}
+.v91-panel .sale-head-actions{display:flex;align-items:center;gap:5px}
+.v91-panel .sale-head-actions .text-btn{font-size:10px!important;padding:6px!important}
+.v91-panel .sale-more{height:30px!important;margin-top:4px!important;font-size:10px!important}
+/* Forms are compact and remain hidden until the user asks for them. */
+.v91-panel .reminder-form,.v91-panel .event-form{margin-top:8px!important;padding:9px!important;border-radius:11px!important}
+.v91-panel .reminder-form .field,.v91-panel .event-form .field{margin:6px 0!important}
+.v91-panel .reminder-form input,.v91-panel .reminder-form select,.v91-panel .event-form input,.v91-panel .event-form select{height:40px!important;font-size:11px!important}
+.v91-panel .reminder-form .primary,.v91-panel .event-form .primary{height:40px!important;font-size:11px!important}
 @media(max-width:760px){
- .compact-detail{max-height:calc(100dvh - 10px)!important}
- .detail-sticky-head{padding-bottom:7px!important}
- .detail-code{padding:7px!important}
- .compact-stats .detail-stat{min-height:42px!important}
- .detail-tabs{margin-bottom:8px!important}
- .compact-actions{grid-template-columns:repeat(3,1fr)!important;gap:5px!important}
- .compact-actions .primary{grid-column:span 3!important}
- .compact-actions button{min-height:38px!important;height:38px!important;font-size:10px!important}
- .reminder-card,.timeline-card-compact,.inline-sale-history{margin-top:8px!important}
+ .v91-nav{position:sticky;top:0;z-index:8;margin:7px 0;padding:4px}
+ .v91-nav button{height:36px;font-size:10px}
+ .v91-tools{grid-template-columns:repeat(3,1fr)}
+ .v91-panel #reminderList,.v91-panel #timeline,.v91-panel #saleHistory{max-height:132px!important}
+ .v91-panel .reminder-card,.v91-panel .timeline-card-compact,.v91-panel .inline-sale-history{padding:10px!important}
 }
 @media(max-width:430px){
- .compact-detail{padding:9px!important}
- .detail-sticky-head h2{font-size:20px!important}
- .compact-stats .detail-stat{padding:7px 8px!important}
- .compact-actions button{font-size:9px!important;padding:0 4px!important}
- #reminderList{max-height:112px}.reminder-item{min-height:42px!important}
- #timeline{max-height:120px}#saleHistory{max-height:105px}
+ .v91-nav button{height:34px;font-size:9px}.v91-nav .nav-icon{display:none}
+ .v91-tools{grid-template-columns:repeat(2,1fr);padding:6px}
+ .v91-panel #reminderList,.v91-panel #timeline,.v91-panel #saleHistory{max-height:118px!important}
 }
 </style>
 <script>
-/* V88 — prevent long records from taking over the passport view. */
+/* V91 — build the compact workspace once per passport detail open. */
 (function(){
-  const oldOpenDetail=window.openDetail;
-  if(typeof oldOpenDetail==='function'){
-    window.openDetail=async function(){
-      const r=await oldOpenDetail.apply(this,arguments);
-      try{switchDetailTab('overview')}catch(e){}
-      return r;
+  const originalOpenDetail=window.openDetail;
+  if(typeof originalOpenDetail!=='function') return;
+  window.openDetail=async function(){
+    await originalOpenDetail.apply(this,arguments);
+    const panel=document.getElementById('detailTabRecords');
+    if(!panel) return;
+    if(panel.dataset.v91Built==='1') return;
+    const actions=panel.querySelector('.detail-actions');
+    const reminder=panel.querySelector('.reminder-card');
+    const timeline=panel.querySelector('.timeline-card-compact');
+    const sale=panel.querySelector('.inline-sale-history');
+    if(!actions||!reminder||!timeline||!sale) return;
+    panel.dataset.v91Built='1';
+    const nav=document.createElement('div');
+    nav.className='v91-nav';
+    nav.innerHTML='<button type="button" data-v91="reminders" class="active"><span class="nav-icon">◷</span>Reminders</button><button type="button" data-v91="timeline"><span class="nav-icon">≡</span>History</button><button type="button" data-v91="sales"><span class="nav-icon">$</span>Sales</button><button type="button" data-v91="tools"><span class="nav-icon">⋯</span>Tools</button>';
+    const tools=document.createElement('div');
+    tools.className='v91-tools v91-panel';
+    tools.dataset.v91panel='tools';
+    tools.innerHTML='<button type="button" class="primary" onclick="verifyDetail()">✓ Verify</button><button type="button" class="secondary" onclick="shareDetail()">Share</button><button type="button" class="secondary" onclick="printPassport()">Print / PDF</button><button type="button" class="secondary" onclick="openQR()">QR Passport</button><button type="button" class="secondary" onclick="openDocs()">Documents</button><button type="button" class="secondary" onclick="openSale()">Record sale</button>';
+    const shell=document.createElement('div'); shell.className='v91-record-shell';
+    const makePanel=(key,node,active=false)=>{const p=document.createElement('div');p.className='v91-panel'+(active?' active':'');p.dataset.v91panel=key;p.appendChild(node);return p};
+    shell.append(makePanel('reminders',reminder,true),makePanel('timeline',timeline),makePanel('sales',sale));
+    panel.innerHTML='';
+    panel.append(nav,tools,shell);
+    const setTab=(key)=>{
+      nav.querySelectorAll('button').forEach(b=>b.classList.toggle('active',b.dataset.v91===key));
+      panel.querySelectorAll('.v91-panel').forEach(p=>p.classList.toggle('active',p.dataset.v91panel===key));
     };
-  }
+    nav.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>setTab(b.dataset.v91)));
+    setTab('reminders');
+  };
 })();
 </script>
+</body></html>
