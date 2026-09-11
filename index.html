@@ -807,6 +807,36 @@ init();
  document.addEventListener('DOMContentLoaded',run);
 })();
 </script>
+
+<style id="v100-tab-isolation">
+/* V100 — each Workspace tab owns only its own content. */
+#detailTabRecords .v97-panel:not(.active){display:none!important}
+#detailTabRecords .v97-tool-grid.v97-panel:not(.active){display:none!important}
+#detailTabRecords .v97-tool-grid.v97-panel.active{display:grid!important}
+</style>
+<script id="v100-tab-isolation-js">
+(function(){
+  function fix(){
+    const panel=document.getElementById('detailTabRecords');
+    if(!panel)return;
+    const nav=panel.querySelector('.v97-record-nav');
+    const tools=panel.querySelector('.v97-tool-grid');
+    const shell=panel.querySelector('.v97-shell');
+    if(!nav||!tools||!shell)return;
+    // Put Tools inside the same section container as the other tabs.
+    if(tools.parentElement!==shell) shell.appendChild(tools);
+    // Make sure exactly one section is visible when the workspace opens.
+    if(!nav.querySelector('button.active')){
+      const first=nav.querySelector('[data-v97="reminders"]');
+      if(first) first.click();
+    }
+  }
+  document.addEventListener('DOMContentLoaded',()=>{fix();setTimeout(fix,200);setTimeout(fix,700);});
+  const old=window.openDetail;
+  if(typeof old==='function') window.openDetail=async function(){await old.apply(this,arguments);setTimeout(fix,0);setTimeout(fix,300);};
+})();
+</script>
+
 </body></html><style id="v99-action-hierarchy">
 /* V99 — action hierarchy: each tool has a distinct visual role instead of identical buttons. */
 .v97-tool-grid{
