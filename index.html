@@ -126,6 +126,11 @@ body{background:radial-gradient(circle at 8% 4%,#dce9ff 0,transparent 30%),radia
 
 /* V59 Documents Vault */
 .doc-head{display:flex;justify-content:space-between;align-items:center;gap:14px}.doc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:14px}.doc-item{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fbfdff}.doc-row{display:flex;align-items:center;gap:10px}.doc-icon{width:38px;height:38px;border-radius:12px;background:#eef4ff;color:#175cd3;display:grid;place-items:center;font-weight:900}.doc-name{font-weight:850;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.doc-meta{font-size:10px;color:#8a99aa;margin-top:3px}.doc-actions{display:flex;gap:7px;margin-top:11px}.doc-actions button{height:36px!important;padding:0 11px!important;font-size:11px!important}.upload-zone{border:1.5px dashed #b8c9df;border-radius:18px;padding:18px;text-align:center;background:#f8fbff;margin:14px 0}.upload-zone b{display:block}.upload-zone small{display:block;color:#7a8798;margin:5px 0 12px}.docs-note{font-size:10px;color:#7a8798;line-height:1.45;margin-top:10px}@media(max-width:650px){.doc-grid{grid-template-columns:1fr}.doc-head{align-items:flex-start}.doc-head button{flex:0 0 auto}}
+
+/* V68 — modal layering fix: create/detail/QR/transfer modals must cover the app header and mobile navigation */
+.modal{z-index:20000!important;}
+.modal.open{z-index:20000!important;}
+body:has(.modal.open){overflow:hidden;}
 </style>
 <style id="v67-asset-form">
 .asset-specific-fields{margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
@@ -246,7 +251,7 @@ async function resetPassword(){clear('authStatus');const email=$('email').value.
 function init(){if(!CONFIG.supabaseUrl||!CONFIG.supabasePublishableKey)return msg('authStatus','Secure connection is not configured.','err');sb=supabase.createClient(CONFIG.supabaseUrl,CONFIG.supabasePublishableKey);sb.auth.onAuthStateChange((_e,s)=>{if(s)showApp(s);else showAuth()});sb.auth.getSession().then(({data})=>data.session?showApp(data.session):showAuth())}
 function showAuth(){$('authView').classList.remove('hidden');$('appView').classList.add('hidden')}function showApp(s){$('authView').classList.add('hidden');$('appView').classList.remove('hidden');const email=s.user.email||'Account';$('userEmail').textContent=email;$('avatar').textContent=email[0].toUpperCase();loadAssets();loadActivity()}
 async function signOut(){await sb.auth.signOut()}
-function openCreate(){$('createModal').classList.add('open');setTimeout(()=>$('assetName').focus(),80)}function closeCreate(){$('createModal').classList.remove('open');clear('createStatus')}
+function closeCreate(){$('createModal').classList.remove('open');clear('createStatus')}
 async function createAsset(){
   clear('createStatus');
   const {data:{user}}=await sb.auth.getUser();

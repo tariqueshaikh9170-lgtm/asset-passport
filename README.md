@@ -1,6 +1,5 @@
-# Asset Passport V67
-Production deployment enabled.
-Build trigger test
+# Asset Passport V61
+
 V61 adds a recipient-side ownership transfer inbox and atomic accept/decline workflow.
 
 ## Supabase migration
