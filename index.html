@@ -2,7 +2,7 @@
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#07111f"><title>Asset Passport — Secure asset records</title>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">const activitySeed=[];let activityRows=[];
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>const activitySeed=[];let activityRows=[];
 function openActivity(){ $('activityModal').classList.add('open'); loadActivity(); }
 function closeActivity(){ $('activityModal').classList.remove('open'); }
 async function logActivity(eventType,eventText,assetId=null){ try{ const {data:{user}}=await sb.auth.getUser(); if(!user)return; await sb.from('asset_activity_log').insert({owner_id:user.id,asset_id:assetId,event_type:eventType,event_text:eventText}); }catch(e){} }
@@ -192,6 +192,28 @@ body:has(.modal.open){overflow:hidden;}
 .reminder-due.overdue{background:#fff0f0;color:#c62828}.reminder-due.soon{background:#fff8e8;color:#9a6700}.reminder-empty{color:#98a2b3;padding:10px 0}
 .reminder-form{padding:14px;border:1px solid #dbe7f7;background:#f6faff;border-radius:14px;margin-bottom:12px}.reminder-form .two{margin-bottom:10px}
 @media(max-width:650px){.reminder-head{display:block}.reminder-head button{width:100%;margin-top:12px}.reminder-item{align-items:flex-start;flex-direction:column}.reminder-due{align-self:flex-start}}
+</style>
+
+<style id="v92-compact-records">
+/* V92 — ultra-compact records: one-screen accordion layout */
+#detailTabRecords{padding-top:8px!important}
+#detailTabRecords .detail-actions{margin-bottom:8px!important}
+#detailTabRecords .reminder-card,#detailTabRecords .timeline-card-compact,#detailTabRecords .sale-history{margin:8px 0!important;padding:10px 12px!important;border-radius:18px!important}
+#detailTabRecords .reminder-head,#detailTabRecords .timeline-head,#detailTabRecords .sale-history-head{display:flex!important;align-items:center!important;gap:8px!important;margin:0!important;min-height:44px!important}
+#detailTabRecords .reminder-head h3,#detailTabRecords .timeline-head h3,#detailTabRecords .sale-history-head h3{font-size:14px!important;margin:0!important}
+#detailTabRecords .reminder-head .sub,#detailTabRecords .timeline-head .sub,#detailTabRecords .sale-history-head .sub{font-size:10px!important;margin-top:2px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+#detailTabRecords .reminder-head>button,#detailTabRecords .timeline-head>button,#detailTabRecords .sale-head-actions>button{font-size:10px!important;padding:8px 10px!important;white-space:nowrap!important}
+#detailTabRecords .reminder-head>div:first-child,#detailTabRecords .timeline-head>div:first-child,#detailTabRecords .sale-history-head>div:first-child{flex:1;min-width:0}
+#detailTabRecords .reminder-card.collapsed #reminderForm,#detailTabRecords .reminder-card.collapsed #reminderList,#detailTabRecords .timeline-card-compact.collapsed #eventForm,#detailTabRecords .timeline-card-compact.collapsed #timeline,#detailTabRecords .sale-history.collapsed #saleHistory{display:none!important}
+#detailTabRecords .compact-section-toggle{border:0;background:transparent;font:inherit;color:#0875d1;font-weight:700;font-size:11px;padding:6px 2px;white-space:nowrap}
+#detailTabRecords .compact-summary{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:5px;padding-top:6px;border-top:1px solid #edf1f5;font-size:11px;color:#667085}
+#detailTabRecords .compact-summary b{color:#101828}
+#detailTabRecords .sale-history.collapsed .sale-history-head{margin-bottom:0!important}
+#detailTabRecords .sale-head-actions{display:flex;align-items:center;gap:5px}
+#detailTabRecords .sale-head-actions .secondary{font-size:10px!important}
+#detailTabRecords .sale-head-actions .text-btn{font-size:10px!important}
+#detailTabRecords .sale-history:not(.collapsed) #saleHistory{max-height:150px!important;overflow:auto!important}
+@media(max-width:600px){#detailTabRecords .detail-actions{grid-template-columns:repeat(3,1fr)!important;gap:6px!important}#detailTabRecords .detail-actions .primary{grid-column:1/-1!important}#detailTabRecords .reminder-card,#detailTabRecords .timeline-card-compact,#detailTabRecords .sale-history{padding:9px 10px!important}#detailTabRecords .compact-summary{font-size:10px!important}}
 </style>
 </head><body>
 <div id="authView" class="shell"><div class="container"><div class="topbar"><div class="logo"><span class="mark">✦</span><span>Asset Passport</span></div><div class="topbadge">Secure · Global · Trusted</div></div>
@@ -513,6 +535,41 @@ init();
 .sale-history-full .sale-record{padding:12px 0!important}
 @media(max-width:760px){.sale-history-head{align-items:center!important}.sale-head-actions .text-btn{display:block!important}.sale-history-modal-card{width:100%!important}.sale-history-full{max-height:60dvh}.inline-sale-history h3{font-size:14px!important}}
 </style>
+
+<script id="v92-compact-records-js">
+(function(){
+  function setupCompactRecords(){
+    const root=document.getElementById('detailTabRecords'); if(!root||root.dataset.v92Ready)return; root.dataset.v92Ready='1';
+    const defs=[
+      ['.reminder-card','#reminderList','reminders'],
+      ['.timeline-card-compact','#timeline','history'],
+      ['.sale-history','#saleHistory','sales']
+    ];
+    defs.forEach(([sel,listSel,label])=>{
+      const card=root.querySelector(sel); if(!card)return;
+      card.classList.add('collapsed');
+      const head=card.querySelector('.reminder-head,.timeline-head,.sale-history-head'); if(!head)return;
+      const oldBtn=card.querySelector('.reminder-head>button,.timeline-head>button');
+      const toggle=document.createElement('button'); toggle.className='compact-section-toggle'; toggle.type='button'; toggle.textContent='Open';
+      if(oldBtn && label!=='sales'){ oldBtn.style.display='none'; head.appendChild(toggle); }
+      else if(label==='sales'){
+        const actions=head.querySelector('.sale-head-actions'); if(actions){ const view=actions.querySelector('.text-btn'); if(view)view.style.display='none'; actions.appendChild(toggle); }
+      }
+      toggle.addEventListener('click',function(e){e.stopPropagation(); card.classList.toggle('collapsed'); toggle.textContent=card.classList.contains('collapsed')?'Open':'Close';});
+      const summary=document.createElement('div'); summary.className='compact-summary'; summary.dataset.summary=label; summary.innerHTML='<span>Loading '+label+'…</span><b>›</b>';
+      const list=card.querySelector(listSel); if(list){ card.appendChild(summary); }
+    });
+  }
+  function updateSummaries(){
+    const r=document.querySelector('[data-summary="reminders"]'); const rl=document.getElementById('reminderList'); if(r&&rl){const items=rl.querySelectorAll('.reminder-item');r.innerHTML=items.length?'<span><b>'+items.length+'</b> reminder'+(items.length===1?'':'s')+' saved</span><b>›</b>':'<span>No reminders yet</span><b>›</b>';}
+    const t=document.querySelector('[data-summary="history"]'); const tl=document.getElementById('timeline'); if(t&&tl){const items=tl.querySelectorAll('.timeline-item');t.innerHTML=items.length?'<span><b>'+items.length+'</b> history event'+(items.length===1?'':'s')+'</span><b>›</b>':'<span>No history events yet</span><b>›</b>';}
+    const s=document.querySelector('[data-summary="sales"]'); const sl=document.getElementById('saleHistory'); if(s&&sl){const items=sl.querySelectorAll('.sale-record');const first=items[0];const price=first?first.querySelector('.sale-price')?.textContent.trim():'';s.innerHTML=items.length?'<span><b>'+items.length+'</b> recent sale'+(items.length===1?'':'s')+(price?' · latest '+price:'')+'</span><b>›</b>':'<span>No sales recorded</span><b>›</b>';}
+  }
+  const orig=window.switchDetailTab; window.switchDetailTab=function(tab){if(orig)orig(tab);if(tab==='records'){setupCompactRecords();setTimeout(updateSummaries,150);}};
+  document.addEventListener('DOMContentLoaded',function(){setupCompactRecords();setTimeout(updateSummaries,500);});
+  setInterval(function(){if(document.getElementById('detailTabRecords')?.classList.contains('active')){setupCompactRecords();updateSummaries();}},1200);
+})();
+</script>
 </body></html>
 <style id="v91-compact-classic">
 /* V91 — compact classic passport workspace. Keep the main page short and make each record area a focused view. */
@@ -596,6 +653,41 @@ init();
     nav.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>setTab(b.dataset.v91)));
     setTab('reminders');
   };
+})();
+</script>
+
+<script id="v92-compact-records-js">
+(function(){
+  function setupCompactRecords(){
+    const root=document.getElementById('detailTabRecords'); if(!root||root.dataset.v92Ready)return; root.dataset.v92Ready='1';
+    const defs=[
+      ['.reminder-card','#reminderList','reminders'],
+      ['.timeline-card-compact','#timeline','history'],
+      ['.sale-history','#saleHistory','sales']
+    ];
+    defs.forEach(([sel,listSel,label])=>{
+      const card=root.querySelector(sel); if(!card)return;
+      card.classList.add('collapsed');
+      const head=card.querySelector('.reminder-head,.timeline-head,.sale-history-head'); if(!head)return;
+      const oldBtn=card.querySelector('.reminder-head>button,.timeline-head>button');
+      const toggle=document.createElement('button'); toggle.className='compact-section-toggle'; toggle.type='button'; toggle.textContent='Open';
+      if(oldBtn && label!=='sales'){ oldBtn.style.display='none'; head.appendChild(toggle); }
+      else if(label==='sales'){
+        const actions=head.querySelector('.sale-head-actions'); if(actions){ const view=actions.querySelector('.text-btn'); if(view)view.style.display='none'; actions.appendChild(toggle); }
+      }
+      toggle.addEventListener('click',function(e){e.stopPropagation(); card.classList.toggle('collapsed'); toggle.textContent=card.classList.contains('collapsed')?'Open':'Close';});
+      const summary=document.createElement('div'); summary.className='compact-summary'; summary.dataset.summary=label; summary.innerHTML='<span>Loading '+label+'…</span><b>›</b>';
+      const list=card.querySelector(listSel); if(list){ card.appendChild(summary); }
+    });
+  }
+  function updateSummaries(){
+    const r=document.querySelector('[data-summary="reminders"]'); const rl=document.getElementById('reminderList'); if(r&&rl){const items=rl.querySelectorAll('.reminder-item');r.innerHTML=items.length?'<span><b>'+items.length+'</b> reminder'+(items.length===1?'':'s')+' saved</span><b>›</b>':'<span>No reminders yet</span><b>›</b>';}
+    const t=document.querySelector('[data-summary="history"]'); const tl=document.getElementById('timeline'); if(t&&tl){const items=tl.querySelectorAll('.timeline-item');t.innerHTML=items.length?'<span><b>'+items.length+'</b> history event'+(items.length===1?'':'s')+'</span><b>›</b>':'<span>No history events yet</span><b>›</b>';}
+    const s=document.querySelector('[data-summary="sales"]'); const sl=document.getElementById('saleHistory'); if(s&&sl){const items=sl.querySelectorAll('.sale-record');const first=items[0];const price=first?first.querySelector('.sale-price')?.textContent.trim():'';s.innerHTML=items.length?'<span><b>'+items.length+'</b> recent sale'+(items.length===1?'':'s')+(price?' · latest '+price:'')+'</span><b>›</b>':'<span>No sales recorded</span><b>›</b>';}
+  }
+  const orig=window.switchDetailTab; window.switchDetailTab=function(tab){if(orig)orig(tab);if(tab==='records'){setupCompactRecords();setTimeout(updateSummaries,150);}};
+  document.addEventListener('DOMContentLoaded',function(){setupCompactRecords();setTimeout(updateSummaries,500);});
+  setInterval(function(){if(document.getElementById('detailTabRecords')?.classList.contains('active')){setupCompactRecords();updateSummaries();}},1200);
 })();
 </script>
 </body></html>

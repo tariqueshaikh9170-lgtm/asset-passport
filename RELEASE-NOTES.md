@@ -1,10 +1,14 @@
-# Asset Passport V90
+# Asset Passport V92
 
-Classic compact passport workspace focused on reducing scrolling.
+Compact classic passport detail layout.
 
-- Passport detail keeps Overview / Workspace / Ownership at the top.
-- Workspace now has a compact one-line navigator: Reminders, History, Sales, Tools.
-- Only one workspace section is open at a time, so Sale History can no longer create a long page.
-- Tools are grouped into one compact panel: Verify, Share, Print/PDF, QR, Documents, Record sale.
-- Existing database, authentication, verification, documents, transfers, sales and reminders remain unchanged.
-- No new SQL migration required.
+- Records is now an accordion-style workspace.
+- Reminders, timeline, and sales are collapsed by default.
+- Each section shows a one-line summary and opens only when needed.
+- Sale history no longer pushes the passport page downward.
+- Existing backend, tables, public verification, documents, transfers, sales, and reminders are preserved.
+
+
+## V93
+- Fixed Supabase client script loading so email/password sign-in and OAuth handlers initialize correctly.
+- No database schema changes.
