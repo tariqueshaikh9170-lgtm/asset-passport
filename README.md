@@ -1,7 +1,5 @@
-# Asset Passport V75
+# Asset Passport V77
 
-Production-oriented universal asset passport prototype.
+V77 adds a two-sided Ownership Center on top of the existing transfer request workflow.
 
-V75 adds a printable/shareable Passport Report using the browser print dialog. No new database migration is required.
-
-Deploy by replacing the current site files in the connected GitHub repository and committing to `main`.
+No new database migration is required.

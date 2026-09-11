@@ -1,15 +1,8 @@
-# Asset Passport V75
+# Asset Passport V77
 
-## New in V75
-- Added a professional Passport Report print flow.
-- Owners can use **Print / PDF** from a passport detail view.
-- Browser print/save-to-PDF includes passport identity, readiness, and timeline while hiding app navigation and action controls.
-- No database migration required.
-
-## V74 carried forward
-- Passport Readiness scoring
-- Structured asset identity
-- Secure document vault and document categories
-- Live passport timeline
-- QR/public verification
-- Ownership transfer workflow
+## Ownership Center
+- Expanded the transfer inbox into a two-sided ownership center.
+- Incoming pending requests can be accepted or declined.
+- Sent transfer requests are listed with recipient email and current status.
+- Added clear workflow messaging: ownership remains unchanged until the recipient accepts.
+- No new database migration required; V77 uses the existing asset_transfer_requests workflow.
