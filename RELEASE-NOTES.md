@@ -1,7 +1,15 @@
-# Asset Passport V74
+# Asset Passport V75
 
-- V73 document categories retained.
-- Added Passport Readiness scoring inside each asset detail view.
-- Score checks the core passport, structured identity, supporting documents, timeline history, and public verification.
-- Missing items are shown with a direct next step.
-- Removed the duplicate create-passport function declaration.
+## New in V75
+- Added a professional Passport Report print flow.
+- Owners can use **Print / PDF** from a passport detail view.
+- Browser print/save-to-PDF includes passport identity, readiness, and timeline while hiding app navigation and action controls.
+- No database migration required.
+
+## V74 carried forward
+- Passport Readiness scoring
+- Structured asset identity
+- Secure document vault and document categories
+- Live passport timeline
+- QR/public verification
+- Ownership transfer workflow
