@@ -1,6 +1,7 @@
-# Asset Passport V72
+# Asset Passport V74
 
-- Connects the passport timeline to a live `public.asset_events` table.
-- Adds owner-only RLS policies for service, repair, inspection, ownership-transfer and note events.
-- Timeline events are stored against the passport and reload from Supabase.
-- Includes `asset-events-migration.sql` for the one-time Supabase database setup.
+- V73 document categories retained.
+- Added Passport Readiness scoring inside each asset detail view.
+- Score checks the core passport, structured identity, supporting documents, timeline history, and public verification.
+- Missing items are shown with a direct next step.
+- Removed the duplicate create-passport function declaration.

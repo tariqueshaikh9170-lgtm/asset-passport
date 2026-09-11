@@ -1,6 +1,9 @@
-# Asset Passport V71
+# Asset Passport V74
 
-Production deployment enabled. V71 adds a saved Asset Identity panel to every passport detail view, showing the structured category-specific details stored in the registry.
+Production-ready static frontend for the Asset Passport universal asset record and verification platform.
 
-## Supabase migration
-Run `asset-details-migration.sql` once in the Supabase SQL Editor if `asset_details` is not already present.
+V74 adds a passport readiness score that helps owners see whether an asset record is complete enough to share, verify, or transfer. It retains document categories, secure document vault, live timeline events, ownership transfer, asset details, QR verification, and public verification.
+
+## Database
+
+V74 uses the existing V72/V73 tables. No new database migration is required for the readiness score.
