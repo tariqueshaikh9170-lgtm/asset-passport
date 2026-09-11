@@ -1,8 +1,7 @@
-# Asset Passport V95
+# Asset Passport V97
 
-- Compact classic authentication layout.
-- Asset Passport branding moved inside the authentication card on mobile.
-- Reduced oversized hero/header spacing on the sign-in screen.
-- Email/password sign-in now has timeout handling and clearer error messages.
-- OAuth buttons now restore reliably and report provider configuration errors clearly.
-- Existing asset, QR verification, documents, timeline, transfer, sales, and reminder features preserved.
+- Reworked passport Records into a classic compact workspace.
+- Reminders, History, Sales and Tools are separate focused panels.
+- Sale history shows only a compact latest-record preview with a complete-history action.
+- Removed conflicting duplicate compact-workspace scripts.
+- Preserved V96 authentication and existing backend integrations.
