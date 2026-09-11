@@ -1,8 +1,7 @@
-# Asset Passport V78
-
-- Ownership Center now shows pending/accepted/declined/cancelled status states.
-- Added cancel action for outgoing pending transfer requests.
-- Prevents sending a transfer to the signed-in user's own email.
-- Prevents duplicate pending transfer requests for the same passport.
-- Refreshes transfer inbox after a successful send.
-- No new database migration required; uses the existing `asset_transfer_requests` table and transfer RPCs.
+# V79 Release Notes
+- Integrated Ownership Center into each passport detail view.
+- Shows sent transfer requests for the current passport with recipient, timestamp and status.
+- Pending requests can be cancelled directly from the passport.
+- Added Full ownership center button for incoming requests and all sent requests.
+- Refreshes the current passport transfer status after send/cancel/accept/decline.
+- No new database migration required.
