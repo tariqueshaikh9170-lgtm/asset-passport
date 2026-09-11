@@ -1,6 +1,6 @@
-# Asset Passport V71
+# Asset Passport V72
 
-- Added owner-only Asset Identity panel in passport details.
-- Loads structured electronics, vehicle, property, furniture, watch, machinery and other fields from `asset_details`.
-- Keeps serial/IMEI and other identity details out of the public verification result.
-- Retained public verification, QR, documents, transfer and timeline workflows.
+- Connects the passport timeline to a live `public.asset_events` table.
+- Adds owner-only RLS policies for service, repair, inspection, ownership-transfer and note events.
+- Timeline events are stored against the passport and reload from Supabase.
+- Includes `asset-events-migration.sql` for the one-time Supabase database setup.
