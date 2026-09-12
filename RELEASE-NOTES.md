@@ -1,8 +1,7 @@
-# Asset Passport V134
-- Fixed PAX conversation clipping on mobile.
-- Added a proper scrollable conversation area for longer chats.
-- Increased PAX chat space when keyboard is closed.
-- Added keyboard-safe chat space while keeping V131/V132 stability.
-- Preserved PAX premium actions from V133.
+# V136
 
-- V135 removed PAX assistant completely per product direction.
+- Added premium Plans & Pricing modal.
+- Added Upgrade entry point in the app header.
+- Added Free, Pro and Business monthly/yearly pricing presentation.
+- No fake payment processing: real recurring checkout requires a configured payment provider/merchant account.
+- Preserved the existing V135 app UI and functionality.

@@ -439,6 +439,16 @@ html.v109-mobile .detail-modal,.v109-mobile #detailModal{max-width:100vw!importa
 }
 @media(min-width:1101px){.v125-back{display:none!important}}
 </style>
+
+<style id="v136-pricing-ui">
+.pricing-btn{height:40px!important;border:1px solid #d7e2ee!important;background:linear-gradient(180deg,#fff,#f6f9fc)!important;color:#174ea6!important;border-radius:12px!important;padding:0 13px!important;font-weight:900!important;font-size:11px!important;box-shadow:0 6px 18px rgba(23,104,217,.08)!important}
+.pricing-modal{position:fixed;inset:0;background:rgba(5,15,30,.48);backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center;padding:18px;z-index:220000}
+.pricing-modal.open{display:flex}
+.pricing-sheet{width:min(980px,100%);max-height:min(90vh,760px);overflow:auto;background:#fff;border-radius:28px;box-shadow:0 30px 90px rgba(3,15,35,.28);padding:24px}
+.pricing-head{display:flex;align-items:flex-start;justify-content:space-between;gap:15px;margin-bottom:20px}.pricing-head h2{margin:0;font-size:27px;letter-spacing:-.04em}.pricing-head p{margin:7px 0 0;color:#667a91;font-size:12px}.pricing-close{width:38px;height:38px;border:1px solid #dce5ef;border-radius:12px;background:#f8fafc;font-size:18px;color:#40536b}
+.plan-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.plan{border:1px solid #e1e8f0;border-radius:22px;padding:20px;background:linear-gradient(180deg,#fff,#f9fbfe);position:relative}.plan.featured{border-color:#78aef5;box-shadow:0 14px 40px rgba(23,104,217,.13);transform:translateY(-3px)}.plan-badge{position:absolute;right:14px;top:14px;background:#eaf2ff;color:#1768d9;border-radius:99px;padding:6px 8px;font-size:8px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}.plan h3{margin:0;font-size:15px}.plan .price{font-size:30px;font-weight:950;letter-spacing:-.04em;margin:14px 0 2px}.plan .price small{font-size:10px;color:#8090a2;font-weight:700}.plan .annual{font-size:9px;color:#067647;font-weight:850;min-height:14px}.plan ul{padding:0;margin:17px 0;list-style:none}.plan li{font-size:10px;color:#40536b;margin:10px 0}.plan li:before{content:'✓';color:#0a8f5a;font-weight:900;margin-right:7px}.plan button{width:100%;height:43px;border-radius:12px;font-weight:900;border:1px solid #d6e0eb;background:#fff;color:#174ea6}.plan.featured button{background:linear-gradient(135deg,#0a2c4d,#1768d9);border-color:transparent;color:#fff}.pricing-note{margin-top:14px;padding:11px 13px;border-radius:13px;background:#f7faff;color:#667a91;font-size:9px;line-height:1.5}.pricing-note b{color:#174ea6}
+@media(max-width:760px){.pricing-modal{align-items:flex-end;padding:0}.pricing-sheet{width:100%;max-height:92dvh;border-radius:26px 26px 0 0;padding:18px 14px 22px}.pricing-head h2{font-size:23px}.plan-grid{grid-template-columns:1fr;gap:10px}.plan{padding:16px}.plan.featured{transform:none}.plan ul{margin:11px 0}.plan li{margin:7px 0}.pricing-btn{height:38px!important;padding:0 9px!important;font-size:10px!important}}
+</style>
 </head><body>
 <div id="authView" class="shell"><div class="container">
 <div class="auth-wrap"><div class="auth-card"><div class="auth-brand-inside"><div class="logo"><span class="mark">✦</span><span>Asset Passport</span></div><span class="topbadge">Secure · Global · Trusted</span></div><div class="auth-head"><div class="auth-orbit"><span class="orbit-dot d1"></span><span class="orbit-dot d2"></span><span class="orbit-dot d3"></span><span class="orbit-line l1"></span><span class="orbit-line l2"></span></div><div class="auth-shield">✦</div><div class="eyebrow">ASSET IDENTITY PLATFORM</div><h1>Asset Passport</h1><p>One trusted record for every valuable asset — ownership, documents, history and verification.</p><div class="auth-promise"><span>Register</span><i>•</i><span>Protect</span><i>•</i><span>Verify</span><i>•</i><span>Everywhere</span></div></div><div class="auth-body">
@@ -475,7 +485,7 @@ html.v109-mobile .detail-modal,.v109-mobile #detailModal{max-width:100vw!importa
       <button class="v125-back" aria-label="Back" onclick="v124Back()"><span>‹</span><small>Back</small></button>
       <div class="mobile-brand"><div class="logo"><span class="mark">✦</span><span>Asset Passport</span></div></div>
       <div class="global-search"><span>⌕</span><input id="globalSearch" placeholder="Search passports, assets or codes…" oninput="document.getElementById('assetSearch').value=this.value;renderAssets()"></div>
-      <div class="profile-area"><button class="icon-btn" onclick="openActivity()" title="Notifications">♧<span id="topNotifBadge" class="top-badge hidden">0</span></button><div class="user-chip"><div class="avatar" id="avatar">A</div><div class="profile-copy"><div class="user-email" id="userEmail">Account</div><div class="user-sub">Secure workspace</div></div></div><button class="secondary signout" onclick="signOut()">Sign out</button></div>
+      <div class="profile-area"><button class="icon-btn" onclick="openActivity()" title="Notifications">♧<span id="topNotifBadge" class="top-badge hidden">0</span></button><button class="pricing-btn" onclick="openPricing()" title="Plans and pricing">Upgrade</button><div class="user-chip"><div class="avatar" id="avatar">A</div><div class="profile-copy"><div class="user-email" id="userEmail">Account</div><div class="user-sub">Secure workspace</div></div></div><button class="secondary signout" onclick="signOut()">Sign out</button></div>
     </div></div>
     <div class="container main premium-main">
       <div class="page-kicker"><span>ASSET COMMAND CENTER</span><span class="live-dot">● Live registry</span></div>
@@ -1580,6 +1590,24 @@ body{background:
 })();
 </script>
 
+
+<div id="pricingModal" class="pricing-modal" onclick="if(event.target===this)closePricing()">
+  <div class="pricing-sheet" role="dialog" aria-modal="true" aria-labelledby="pricingTitle">
+    <div class="pricing-head"><div><div class="page-kicker" style="margin:0 0 7px">ASSET PASSPORT PLANS</div><h2 id="pricingTitle">Choose your plan</h2><p>Start free. Upgrade when you need more passports and business tools.</p></div><button class="pricing-close" onclick="closePricing()">×</button></div>
+    <div class="plan-grid">
+      <div class="plan"><h3>Free</h3><div class="price">QAR 0 <small>/ forever</small></div><div class="annual">No card required</div><ul><li>Up to 5 passports</li><li>Public verification</li><li>Basic activity history</li></ul><button onclick="selectPlan('Free')">Current plan</button></div>
+      <div class="plan featured"><span class="plan-badge">Most popular</span><h3>Pro</h3><div class="price">QAR 29 <small>/ month</small></div><div class="annual">QAR 290 / year</div><ul><li>Unlimited passports</li><li>Documents & reminders</li><li>Advanced history & sales</li><li>Priority verification tools</li></ul><button onclick="selectPlan('Pro')">Choose Pro</button></div>
+      <div class="plan"><h3>Business</h3><div class="price">QAR 79 <small>/ month</small></div><div class="annual">QAR 790 / year</div><ul><li>Team-ready workspace</li><li>Business asset management</li><li>Transfer workflows</li><li>Priority support</li></ul><button onclick="selectPlan('Business')">Choose Business</button></div>
+    </div>
+    <div class="pricing-note"><b>Payment setup:</b> the plans and pricing UI are ready. Real recurring checkout will be connected after the payment provider account and merchant credentials are configured; no fake payment is being claimed here.</div>
+  </div>
+</div>
+<script id="v136-pricing-js">
+function openPricing(){var m=document.getElementById('pricingModal');if(m)m.classList.add('open');document.body.style.overflow='hidden'}
+function closePricing(){var m=document.getElementById('pricingModal');if(m)m.classList.remove('open');document.body.style.overflow=''}
+function selectPlan(plan){if(typeof msg==='function')msg('globalStatus',plan+' selected. Real checkout will be connected after payment setup.','ok');closePricing()}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closePricing()});
+</script>
 </body></html><style id="v99-action-hierarchy">
 /* V99 — action hierarchy: each tool has a distinct visual role instead of identical buttons. */
 .v97-tool-grid{
