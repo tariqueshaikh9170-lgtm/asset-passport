@@ -16,3 +16,5 @@ V113
 - Mobile Home now reliably exits focused modes.
 
 - V114 fixed the mobile Asset Details screen so the fixed bottom navigation / + button is hidden while a passport detail is open, and restored automatically after closing the detail.
+
+V115: hard-fixed mobile bottom navigation to hide whenever Asset Details is open; restores on close.
