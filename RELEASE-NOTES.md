@@ -4,3 +4,7 @@
 - Android/browser Back now exits Verify mode and returns to Home.
 - Verify mode uses browser history so Back behaves naturally.
 - Preserved existing V123 compact mobile dashboard and premium brand mark.
+
+- V125 moved Verify back control into the mobile app header for a clean premium layout.
+- Verify back button no longer floats over ASSET COMMAND CENTER.
+- Existing Verify history/back behavior preserved.
