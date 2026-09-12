@@ -385,7 +385,7 @@ html.v109-mobile .detail-modal,.v109-mobile #detailModal{max-width:100vw!importa
   <button id="mobileHomeBtn" class="mobile-nav-item active" onclick="v113Home()"><span>⌂</span><small>Home</small></button>
   <button id="mobileAssetsBtn" class="mobile-nav-item" onclick="v110Assets()"><span>▣</span><small>Assets</small></button>
   <button class="mobile-add" onclick="openCreate()">＋</button>
-  <button class="mobile-nav-item" onclick="document.getElementById('verifyCard').scrollIntoView({behavior:'smooth'})"><span>⌕</span><small>Verify</small></button>
+  <button id="mobileVerifyBtn" class="mobile-nav-item" onclick="v113Verify()"><span>⌕</span><small>Verify</small></button>
   <button id="mobileActivityBtn" class="mobile-nav-item" onclick="v113Activity()"><span>☷</span><small>Activity</small></button>
 </nav>
 <div class="modal" id="createModal" onclick="if(event.target===this)closeCreate()"><div class="modal-card"><div class="modal-head"><div><div class="eyebrow" style="color:#667085">New record</div><h2 style="margin:6px 0 3px">Create Asset Passport</h2><div class="sub">Create the passport with asset-specific identity details. Documents and service history can be added later.</div></div><button class="close" onclick="closeCreate()">×</button></div>
@@ -1296,7 +1296,7 @@ init();
     document.documentElement.classList.remove('v110-assets-mode','v113-activity-mode');
     document.documentElement.classList.add('v113-verify-mode');
     document.querySelectorAll('.mobile-nav-item').forEach(function(b){b.classList.remove('active')});
-    var buttons=document.querySelectorAll('.mobile-nav-item'); if(buttons[3])buttons[3].classList.add('active');
+    var b=document.getElementById('mobileVerifyBtn'); if(b)b.classList.add('active');
     window.scrollTo(0,0);
     var input=document.getElementById('verifyInput'); if(input)setTimeout(function(){input.focus()},120);
   };

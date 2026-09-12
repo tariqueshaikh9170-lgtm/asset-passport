@@ -1,6 +1,5 @@
-# Asset Passport V120
+# Asset Passport V121
 
-- Sale flow now defaults to “Mark this passport as sold” when recording a sale.
-- After a sale is saved with that option enabled, the open passport detail immediately shows status `sold`.
-- Sale confirmation text clearly states when the passport was marked sold.
-- Existing sale-record behavior remains available: users can uncheck the option if they want to record a sale without changing the asset status.
+- Fixed mobile Verify navigation active-state indicator.
+- Verify now highlights the Verify tab instead of Activity.
+- Verify still opens the focused mobile verification view and keeps the existing verification flow unchanged.
