@@ -1,5 +1,6 @@
-V123 — Premium mobile dashboard
-- Reduced Home screen vertical height and long scrolling.
-- Kept full Verify/Security content accessible through the Verify tab.
-- Compact hero, KPI cards, registry, activity and quick actions for mobile.
-- Added a more distinctive Asset Passport brand mark across mobile/desktop/auth/QR surfaces.
+# Asset Passport V124
+
+- Fixed mobile Verify navigation: added a visible Back button.
+- Android/browser Back now exits Verify mode and returns to Home.
+- Verify mode uses browser history so Back behaves naturally.
+- Preserved existing V123 compact mobile dashboard and premium brand mark.
