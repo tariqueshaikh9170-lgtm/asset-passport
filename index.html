@@ -326,6 +326,85 @@ html.v109-mobile .detail-modal,.v109-mobile #detailModal{max-width:100vw!importa
 })();
 </script>
 
+
+<style id="v123-premium-mobile-dashboard">
+/* V123 — compact mobile home: reduce long scrolling while keeping full features in tabs. */
+@media (pointer:coarse) and (max-width:760px){
+  .premium-main{padding-bottom:92px!important}
+  .page-kicker{margin:8px 2px 7px!important}
+  .premium-hero{min-height:250px!important;padding:20px 18px!important;margin-bottom:10px!important;border-radius:22px!important}
+  .premium-hero h1{font-size:29px!important;line-height:1.03!important;max-width:310px!important;margin:7px 0 7px!important}
+  .premium-hero p{font-size:11px!important;line-height:1.38!important;max-width:315px!important}
+  .hero-checks{margin:10px 0!important;gap:6px!important;font-size:8px!important;max-width:320px!important}
+  .hero-actions{margin-top:9px!important;display:grid!important;grid-template-columns:1fr 1fr!important;gap:7px!important}
+  .hero-actions>*{width:100%!important;height:42px!important;min-height:42px!important;font-size:11px!important;padding:0 8px!important}
+  .hero-art{right:-110px!important;top:105px!important;width:260px!important;height:220px!important;opacity:.18!important}
+  .premium-kpis{gap:7px!important;margin-bottom:10px!important}
+  .premium-kpis .kpi{min-height:76px!important;padding:11px 12px!important;border-radius:17px!important}
+  .kpi-num{font-size:23px!important;line-height:1!important}
+  .kpi-label{font-size:9px!important;margin-top:4px!important}
+  .kpi-icon{width:25px!important;height:25px!important;right:10px!important;top:10px!important;font-size:11px!important}
+  .dashboard-grid{gap:10px!important}
+  .premium-card{padding:13px!important;border-radius:19px!important}
+  /* Keep Home focused: full Verify/Security panels live under the Verify tab. */
+  .premium-main .verify-panel,.premium-main .secure-strip{display:none!important}
+  .registry-card{order:1!important}
+  .activity-mini{order:2!important;min-height:0!important}
+  .quick-card{order:3!important}
+  .registry-card .card-head h2{font-size:21px!important;margin:0 0 2px!important}
+  .registry-card .card-head .sub{font-size:10px!important}
+  .head-actions .secondary{height:34px!important;font-size:10px!important;padding:0 9px!important}
+  .premium-tools{gap:6px!important;margin:9px 0 4px!important}
+  .premium-tools input{height:40px!important;font-size:11px!important;border-radius:12px!important}
+  .premium-tools select{height:38px!important;font-size:11px!important;border-radius:12px!important}
+  .asset{padding:11px 0!important}
+  .asset-row{grid-template-columns:34px minmax(0,1fr) auto!important;gap:7px!important;min-height:42px!important}
+  .asset-thumb{width:32px!important;height:32px!important;border-radius:10px!important;font-size:13px!important}
+  .asset-name{font-size:12px!important}
+  .asset-meta{font-size:8px!important;margin-top:2px!important}
+  .asset-row>.pill{font-size:8px!important;max-width:76px!important}
+  .copyline{margin:6px 0 0 41px!important;gap:5px!important}
+  .copyline .code,.copyline button{height:34px!important;font-size:9px!important;border-radius:10px!important}
+  .copyline button{padding:0 8px!important}
+  .activity-mini .timeline-item{padding:9px 0!important;gap:8px!important}
+  .activity-mini .timeline-dot{width:28px!important;height:28px!important;border-radius:9px!important;font-size:12px!important}
+  .activity-mini .timeline-item b{font-size:11px!important}
+  .activity-mini .timeline-item small{font-size:8px!important}
+  .quick-grid{gap:6px!important}
+  .quick-grid button{min-height:58px!important;padding:8px!important;border-radius:12px!important}
+  .quick-grid span{width:25px!important;height:25px!important;border-radius:8px!important;margin-bottom:4px!important;font-size:13px!important}
+  .quick-grid b{font-size:9px!important}
+}
+@media (pointer:coarse) and (max-width:430px){
+  .premium-hero{min-height:235px!important;padding:18px 16px!important}
+  .premium-hero h1{font-size:27px!important}
+  .premium-hero p{font-size:10px!important;max-width:285px!important}
+  .hero-checks{font-size:7px!important}
+  .hero-actions>*{height:39px!important;min-height:39px!important;font-size:10px!important}
+  .premium-kpis .kpi{min-height:70px!important;padding:10px!important}
+  .kpi-num{font-size:21px!important}
+  .registry-card .card-head h2{font-size:20px!important}
+  .asset-row>.pill{display:none!important}
+}
+/* V123 — original Asset Passport brand mark: shield + four-point passport seal. */
+.mobile-brand .logo .mark,.side-brand .mark,.auth-brand-inside .logo .mark,.qr-brand .mark{
+  position:relative!important;display:grid!important;place-items:center!important;
+  width:38px!important;height:38px!important;border-radius:13px!important;
+  color:#fff!important;font-size:0!important;flex:0 0 auto!important;
+  background:linear-gradient(145deg,#0b2d4d,#0b6fd8 72%,#19b6ff)!important;
+  box-shadow:inset 0 0 0 1px #ffffff30,0 8px 18px #0b5cd326!important;
+  overflow:hidden!important;
+}
+.mobile-brand .logo .mark:before,.side-brand .mark:before,.auth-brand-inside .logo .mark:before,.qr-brand .mark:before{
+  content:'✦';font-size:20px;line-height:1;color:#fff;z-index:2;
+  text-shadow:0 1px 8px #6ec8ff88;
+}
+.mobile-brand .logo .mark:after,.side-brand .mark:after,.auth-brand-inside .logo .mark:after,.qr-brand .mark:after{
+  content:'';position:absolute;inset:5px;border:1px solid #8ed5ff66;border-radius:10px;transform:rotate(45deg);opacity:.8;
+}
+@media(max-width:760px){.mobile-brand .logo .mark{width:40px!important;height:40px!important;border-radius:13px!important}.mobile-brand .logo{gap:9px!important}}
+</style>
+
 </head><body>
 <div id="authView" class="shell"><div class="container">
 <div class="auth-wrap"><div class="auth-card"><div class="auth-brand-inside"><div class="logo"><span class="mark">✦</span><span>Asset Passport</span></div><span class="topbadge">Secure · Global · Trusted</span></div><div class="auth-head"><div class="auth-orbit"><span class="orbit-dot d1"></span><span class="orbit-dot d2"></span><span class="orbit-dot d3"></span><span class="orbit-line l1"></span><span class="orbit-line l2"></span></div><div class="auth-shield">✦</div><div class="eyebrow">ASSET IDENTITY PLATFORM</div><h1>Asset Passport</h1><p>One trusted record for every valuable asset — ownership, documents, history and verification.</p><div class="auth-promise"><span>Register</span><i>•</i><span>Protect</span><i>•</i><span>Verify</span><i>•</i><span>Everywhere</span></div></div><div class="auth-body">
