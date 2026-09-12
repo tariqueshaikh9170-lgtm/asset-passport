@@ -1956,3 +1956,47 @@ body{background:
   };
 })();
 </script>
+
+<style id="v131-pax-keyboard-fix">
+/* V131 — keep PAX compact and stable when the Android keyboard opens */
+@media(max-width:700px){
+  html.pax-keyboard-open .pax-panel{
+    left:8px!important;
+    right:8px!important;
+    width:auto!important;
+    bottom:6px!important;
+    max-height:360px!important;
+    height:auto!important;
+    border-radius:24px!important;
+    border-bottom:1px solid #d8e4ef!important;
+    box-shadow:0 -10px 34px rgba(7,17,31,.18)!important;
+  }
+  html.pax-keyboard-open .pax-body{padding:10px 12px 6px!important}
+  html.pax-keyboard-open .pax-welcome,
+  html.pax-keyboard-open .pax-chips{display:none!important}
+  html.pax-keyboard-open .pax-chat{max-height:84px!important;min-height:0!important}
+  html.pax-keyboard-open .pax-input-row{margin-top:6px!important;padding-top:7px!important}
+  html.pax-keyboard-open .pax-foot{padding:0 12px 7px!important}
+  html.pax-keyboard-open .pax-head{padding:12px 14px 10px!important}
+  html.pax-keyboard-open .pax-head:before{top:6px!important}
+}
+</style>
+<script id="v131-pax-keyboard-js">
+(function(){
+  function syncKeyboard(){
+    var vv=window.visualViewport;
+    var h=window.innerHeight;
+    var vh=vv?vv.height:h;
+    var keyboard=(h-vh)>140;
+    document.documentElement.classList.toggle('pax-keyboard-open',keyboard);
+  }
+  function bind(){
+    var i=document.getElementById('paxInput');
+    if(i){i.addEventListener('focus',function(){setTimeout(syncKeyboard,80)});i.addEventListener('blur',function(){setTimeout(syncKeyboard,180)});}
+    if(window.visualViewport){window.visualViewport.addEventListener('resize',syncKeyboard);window.visualViewport.addEventListener('scroll',syncKeyboard)}
+    window.addEventListener('resize',syncKeyboard);
+    syncKeyboard();
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bind);else bind();
+})();
+</script>
