@@ -925,6 +925,95 @@ init();
 })();
 </script>
 
+
+<style id="v102-workspace-ux">
+/* V102 — small workspace UX polish; no database/schema changes. */
+.v102-form-actions{display:flex;gap:8px;align-items:center;margin-top:8px}
+.v102-form-actions .primary{flex:1}
+.v102-cancel{min-height:44px;padding:0 16px!important;border:1px solid #d7e0ea!important;background:#fff!important;color:#475467!important;border-radius:12px!important;font-weight:800!important}
+@media(max-width:430px){.v102-form-actions{gap:6px}.v102-cancel{padding:0 12px!important;font-size:11px!important}}
+</style>
+<script id="v102-workspace-ux-js">
+(function(){
+  function addCancel(formId, cancelFn){
+    const form=document.getElementById(formId); if(!form || form.querySelector('.v102-form-actions')) return;
+    const primary=form.querySelector('button.primary'); if(!primary) return;
+    const row=document.createElement('div'); row.className='v102-form-actions';
+    primary.parentNode.insertBefore(row,primary); row.appendChild(primary);
+    const cancel=document.createElement('button'); cancel.type='button'; cancel.className='v102-cancel'; cancel.textContent='Cancel';
+    cancel.addEventListener('click',cancelFn); row.appendChild(cancel);
+  }
+  function setup(){
+    addCancel('reminderForm',()=>{
+      const f=document.getElementById('reminderForm'); if(f) f.classList.add('hidden');
+      const st=document.getElementById('reminderStatus'); if(st){st.className='status';st.textContent='';}
+    });
+    addCancel('eventForm',()=>{
+      const f=document.getElementById('eventForm'); if(f) f.classList.add('hidden');
+      const st=document.getElementById('eventStatus'); if(st){st.className='status';st.textContent='';}
+    });
+  }
+  const oldReminder=window.toggleReminderForm;
+  if(typeof oldReminder==='function') window.toggleReminderForm=function(){oldReminder.apply(this,arguments);setTimeout(()=>{setup();const f=document.getElementById('reminderForm');if(f&&!f.classList.contains('hidden')){f.scrollIntoView({behavior:'smooth',block:'nearest'});setTimeout(()=>document.getElementById('reminderTitle')?.focus(),180)}},30)};
+  const oldEvent=window.openEventForm;
+  if(typeof oldEvent==='function') window.openEventForm=function(){oldEvent.apply(this,arguments);setTimeout(()=>{setup();const f=document.getElementById('eventForm');if(f&&!f.classList.contains('hidden')){f.scrollIntoView({behavior:'smooth',block:'nearest'});setTimeout(()=>document.getElementById('eventText')?.focus(),180)}},30)};
+  document.addEventListener('DOMContentLoaded',()=>{setup();setTimeout(setup,300);setTimeout(setup,1000)});
+  const obs=new MutationObserver(setup); if(document.body) obs.observe(document.body,{childList:true,subtree:true});
+})();
+</script>
+
+<style id="v103-reminder-layout-fix">
+/* V103 — keep reminder header and action button side-by-side on mobile. */
+#detailTabRecords .v101-workspace-panel > .reminder-card .reminder-head,
+#detailTabRecords .v101-workspace-panel > .timeline-card-compact .timeline-head,
+#detailTabRecords .v101-workspace-panel > .sale-history .sale-history-head,
+#detailTabRecords .v101-workspace-panel > .inline-sale-history .sale-history-head{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:12px!important;
+  margin:0 0 12px!important;
+  min-height:44px!important;
+}
+#detailTabRecords .v101-workspace-panel > .reminder-card .reminder-head > div:first-child,
+#detailTabRecords .v101-workspace-panel > .timeline-card-compact .timeline-head > div:first-child,
+#detailTabRecords .v101-workspace-panel > .sale-history .sale-history-head > div:first-child,
+#detailTabRecords .v101-workspace-panel > .inline-sale-history .sale-history-head > div:first-child{
+  flex:1 1 auto!important;
+  min-width:0!important;
+}
+#detailTabRecords .v101-workspace-panel > .reminder-card .reminder-head > button,
+#detailTabRecords .v101-workspace-panel > .timeline-card-compact .timeline-head > button,
+#detailTabRecords .v101-workspace-panel > .sale-history .sale-history-head .sale-head-actions > button,
+#detailTabRecords .v101-workspace-panel > .inline-sale-history .sale-history-head .sale-head-actions > button{
+  width:auto!important;
+  flex:0 0 auto!important;
+  margin-top:0!important;
+  min-width:132px!important;
+  min-height:44px!important;
+  white-space:nowrap!important;
+}
+#detailTabRecords .v101-workspace-panel > .reminder-card .reminder-head h3,
+#detailTabRecords .v101-workspace-panel > .timeline-card-compact .timeline-head h3,
+#detailTabRecords .v101-workspace-panel > .sale-history .sale-history-head h3,
+#detailTabRecords .v101-workspace-panel > .inline-sale-history .sale-history-head h3{
+  margin:0 0 4px!important;
+  line-height:1.15!important;
+}
+@media(max-width:430px){
+  #detailTabRecords .v101-workspace-panel > .reminder-card .reminder-head,
+  #detailTabRecords .v101-workspace-panel > .timeline-card-compact .timeline-head,
+  #detailTabRecords .v101-workspace-panel > .sale-history .sale-history-head,
+  #detailTabRecords .v101-workspace-panel > .inline-sale-history .sale-history-head{gap:8px!important}
+  #detailTabRecords .v101-workspace-panel > .reminder-card .reminder-head > button,
+  #detailTabRecords .v101-workspace-panel > .timeline-card-compact .timeline-head > button{min-width:118px!important;padding:0 10px!important;font-size:10px!important}
+  #detailTabRecords .v101-workspace-panel > .reminder-card .reminder-head h3,
+  #detailTabRecords .v101-workspace-panel > .timeline-card-compact .timeline-head h3{font-size:14px!important}
+  #detailTabRecords .v101-workspace-panel > .reminder-card .reminder-head .sub,
+  #detailTabRecords .v101-workspace-panel > .timeline-card-compact .timeline-head .sub{font-size:9px!important;white-space:normal!important;line-height:1.25!important}
+}
+</style>
+
 </body></html><style id="v99-action-hierarchy">
 /* V99 — action hierarchy: each tool has a distinct visual role instead of identical buttons. */
 .v97-tool-grid{
