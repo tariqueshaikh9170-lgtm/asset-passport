@@ -1,5 +1,7 @@
-# Asset Passport V121
+# Release notes
 
-- Fixed mobile Verify navigation active-state indicator.
-- Verify now highlights the Verify tab instead of Activity.
-- Verify still opens the focused mobile verification view and keeps the existing verification flow unchanged.
+## V122
+- Premium visual polish across dashboard, cards, buttons, modals and mobile navigation.
+- Added refined gradients, depth, spacing, focus states and subtle micro-interactions.
+- No functional/database flows changed.
+- Preserved V121 mobile Verify focus/navigation fix.
