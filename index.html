@@ -2023,3 +2023,42 @@ body{background:
   };
 })();
 </script>
+
+<style id="v133-pax-action-polish">
+/* V133 — PAX actionable answers and premium result treatment */
+.pax-action-row{display:flex;flex-wrap:wrap;gap:7px;margin:2px 0 2px;max-width:92%}
+.pax-action-btn{border:1px solid #cfe0f2;background:#fff;color:#075fae;border-radius:11px;padding:8px 10px;font:800 10px/1 inherit;cursor:pointer;box-shadow:0 3px 10px rgba(7,17,31,.05);transition:transform .14s ease,background .14s ease,border-color .14s ease}
+.pax-action-btn:active{transform:scale(.98);background:#eef6ff}
+.pax-data-card{width:min(92%,360px);border:1px solid #dce8f4;background:linear-gradient(145deg,#fbfdff,#f1f7fd);border-radius:16px;padding:11px 12px;margin:1px 0 3px;box-shadow:0 6px 18px rgba(7,17,31,.06)}
+.pax-data-card b{display:block;font-size:11px;color:#122b43;margin-bottom:5px}.pax-data-card span{display:block;font-size:10px;line-height:1.5;color:#66788b}.pax-data-card .pax-code{font-weight:850;color:#0b67b8;letter-spacing:.03em}
+@media(max-width:700px){.pax-action-row{max-width:94%}.pax-action-btn{min-height:38px}.pax-data-card{width:94%}}
+</style>
+<script id="v133-pax-actions-js">
+(function(){
+  var oldAsk=window.paxAsk;
+  if(typeof oldAsk!=='function')return;
+  function esc(s){return String(s??'').replace(/[&<>\"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[c]})}
+  function addBot(text){var c=document.getElementById('paxChat');if(!c)return;var d=document.createElement('div');d.className='pax-msg pax-bot';d.textContent=text;c.appendChild(d);c.scrollTop=c.scrollHeight}
+  function actions(items){var c=document.getElementById('paxChat');if(!c)return;var d=document.createElement('div');d.className='pax-action-row';items.forEach(function(x){var b=document.createElement('button');b.type='button';b.className='pax-action-btn';b.textContent=x.label;b.onclick=x.fn;d.appendChild(b)});c.appendChild(d);c.scrollTop=c.scrollHeight}
+  function dataCard(title,lines){var c=document.getElementById('paxChat');if(!c)return;var d=document.createElement('div');d.className='pax-data-card';d.innerHTML='<b>'+esc(title)+'</b>'+lines.map(function(x){return '<span class="'+(x.code?'pax-code':'')+'">'+esc(x.text)+'</span>'}).join('');c.appendChild(d);c.scrollTop=c.scrollHeight}
+  window.paxAsk=function(q){
+    q=String(q||'').trim();if(!q)return;
+    oldAsk(q);
+    var lower=q.toLowerCase(), rows=Array.isArray(window.assetData)?window.assetData:[];
+    setTimeout(function(){
+      if(lower.includes('active')){
+        var a=rows.filter(function(x){return String(x.status||'').toLowerCase()==='active'});
+        if(a.length){dataCard('Active assets',a.slice(0,5).map(function(x){return {text:x.name+' · '+x.passport_code,code:true}}));actions([{label:'Open Assets',fn:function(){if(typeof v110Assets==='function')v110Assets()}},{label:'Create Passport',fn:function(){if(typeof openCreate==='function')openCreate()}}]);}
+      }else if(lower.includes('sold')){
+        var s=rows.filter(function(x){return String(x.status||'').toLowerCase()==='sold'});
+        if(s.length){dataCard('Sold assets',s.slice(0,5).map(function(x){return {text:x.name+' · '+x.passport_code,code:true}}));actions([{label:'Open Assets',fn:function(){if(typeof v110Assets==='function')v110Assets()}},{label:'Activity Log',fn:function(){if(typeof v113Activity==='function')v113Activity();else if(typeof openActivity==='function')openActivity()}}]);}
+      }else if(lower.includes('summary')||lower.includes('passport')){
+        dataCard('Workspace snapshot',[{text:rows.length+' total passports'},{text:rows.filter(function(x){return String(x.status||'').toLowerCase()==='active'}).length+' active assets'},{text:rows.filter(function(x){return !!x.is_publicly_verifiable}).length+' publicly verifiable'}]);actions([{label:'View Assets',fn:function(){if(typeof v110Assets==='function')v110Assets()}},{label:'Verify a Code',fn:function(){if(typeof v113Verify==='function')v113Verify()}}]);
+      }else if(lower.includes('attention')||lower.includes('need')||lower.includes('problem')){
+        var m=rows.filter(function(x){return !x.is_publicly_verifiable||String(x.status||'').toLowerCase()==='archived'});
+        if(m.length){dataCard('Needs attention',m.slice(0,5).map(function(x){return {text:x.name+' · '+(x.is_publicly_verifiable?'status check':'public verification off')}}));actions([{label:'Open Assets',fn:function(){if(typeof v110Assets==='function')v110Assets()}}]);}
+      }
+    },240);
+  };
+})();
+</script>
