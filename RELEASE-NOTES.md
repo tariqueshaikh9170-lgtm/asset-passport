@@ -1,7 +1,6 @@
-V118 — security review gate.
-No app UI or navigation changes from V117.
-Refined the read-only Supabase audit to report RLS, policies, and policies that need manual review when they do not visibly reference auth.uid().
-Added SECURITY-REVIEW.md with the two-account isolation test and public-verification launch gate.
+# Asset Passport V120
 
-V119 — production launch QA gate.
-No app UI/navigation changes. Added PRODUCTION-QA.md covering mobile smoke tests, passport CRUD, reminders/history/sales, ownership transfer, two-account privacy isolation, public verification, and database-security launch blockers.
+- Sale flow now defaults to “Mark this passport as sold” when recording a sale.
+- After a sale is saved with that option enabled, the open passport detail immediately shows status `sold`.
+- Sale confirmation text clearly states when the passport was marked sold.
+- Existing sale-record behavior remains available: users can uncheck the option if they want to record a sale without changing the asset status.
