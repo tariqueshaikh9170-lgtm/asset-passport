@@ -1,5 +1,5 @@
-# Asset Passport V105
+# Asset Passport V107
 
-- Added Overview quick actions for Edit passport, Open workspace, and Verify.
-- Added a mobile-friendly Edit passport dialog for name, status, and public verification.
-- Preserved V103/V104 Workspace and Ownership UI fixes.
+- Polished the public verification page for mobile and desktop.
+- Added clearer Verified / Not verified states and structured public-safe asset details.
+- Preserved V105/V106 Overview, Workspace, and Ownership improvements.
