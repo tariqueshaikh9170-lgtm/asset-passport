@@ -1758,3 +1758,79 @@ body{background:
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot); else boot();
 })();
 </script>
+
+<style id="v127-pax-style">
+/* V127 — PAX: Asset Passport intelligence assistant */
+.pax-launcher{position:fixed;right:24px;bottom:24px;width:62px;height:62px;border:0;border-radius:20px;background:linear-gradient(145deg,#071a31,#0d5fc7 72%,#25b6ff);color:#fff;display:none;place-items:center;z-index:100001;box-shadow:0 18px 45px rgba(7,17,31,.28),0 0 0 1px rgba(255,255,255,.2) inset;cursor:pointer;transition:transform .18s ease,box-shadow .18s ease}
+.pax-launcher:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 22px 55px rgba(7,17,31,.34),0 0 0 1px rgba(255,255,255,.24) inset}
+.pax-orb{width:38px;height:38px;border-radius:14px;display:grid;place-items:center;background:radial-gradient(circle at 35% 28%,#fff 0 7%,#d8edff 8% 22%,#4faeff 48%,#0751a9 100%);color:#071a31;font-size:21px;font-weight:950;box-shadow:0 0 22px rgba(80,180,255,.5),inset 0 1px 0 rgba(255,255,255,.8)}
+.pax-launcher small{position:absolute;right:-3px;top:-7px;padding:3px 6px;border-radius:99px;background:#eaf4ff;color:#1768d9;border:1px solid #cfe2fb;font-size:8px;font-weight:950;letter-spacing:.08em}
+.pax-panel{position:fixed;right:24px;bottom:98px;width:min(390px,calc(100vw - 28px));max-height:min(620px,calc(100vh - 125px));background:rgba(255,255,255,.97);border:1px solid #dce6f1;border-radius:26px;box-shadow:0 30px 90px rgba(7,17,31,.22),0 5px 18px rgba(7,17,31,.08);z-index:100002;display:none;overflow:hidden;backdrop-filter:blur(20px)}
+.pax-panel.open{display:flex;flex-direction:column}
+.pax-head{padding:17px 18px 14px;background:radial-gradient(circle at 88% 0%,#3284ff44,transparent 32%),linear-gradient(135deg,#061326,#0d3155);color:#fff;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.pax-head-left{display:flex;align-items:center;gap:11px;min-width:0}.pax-head-orb{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;background:radial-gradient(circle at 35% 25%,#fff,#bce4ff 22%,#1682ed 62%,#063a77);color:#071a31;font-weight:950;font-size:21px;box-shadow:0 0 24px #4aaeff55}.pax-head b{display:block;font-size:16px;letter-spacing:-.02em}.pax-head small{display:block;color:#bcd5ee;font-size:10px;margin-top:2px}.pax-close{width:34px;height:34px;border:1px solid #ffffff30;border-radius:10px;background:#ffffff10;color:#fff;font-size:19px;display:grid;place-items:center}
+.pax-body{padding:15px;overflow:auto}.pax-welcome{padding:3px 2px 12px}.pax-welcome b{font-size:16px}.pax-welcome p{margin:5px 0 0;color:#667085;font-size:11px;line-height:1.45}.pax-chips{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:13px}.pax-chip{border:1px solid #dfe7f0;background:#f8fbff;border-radius:13px;padding:11px;text-align:left;color:#17304b;font-size:10px;font-weight:850;min-height:54px}.pax-chip:hover{background:#eef6ff;border-color:#bfd8f5}.pax-chat{display:flex;flex-direction:column;gap:9px;min-height:50px}.pax-msg{max-width:88%;padding:10px 12px;border-radius:14px;font-size:11px;line-height:1.45}.pax-msg.pax-bot{align-self:flex-start;background:#f1f6fb;color:#20364d;border:1px solid #e1e9f1}.pax-msg.pax-user{align-self:flex-end;background:#eaf3ff;color:#0b5da8;border:1px solid #d2e5fb}.pax-input-row{display:flex;gap:8px;padding-top:12px;border-top:1px solid #e8edf3;margin-top:12px}.pax-input{flex:1;height:43px;border:1px solid #d7e1eb;border-radius:12px;padding:0 12px;outline:none;background:#fff;font-size:11px}.pax-input:focus{border-color:#70a9e8;box-shadow:0 0 0 4px #1768d90d}.pax-send{width:43px;height:43px;border:0;border-radius:12px;background:linear-gradient(135deg,#06203d,#1768d9);color:#fff;font-weight:900}.pax-foot{padding:0 15px 13px;color:#98a2b3;font-size:8px;line-height:1.4}.pax-launcher.pax-visible{display:grid}
+@media(max-width:650px){
+  .pax-launcher{right:16px;bottom:92px;width:56px;height:56px;border-radius:18px}
+  .pax-orb{width:34px;height:34px;border-radius:12px;font-size:18px}
+  .pax-panel{right:10px;bottom:158px;width:calc(100vw - 20px);max-height:calc(100vh - 205px);border-radius:23px}
+  .pax-head{padding:15px}.pax-body{padding:13px}.pax-chip{padding:10px;font-size:9px}.pax-foot{padding-bottom:10px}
+}
+@media(max-width:380px){.pax-chips{grid-template-columns:1fr}.pax-panel{bottom:154px;max-height:calc(100vh - 195px)}}
+</style>
+
+<div id="paxRoot" aria-live="polite">
+  <button id="paxLauncher" class="pax-launcher" type="button" onclick="togglePax()" aria-label="Open PAX assistant">
+    <span class="pax-orb">✦</span><small>PAX</small>
+  </button>
+  <section id="paxPanel" class="pax-panel" aria-label="PAX Asset Passport assistant">
+    <div class="pax-head">
+      <div class="pax-head-left"><div class="pax-head-orb">✦</div><div><b>PAX</b><small>Asset Passport Intelligence</small></div></div>
+      <button class="pax-close" type="button" onclick="togglePax(false)" aria-label="Close PAX">×</button>
+    </div>
+    <div class="pax-body">
+      <div class="pax-welcome"><b>How can I help?</b><p>I can help you find, understand and manage information already in your Asset Passport workspace.</p></div>
+      <div class="pax-chips">
+        <button class="pax-chip" onclick="paxAsk('Show my active assets')">✓ Active assets</button>
+        <button class="pax-chip" onclick="paxAsk('Show my sold assets')">◆ Sold assets</button>
+        <button class="pax-chip" onclick="paxAsk('Show my passport summary')">▣ Passport summary</button>
+        <button class="pax-chip" onclick="paxAsk('What needs attention?')">! Needs attention</button>
+      </div>
+      <div id="paxChat" class="pax-chat"><div class="pax-msg pax-bot">Hi, I'm PAX. I can answer quick questions using your current workspace data.</div></div>
+      <div class="pax-input-row"><input id="paxInput" class="pax-input" placeholder="Ask PAX…" onkeydown="if(event.key==='Enter')paxSend()"><button class="pax-send" type="button" onclick="paxSend()">→</button></div>
+    </div>
+    <div class="pax-foot">PAX provides workspace assistance, not legal or ownership advice.</div>
+  </section>
+</div>
+
+<script id="v127-pax-js">
+(function(){
+  function appIsVisible(){var a=document.getElementById('appView');return !!(a&&!a.classList.contains('hidden'))}
+  function sync(){var b=document.getElementById('paxLauncher');if(b)b.classList.toggle('pax-visible',appIsVisible())}
+  window.togglePax=function(force){var p=document.getElementById('paxPanel');if(!p)return;var open=typeof force==='boolean'?force:!p.classList.contains('open');p.classList.toggle('open',open);if(open){var i=document.getElementById('paxInput');if(i)setTimeout(function(){i.focus()},80)}};
+  function add(text,who){var c=document.getElementById('paxChat');if(!c)return;var d=document.createElement('div');d.className='pax-msg '+(who==='user'?'pax-user':'pax-bot');d.textContent=text;c.appendChild(d);c.scrollTop=c.scrollHeight}
+  function assets(){return Array.isArray(window.assetData)?window.assetData:[]}
+  function money(x){return String(x.currency||'QAR')+' '+Number(x.sale_price||0).toFixed(2)}
+  window.paxAsk=function(q){
+    q=String(q||'').trim();if(!q)return;add(q,'user');
+    var rows=assets(), lower=q.toLowerCase(), reply='';
+    if(lower.includes('active')){
+      var a=rows.filter(function(x){return String(x.status||'').toLowerCase()==='active'});reply=a.length?'You have '+a.length+' active asset'+(a.length===1?'':'s')+'. '+a.slice(0,4).map(function(x){return x.name+' ('+x.passport_code+')'}).join(', ')+(a.length>4?'…':''): 'You have no active assets right now.';
+    }else if(lower.includes('sold')){
+      var s=rows.filter(function(x){return String(x.status||'').toLowerCase()==='sold'});reply=s.length?'You have '+s.length+' sold passport'+(s.length===1?'':'s')+'. '+s.slice(0,4).map(function(x){return x.name+' ('+x.passport_code+')'}).join(', ')+(s.length>4?'…':''): 'No sold passports found.';
+    }else if(lower.includes('summary')||lower.includes('passport')){
+      var pub=rows.filter(function(x){return !!x.is_publicly_verifiable}).length, cats=new Set(rows.map(function(x){return x.asset_type}).filter(Boolean)).size;
+      reply='Workspace summary: '+rows.length+' passports, '+rows.filter(function(x){return String(x.status||'').toLowerCase()==='active'}).length+' active, '+pub+' publicly verifiable, across '+cats+' categor'+(cats===1?'y':'ies')+'.';
+    }else if(lower.includes('attention')||lower.includes('need')||lower.includes('problem')){
+      var missing=rows.filter(function(x){return !x.is_publicly_verifiable||String(x.status||'').toLowerCase()==='archived'});reply=missing.length?'I found '+missing.length+' passport'+(missing.length===1?'':'s')+' that may need attention. Check their verification/status settings.':'Nothing obvious needs attention from the basic passport data I can see.';
+    }else if(lower.includes('find')||lower.includes('search')){
+      var terms=lower.replace(/find|search|for|passport|asset/g,'').trim(), hit=rows.filter(function(x){return (String(x.name)+' '+String(x.passport_code)+' '+String(x.asset_type)).toLowerCase().includes(terms)});reply=hit.length?'Found: '+hit.slice(0,5).map(function(x){return x.name+' — '+x.passport_code}).join('; '):'I could not find a matching passport in the current workspace.';
+    }else if(lower.includes('hello')||lower.includes('hi')){reply='Hi 👋 I’m PAX. Try “show my active assets” or “passport summary”.'}
+    else{reply='I can currently help with active assets, sold assets, passport summaries, finding passports, and basic attention checks. More intelligence can be connected later.'}
+    setTimeout(function(){add(reply,'bot')},180);
+  };
+  window.paxSend=function(){var i=document.getElementById('paxInput');if(!i)return;var q=i.value.trim();if(!q)return;i.value='';window.paxAsk(q)};
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',sync);else sync();
+  setInterval(sync,800);
+})();
+</script>

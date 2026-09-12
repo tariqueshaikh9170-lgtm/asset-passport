@@ -10,3 +10,9 @@
 - Existing Verify history/back behavior preserved.
 
 V126 — premium mobile Home hero: fixed action spacing, improved Create/Verify button contrast, reduced artwork interference, and kept controls inside the hero with consistent premium sizing.
+
+## V127
+- Added PAX, a premium Asset Passport intelligence assistant interface.
+- Added PAX quick actions for active assets, sold assets, passport summary, attention checks and search.
+- PAX uses the current workspace passport data for its quick answers; no external AI API was added in this release.
+- Added responsive desktop/mobile PAX launcher and assistant panel.
