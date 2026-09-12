@@ -1044,6 +1044,61 @@ init();
 </style>
 
 <!-- V104 ownership center polish -->
+
+<style id="v108-touch-mobile">
+/* V108 — touch-device dashboard layout: mobile first even when browser requests desktop layout. */
+@media (pointer:coarse) and (max-width:1100px){
+  .side-nav{display:none!important}
+  .app-shell{margin-left:0!important;min-width:0!important}
+  .app-shell .appbar .inner{height:64px!important;padding:0 12px!important}
+  .mobile-brand{display:block!important}
+  .global-search{display:none!important}
+  .profile-area .signout{display:none!important}
+  .profile-area .icon-btn{display:none!important}
+  .profile-area .user-chip{border:1px solid #dce7f7;border-radius:16px;padding:3px;background:#f8fbff}
+  .profile-area .avatar{width:38px;height:38px}
+  .premium-main{padding:0 12px 105px!important;max-width:none!important}
+  .page-kicker{margin:12px 2px 9px!important}
+  .premium-hero{min-height:405px!important;padding:27px 22px!important;border-radius:25px!important}
+  .premium-hero h1{font-size:32px!important;max-width:330px!important}
+  .premium-hero p{font-size:13px!important;max-width:340px!important}
+  .hero-checks{max-width:340px!important;gap:8px!important}
+  .hero-actions{display:flex!important;flex-direction:column!important}
+  .hero-actions>*{width:100%!important}
+  .hero-art{right:-95px!important;top:150px!important;opacity:.28!important}
+  .premium-kpis{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}
+  .premium-kpis .kpi{min-height:100px!important;padding:15px!important;border-radius:20px!important}
+  .kpi-num{font-size:27px!important}
+  .dashboard-grid{grid-template-columns:1fr!important;gap:12px!important}
+  .registry-card,.activity-mini,.quick-card,.verify-panel,.secure-strip{grid-column:auto!important;grid-row:auto!important}
+  .registry-card{order:1}.activity-mini{order:2}.quick-card{order:3}.verify-panel{order:4}.secure-strip{order:5}
+  .premium-card{padding:16px!important}
+  .premium-tools{grid-template-columns:1fr!important}
+  .head-actions .text-btn{display:none!important}
+  .asset-row{grid-template-columns:42px 1fr auto!important;align-items:center!important}
+  .asset-row:before{display:none!important}
+  .copyline{margin-left:42px!important;display:grid!important;grid-template-columns:1fr auto auto!important}
+  .copyline .code{min-width:0!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important}
+  .quick-grid{grid-template-columns:1fr 1fr!important}
+  .secure-strip{display:block!important}
+  .secure-points{margin-top:12px!important}
+  .mobile-nav{position:fixed!important;display:grid!important;grid-template-columns:1fr 1fr 1fr 1fr 1fr!important;align-items:center!important;left:10px!important;right:10px!important;bottom:10px!important;height:66px!important;padding:6px!important;border:1px solid #dce5ef!important;background:rgba(255,255,255,.94)!important;backdrop-filter:blur(18px)!important;border-radius:22px!important;box-shadow:0 16px 45px #07111f24!important;z-index:100000!important}
+  .mobile-nav-item{border:0!important;background:transparent!important;color:#667085!important;height:54px!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:3px!important;border-radius:15px!important;font-weight:800!important}
+  .mobile-nav-item span{font-size:18px!important;line-height:1!important}.mobile-nav-item small{font-size:9px!important}
+  .mobile-nav-item.active{background:#edf4ff!important;color:#1768d9!important}
+  .mobile-add{width:48px!important;height:48px!important;margin:auto!important;border:0!important;border-radius:50%!important;background:linear-gradient(135deg,#061b34,#1768d9)!important;color:#fff!important;font-size:25px!important}
+}
+</style>
+<script id="v108-touch-mobile-js">
+(function(){
+  function mark(){
+    if(window.matchMedia && window.matchMedia('(pointer:coarse)').matches) document.documentElement.classList.add('v108-touch');
+  }
+  mark();
+  window.addEventListener('resize',mark);
+})();
+</script>
+
 </body></html><style id="v99-action-hierarchy">
 /* V99 — action hierarchy: each tool has a distinct visual role instead of identical buttons. */
 .v97-tool-grid{
