@@ -1,2 +1,4 @@
-V117 — pre-launch security gate.
-Added a READ-ONLY Supabase security audit script covering RLS and policies for the core Asset Passport tables. No app UI or navigation code was changed from V116.
+V118 — security review gate.
+No app UI or navigation changes from V117.
+Refined the read-only Supabase audit to report RLS, policies, and policies that need manual review when they do not visibly reference auth.uid().
+Added SECURITY-REVIEW.md with the two-account isolation test and public-verification launch gate.
