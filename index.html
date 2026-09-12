@@ -264,6 +264,29 @@ body:has(.modal.open){overflow:hidden;}
 @media(max-width:760px){#authView{background:linear-gradient(180deg,#061426 0 9%,#f4f8ff 9% 100%)}#authView .container{width:100%;padding:0 10px}#authView .auth-wrap{margin-top:10px}#authView .auth-card{border-radius:24px;overflow:hidden}#authView .auth-brand-inside{padding:11px 14px}#authView .auth-brand-inside .topbadge{display:none}#authView .auth-head{padding:17px 18px 14px!important}#authView .auth-body{padding:15px 18px 18px!important}}
 @media(max-width:430px){#authView .auth-head h1{font-size:24px}#authView .auth-head p{font-size:11px;line-height:1.45}#authView .auth-body .field{margin-bottom:11px}#authView .auth-body .primary{height:48px}}
 </style>
+<style id="v104-ownership-polish">
+/* V104 — Ownership center polish */
+.ownership-card{margin-top:24px;padding:20px;border:1px solid #dce7f7!important;border-radius:20px;background:linear-gradient(135deg,#fbfdff,#f7fbff)}
+.ownership-head{margin-bottom:16px!important;align-items:center!important}
+.ownership-head h3{font-size:20px!important}
+.ownership-head .sub{max-width:520px}
+.ownership-head .secondary{min-height:42px}
+.ownership-primary{margin:8px 0 18px}
+.ownership-primary .primary{width:100%;min-height:50px;border-radius:14px}
+.ownership-primary:before{content:'🔐';display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:9px;background:#eaf4ff;color:#075985;vertical-align:middle;margin-right:8px;display:none}
+#assetTransfers{padding-top:2px}
+#assetTransfers:before{content:'Transfer activity';display:block;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#667085;margin:0 0 4px}
+.ownership-row{padding:15px 0!important}
+@media(max-width:650px){
+  .ownership-card{padding:16px;border-radius:18px}
+  .ownership-head{display:flex!important;align-items:flex-start!important;gap:10px!important}
+  .ownership-head>div{min-width:0}
+  .ownership-head h3{font-size:18px!important}
+  .ownership-head .secondary{width:auto!important;margin-top:0!important;flex:0 0 auto}
+  .ownership-primary{margin-top:14px}
+  .ownership-primary .primary{min-height:48px}
+}
+</style>
 </head><body>
 <div id="authView" class="shell"><div class="container">
 <div class="auth-wrap"><div class="auth-card"><div class="auth-brand-inside"><div class="logo"><span class="mark">✦</span><span>Asset Passport</span></div><span class="topbadge">Secure · Global · Trusted</span></div><div class="auth-head"><div class="auth-orbit"><span class="orbit-dot d1"></span><span class="orbit-dot d2"></span><span class="orbit-dot d3"></span><span class="orbit-line l1"></span><span class="orbit-line l2"></span></div><div class="auth-shield">✦</div><div class="eyebrow">ASSET IDENTITY PLATFORM</div><h1>Asset Passport</h1><p>One trusted record for every valuable asset — ownership, documents, history and verification.</p><div class="auth-promise"><span>Register</span><i>•</i><span>Protect</span><i>•</i><span>Verify</span><i>•</i><span>Everywhere</span></div></div><div class="auth-body">
@@ -1014,6 +1037,7 @@ init();
 }
 </style>
 
+<!-- V104 ownership center polish -->
 </body></html><style id="v99-action-hierarchy">
 /* V99 — action hierarchy: each tool has a distinct visual role instead of identical buttons. */
 .v97-tool-grid{
