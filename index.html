@@ -676,13 +676,13 @@ init();
     panel.dataset.v97Built='1';
     const nav=document.createElement('div'); nav.className='v97-record-nav';
     nav.innerHTML='<button type="button" data-v97="reminders">Reminders</button><button type="button" data-v97="history">History</button><button type="button" data-v97="sales">Sales</button><button type="button" data-v97="tools">Tools</button>';
-    const tools=document.createElement('div'); tools.className='v97-tool-grid v97-panel'; tools.dataset.v97Panel='tools';
-    tools.innerHTML='<button type="button" class="primary" onclick="verifyDetail()">✓ Verify</button><button type="button" class="secondary" onclick="shareDetail()">Share</button><button type="button" class="secondary" onclick="printPassport()">Print / PDF</button><button type="button" class="secondary" onclick="openQR()">QR Passport</button><button type="button" class="secondary" onclick="openDocs()">Documents</button><button type="button" class="secondary" onclick="openSale()">Record sale</button>';
+    const toolsGrid=document.createElement('div'); toolsGrid.className='v97-tool-grid';
+    toolsGrid.innerHTML='<button type="button" class="primary" onclick="verifyDetail()">✓ Verify</button><button type="button" class="secondary" onclick="shareDetail()">Share</button><button type="button" class="secondary" onclick="printPassport()">Print / PDF</button><button type="button" class="secondary" onclick="openQR()">QR Passport</button><button type="button" class="secondary" onclick="openDocs()">Documents</button><button type="button" class="secondary" onclick="openSale()">Record sale</button>';
     const shell=document.createElement('div'); shell.className='v97-shell';
     function wrap(key,node){const p=document.createElement('div');p.className='v97-panel';p.dataset.v97Panel=key;p.appendChild(node);return p}
-    const p1=wrap('reminders',reminder),p2=wrap('history',timeline),p3=wrap('sales',sale);
-    shell.append(p1,p2,p3);
-    panel.innerHTML=''; panel.append(nav,tools,shell);
+    const p1=wrap('reminders',reminder),p2=wrap('history',timeline),p3=wrap('sales',sale),p4=wrap('tools',toolsGrid);
+    shell.append(p1,p2,p3,p4);
+    panel.innerHTML=''; panel.append(nav,shell);
     const set=(key)=>{nav.querySelectorAll('button').forEach(b=>b.classList.toggle('active',b.dataset.v97===key));panel.querySelectorAll('.v97-panel').forEach(p=>p.classList.toggle('active',p.dataset.v97Panel===key));};
     nav.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>set(b.dataset.v97)));
     // Keep sale preview genuinely compact and provide one clear path to the complete history.
@@ -807,33 +807,121 @@ init();
  document.addEventListener('DOMContentLoaded',run);
 })();
 </script>
-
-<style id="v100-tab-isolation">
-/* V100 — each Workspace tab owns only its own content. */
-#detailTabRecords .v97-panel:not(.active){display:none!important}
-#detailTabRecords .v97-tool-grid.v97-panel:not(.active){display:none!important}
-#detailTabRecords .v97-tool-grid.v97-panel.active{display:grid!important}
+<!-- V101 — Workspace tab separation fix. Keeps Reminders, History, Sales and Tools strictly independent. -->
+<style id="v101-workspace-fix">
+.v101-record-nav{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;margin:10px 0 10px;padding:4px;background:#f4f7fb;border:1px solid #dfe7f0;border-radius:14px}
+.v101-record-nav button{width:100%;height:38px;border:1px solid transparent;border-radius:10px;background:transparent;color:#667085;font:800 11px/1 inherit;cursor:pointer}
+.v101-record-nav button.active{background:#fff;color:#0b67b8;border-color:#dce6f1;box-shadow:0 2px 8px rgba(15,23,42,.08)}
+.v101-workspace-panel{display:none!important;margin:0}
+.v101-workspace-panel.active{display:block!important}
+.v101-workspace-panel>.reminder-card,.v101-workspace-panel>.timeline-card-compact,.v101-workspace-panel>.sale-history,.v101-workspace-panel>.inline-sale-history{margin:0!important}
+.v101-tools{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:8px;border:1px solid #dfe7f0;border-radius:16px;background:#f8fbff}
+.v101-tools button{min-height:48px!important;border-radius:12px!important;font-size:11px!important;font-weight:800!important}
+.v101-tools button:first-child{grid-column:1/-1}
+.v101-tools .v101-tool-primary{background:linear-gradient(110deg,#062844,#086dd6)!important;color:#fff!important;border:0!important}
+.v101-tools .v101-tool-share{background:#fff!important;border:1px solid #cfe0f2!important;color:#17324f!important}
+.v101-tools .v101-tool-print{background:#f5f7fa!important;border:1px solid #d9e0e8!important;color:#34465b!important}
+.v101-tools .v101-tool-qr{background:#eef7ff!important;border:1px solid #bcdcff!important;color:#0767b8!important}
+.v101-tools .v101-tool-docs{background:#f7f5ff!important;border:1px solid #ddd7fb!important;color:#5146a8!important}
+.v101-tools .v101-tool-sale{background:#f5fbf7!important;border:1px solid #ccebd7!important;color:#08783f!important}
+@media(max-width:600px){.v101-record-nav{gap:3px;padding:4px}.v101-record-nav button{height:36px;font-size:10px}.v101-tools{gap:6px;padding:6px}.v101-tools button{min-height:46px!important;font-size:10px!important}}
+@media(max-width:430px){.v101-record-nav button{height:34px;font-size:9px}.v101-tools button{min-height:44px!important}}
 </style>
-<script id="v100-tab-isolation-js">
+<script id="v101-workspace-fix-js">
 (function(){
-  function fix(){
+  function buildV101(){
     const panel=document.getElementById('detailTabRecords');
-    if(!panel)return;
-    const nav=panel.querySelector('.v97-record-nav');
-    const tools=panel.querySelector('.v97-tool-grid');
-    const shell=panel.querySelector('.v97-shell');
-    if(!nav||!tools||!shell)return;
-    // Put Tools inside the same section container as the other tabs.
-    if(tools.parentElement!==shell) shell.appendChild(tools);
-    // Make sure exactly one section is visible when the workspace opens.
-    if(!nav.querySelector('button.active')){
-      const first=nav.querySelector('[data-v97="reminders"]');
-      if(first) first.click();
+    if(!panel) return false;
+
+    // If an older workspace was already built, collect its real content nodes first.
+    const reminder=panel.querySelector('.reminder-card');
+    const timeline=panel.querySelector('.timeline-card-compact');
+    const sale=panel.querySelector('.sale-history, .inline-sale-history');
+    if(!reminder || !timeline || !sale) return false;
+
+    // Do not keep the old all-in-one action row in any workspace section.
+    const oldActions=panel.querySelector('.detail-actions');
+    if(oldActions) oldActions.remove();
+    const oldToolGrids=panel.querySelectorAll('.v97-tool-grid');
+    oldToolGrids.forEach(x=>x.remove());
+
+    // If this exact V101 layout is already present, only restore the active state.
+    const existing=panel.querySelector('.v101-record-nav');
+    if(existing){
+      const active=panel.dataset.v101Active||'reminders';
+      activate(active);
+      return true;
     }
+
+    const nav=document.createElement('div');
+    nav.className='v101-record-nav';
+    nav.setAttribute('role','tablist');
+    nav.innerHTML='<button type="button" data-v101="reminders">🔔 Reminders</button><button type="button" data-v101="history">◷ History</button><button type="button" data-v101="sales">◇ Sales</button><button type="button" data-v101="tools">▣ Tools</button>';
+
+    const tools=document.createElement('div');
+    tools.className='v101-tools';
+    tools.innerHTML='<button type="button" class="v101-tool-primary" onclick="verifyDetail()">✓ Verify</button><button type="button" class="v101-tool-share" onclick="shareDetail()">↗ Share</button><button type="button" class="v101-tool-print" onclick="printPassport()">⎙ Print / PDF</button><button type="button" class="v101-tool-qr" onclick="openQR()">▣ QR Passport</button><button type="button" class="v101-tool-docs" onclick="openDocs()">▤ Documents</button><button type="button" class="v101-tool-sale" onclick="openSale()">◇ Record sale</button>';
+
+    const wrap=(key,node)=>{
+      const p=document.createElement('div');
+      p.className='v101-workspace-panel';
+      p.dataset.v101Panel=key;
+      p.appendChild(node);
+      return p;
+    };
+    const p1=wrap('reminders',reminder);
+    const p2=wrap('history',timeline);
+    const p3=wrap('sales',sale);
+    const p4=wrap('tools',tools);
+
+    panel.innerHTML='';
+    panel.append(nav,p1,p2,p3,p4);
+    nav.querySelectorAll('button').forEach(btn=>btn.addEventListener('click',()=>activate(btn.dataset.v101)));
+
+    // Match the requested labels without changing the underlying database functions.
+    const addReminder=p1.querySelector('.reminder-head>button');
+    if(addReminder) addReminder.textContent='+ Add reminder';
+    const addEvent=p2.querySelector('.timeline-head>button');
+    if(addEvent) addEvent.textContent='+ Add event';
+    const recordSale=p3.querySelector('.sale-head-actions .secondary');
+    if(recordSale) recordSale.textContent='+ Record sale';
+
+    function activate(key){
+      panel.dataset.v101Active=key;
+      nav.querySelectorAll('button').forEach(b=>{
+        const on=b.dataset.v101===key;
+        b.classList.toggle('active',on);
+        b.setAttribute('aria-selected',on?'true':'false');
+      });
+      panel.querySelectorAll('.v101-workspace-panel').forEach(p=>p.classList.toggle('active',p.dataset.v101Panel===key));
+    }
+    activate('reminders');
+    return true;
   }
-  document.addEventListener('DOMContentLoaded',()=>{fix();setTimeout(fix,200);setTimeout(fix,700);});
-  const old=window.openDetail;
-  if(typeof old==='function') window.openDetail=async function(){await old.apply(this,arguments);setTimeout(fix,0);setTimeout(fix,300);};
+
+  function activate(key){
+    const panel=document.getElementById('detailTabRecords');
+    if(!panel) return;
+    panel.dataset.v101Active=key;
+    panel.querySelectorAll('.v101-record-nav button').forEach(b=>b.classList.toggle('active',b.dataset.v101===key));
+    panel.querySelectorAll('.v101-workspace-panel').forEach(p=>p.classList.toggle('active',p.dataset.v101Panel===key));
+  }
+
+  function run(){
+    if(buildV101()) return;
+    setTimeout(buildV101,50);setTimeout(buildV101,200);setTimeout(buildV101,700);
+  }
+
+  const oldOpen=window.openDetail;
+  if(typeof oldOpen==='function'){
+    window.openDetail=async function(){
+      await oldOpen.apply(this,arguments);
+      run();
+    };
+  }
+  document.addEventListener('DOMContentLoaded',run);
+  const obs=new MutationObserver(()=>{const p=document.getElementById('detailTabRecords');if(p && !p.querySelector('.v101-record-nav')) run();});
+  if(document.body) obs.observe(document.body,{childList:true,subtree:true});
 })();
 </script>
 
@@ -901,3 +989,4 @@ init();
   document.addEventListener('DOMContentLoaded',function(){setTimeout(polish,400);});
 })();
 </script>
+
