@@ -4,3 +4,5 @@
 - Increased PAX chat space when keyboard is closed.
 - Added keyboard-safe chat space while keeping V131/V132 stability.
 - Preserved PAX premium actions from V133.
+
+- V135 removed PAX assistant completely per product direction.
