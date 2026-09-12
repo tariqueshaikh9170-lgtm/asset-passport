@@ -1854,3 +1854,69 @@ body{background:
   setInterval(sync,800);
 })();
 </script>
+
+<style id="v129-pax-bottom-sheet">
+/* V129 — PAX mobile bottom-sheet treatment */
+@media(max-width:700px){
+  .pax-panel{
+    left:0!important;
+    right:0!important;
+    bottom:0!important;
+    width:100%!important;
+    max-width:none!important;
+    max-height:min(560px,58dvh)!important;
+    border-radius:28px 28px 0 0!important;
+    border:1px solid #d8e4ef!important;
+    border-bottom:0!important;
+    box-shadow:0 -18px 55px rgba(7,17,31,.22),0 -2px 10px rgba(7,17,31,.08)!important;
+    animation:paxSheetIn .22s cubic-bezier(.22,.8,.24,1)!important;
+  }
+  .pax-panel.open{display:flex!important}
+  .pax-head{
+    position:relative!important;
+    padding:13px 16px 12px!important;
+  }
+  .pax-head:before{
+    content:"";
+    position:absolute;
+    top:7px;
+    left:50%;
+    transform:translateX(-50%);
+    width:38px;
+    height:4px;
+    border-radius:99px;
+    background:rgba(255,255,255,.34);
+  }
+  .pax-head-left{padding-top:4px!important}
+  .pax-body{padding:12px 15px 8px!important}
+  .pax-welcome p{max-width:620px!important}
+  .pax-chips{gap:7px!important;margin-bottom:9px!important}
+  .pax-chip{min-height:44px!important;padding:9px 10px!important}
+  .pax-chat{max-height:76px!important}
+  .pax-input-row{padding-top:9px!important;margin-top:8px!important}
+  .pax-foot{padding:0 15px 9px!important}
+}
+@media(max-width:380px){
+  .pax-panel{max-height:60dvh!important}
+  .pax-chips{grid-template-columns:1fr 1fr!important}
+}
+@keyframes paxSheetIn{
+  from{opacity:0;transform:translateY(24px)}
+  to{opacity:1;transform:translateY(0)}
+}
+</style>
+
+<script id="v129-pax-sheet-js">
+(function(){
+  var original=window.togglePax;
+  window.togglePax=function(force){
+    if(typeof original==='function') original(force);
+    var p=document.getElementById('paxPanel');
+    if(p && p.classList.contains('open')){
+      document.body.classList.add('pax-sheet-open');
+    }else{
+      document.body.classList.remove('pax-sheet-open');
+    }
+  };
+})();
+</script>
