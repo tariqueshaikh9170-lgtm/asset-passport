@@ -1544,6 +1544,42 @@ body{background:
   });
 })();
 </script>
+
+<style id="v130-pax-keyboard-fix">
+@media(max-width:700px){
+  body.pax-sheet-open{overflow:hidden!important;overscroll-behavior:none!important}
+  .pax-panel.pax-keyboard-mode{
+    top:auto!important;
+    bottom:0!important;
+    max-height:min(360px,48dvh)!important;
+    height:auto!important;
+    transform:none!important;
+  }
+  .pax-panel.pax-keyboard-mode .pax-welcome{display:none!important}
+  .pax-panel.pax-keyboard-mode .pax-chips{display:none!important}
+  .pax-panel.pax-keyboard-mode .pax-chat{max-height:145px!important;overflow:auto!important}
+  .pax-panel.pax-keyboard-mode .pax-body{padding-top:10px!important}
+  .pax-panel.pax-keyboard-mode .pax-input-row{margin-top:6px!important}
+}
+</style>
+<script id="v130-pax-keyboard-js">
+(function(){
+  var base=window.togglePax;
+  function syncKeyboard(){
+    var p=document.getElementById('paxPanel'),i=document.getElementById('paxInput');
+    if(!p||!i)return;
+    var active=document.activeElement===i;
+    p.classList.toggle('pax-keyboard-mode',active&&p.classList.contains('open'));
+  }
+  document.addEventListener('focusin',function(e){if(e.target&&e.target.id==='paxInput')setTimeout(syncKeyboard,60)});
+  document.addEventListener('focusout',function(e){if(e.target&&e.target.id==='paxInput')setTimeout(syncKeyboard,80)});
+  window.togglePax=function(force){
+    if(typeof base==='function')base(force);
+    setTimeout(syncKeyboard,90);
+  };
+})();
+</script>
+
 </body></html><style id="v99-action-hierarchy">
 /* V99 — action hierarchy: each tool has a distinct visual role instead of identical buttons. */
 .v97-tool-grid{
