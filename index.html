@@ -351,7 +351,7 @@ html.v109-mobile .detail-modal,.v109-mobile #detailModal{max-width:100vw!importa
     <button class="side-item" onclick="openTransferInbox()"><span>⇄</span> Transfer Inbox <b class="side-count hidden" id="sideTransferBadge">0</b></button>
     <button class="side-item" onclick="openDocs()"><span>▤</span> Documents Vault</button>
     <button class="side-item" onclick="openActivity()"><span>☷</span> Activity Log</button>
-    <button class="side-item" onclick="v113Verify()"><span>⌕</span> Public Verify</button>
+    <button class="side-item" onclick="document.getElementById('verifyCard').scrollIntoView({behavior:'smooth'})"><span>⌕</span> Public Verify</button>
     <button class="side-item" onclick="alert('Business accounts are the next workspace module.')"><span>♙</span> Business Accounts</button>
     <button class="side-item" onclick="alert('Workspace settings will be expanded in the business release.')"><span>⚙</span> Settings</button>
     <div class="side-spacer"></div>
@@ -382,11 +382,11 @@ html.v109-mobile .detail-modal,.v109-mobile #detailModal{max-width:100vw!importa
 <div class="modal" id="detailModal" onclick="if(event.target===this)closeDetail()"><div class="detail-card compact-detail"><div class="modal-head detail-sticky-head"><div><div class="eyebrow" style="color:#667085">Asset passport</div><h2 id="detailTitle">Passport</h2><div id="detailMeta" class="sub"></div></div><button class="close" onclick="closeDetail()">×</button></div><div class="detail-code"><span>Passport code</span><b id="detailCode">PP-00000000</b><button class="secondary" onclick="copyText($('detailCode').textContent)">Copy</button></div><div class="detail-grid compact-stats"><div class="detail-stat"><small>Status</small><b id="detailStatus">—</b></div><div class="detail-stat"><small>Verification</small><b id="detailPublic">—</b></div><div class="detail-stat"><small>Category</small><b id="detailType">—</b></div><div class="detail-stat"><small>Created</small><b id="detailCreated">—</b></div></div><div class="detail-tabs" role="tablist" aria-label="Passport sections"><button class="detail-tab active" data-tab="overview" onclick="switchDetailTab('overview')">Overview</button><button class="detail-tab" data-tab="records" onclick="switchDetailTab('records')">Workspace</button><button class="detail-tab" data-tab="ownership" onclick="switchDetailTab('ownership')">Ownership</button></div><div class="detail-tab-panel active" id="detailTabOverview"><div class="asset-identity"><div class="asset-identity-head"><div><h3>Asset identity</h3><div class="sub">Structured details saved with this passport.</div></div><span class="pill green">Owner only</span></div><div id="assetIdentityBody"><div class="identity-empty">Loading asset details…</div></div></div><div class="readiness-card"><div class="readiness-head"><div><h3>Passport readiness</h3><div class="sub">Completeness before sharing or transferring.</div></div><div class="readiness-score" id="readinessScore">—%</div></div><div class="readiness-bar"><div class="readiness-fill" id="readinessFill"></div></div><div id="readinessList" class="readiness-list"><div class="readiness-item"><b>Checking…</b>Loading passport records.</div></div></div><div class="v105-overview-actions" aria-label="Passport quick actions"><button type="button" class="secondary" onclick="openEditPassport()">Edit passport</button><button type="button" class="secondary" onclick="switchDetailTab('records')">Open workspace</button><button type="button" class="primary" onclick="verifyDetail()">✓ Verify</button></div></div><div class="detail-tab-panel" id="detailTabRecords"><div class="detail-actions compact-actions"><button class="primary" onclick="verifyDetail()">✓ Verify</button><button class="secondary" onclick="shareDetail()">Share</button><button class="secondary" onclick="printPassport()">Print / PDF</button><button class="secondary" onclick="openQR()">QR Passport</button><button class="secondary" onclick="openDocs()">Documents</button><button class="secondary" onclick="openSale()">Record sale</button></div><div class="reminder-card"><div class="reminder-head"><div><h3>Warranty & service reminders</h3><div class="sub">Warranty, service, inspection and expiry dates.</div></div><button class="secondary" onclick="toggleReminderForm()">+ Add</button></div><div id="reminderForm" class="reminder-form hidden"><div class="two"><div class="field"><label>Reminder type</label><select id="reminderType"><option value="warranty">Warranty</option><option value="service">Service</option><option value="inspection">Inspection</option><option value="registration">Registration</option><option value="insurance">Insurance</option><option value="other">Other</option></select></div><div class="field"><label>Due date</label><input id="reminderDate" type="date"></div></div><div class="field"><label>Title</label><input id="reminderTitle" placeholder="e.g. Warranty expires"></div><div class="field"><label>Notes (optional)</label><input id="reminderNotes" placeholder="Provider, coverage, service interval…"></div><button class="primary" onclick="addReminder()">Save reminder</button><div id="reminderStatus" class="status"></div></div><div id="reminderList" class="reminder-list"><div class="reminder-empty">Loading reminders…</div></div></div><div class="timeline-card-compact"><div class="timeline-head"><div><h3>Passport timeline</h3><div class="sub">Service, repair and inspection history.</div></div><button class="secondary" onclick="openEventForm()">+ Add event</button></div><div id="eventForm" class="event-form hidden"><div class="two"><div class="field"><label>Event type</label><select id="eventType"><option value="service">Service</option><option value="repair">Repair</option><option value="inspection">Inspection</option><option value="ownership_transfer">Ownership transfer</option><option value="note">Note</option></select></div><div class="field"><label>Date</label><input id="eventDate" type="date"></div></div><div class="field"><label>Details</label><input id="eventText" placeholder="e.g. Annual service completed"></div><button class="primary" onclick="addEvent()">Save event</button><div id="eventStatus" class="status"></div></div><div id="timeline"><div class="empty">Loading timeline…</div></div></div><div class="sale-history inline-sale-history"><div class="sale-history-head"><div><h3>Sale history</h3><div class="sub">Private transaction records.</div></div><div class="sale-head-actions"><button class="secondary" onclick="openSale()">+ Record sale</button><button class="text-btn" onclick="openSaleHistory()">View all</button></div></div><div id="saleHistory"><div class="empty">Loading sale history…</div></div></div></div><div class="detail-tab-panel" id="detailTabOwnership"><div class="ownership-card"><div class="ownership-head"><div><h3>Ownership center</h3><div class="sub">Transfer this passport securely to another owner.</div></div><button class="secondary" onclick="openTransferInbox()">Full center</button></div><div class="ownership-primary"><button class="primary" onclick="openTransfer()">Transfer ownership</button></div><div id="assetTransfers"><div class="empty">Loading ownership status…</div></div></div></div></div></div>
 <div class="modal" id="qrModal" onclick="if(event.target===this)closeQR()"><div class="modal-card qr-card"><div class="modal-head"><div><div class="eyebrow" style="color:#667085">Portable verification</div><h2 style="margin:6px 0 3px">Passport QR</h2><div class="sub">Scan to verify this asset record.</div></div><button class="close" onclick="closeQR()">×</button></div><div class="qr-preview"><div class="qr-brand"><span class="mark">✦</span><div><b>Asset Passport</b><small>Verified asset record</small></div></div><div id="qrCode" class="qr-code"></div><div id="qrAssetName" class="qr-name">Passport</div><div id="qrAssetCode" class="qr-pass">PP-00000000</div><div class="qr-note">Public verification shows only the fields allowed by the registry.</div></div><div class="qr-actions"><button class="primary" onclick="shareQR()">Share passport</button><button class="secondary" onclick="copyQRLink()">Copy verification link</button></div><div id="qrStatus" class="status"></div></div></div>
 <nav class="mobile-nav" aria-label="Primary navigation">
-  <button id="mobileHomeBtn" class="mobile-nav-item active" onclick="v113Home()"><span>⌂</span><small>Home</small></button>
+  <button id="mobileHomeBtn" class="mobile-nav-item active" onclick="v110Home()"><span>⌂</span><small>Home</small></button>
   <button id="mobileAssetsBtn" class="mobile-nav-item" onclick="v110Assets()"><span>▣</span><small>Assets</small></button>
   <button class="mobile-add" onclick="openCreate()">＋</button>
-  <button class="mobile-nav-item" onclick="document.getElementById('verifyCard').scrollIntoView({behavior:'smooth'})"><span>⌕</span><small>Verify</small></button>
-  <button id="mobileActivityBtn" class="mobile-nav-item" onclick="v113Activity()"><span>☷</span><small>Activity</small></button>
+  <button id="mobileVerifyBtn" class="mobile-nav-item" onclick="v114Verify()"><span>⌕</span><small>Verify</small></button>
+  <button id="mobileActivityBtn" class="mobile-nav-item" onclick="v114Activity()"><span>☷</span><small>Activity</small></button>
 </nav>
 <div class="modal" id="createModal" onclick="if(event.target===this)closeCreate()"><div class="modal-card"><div class="modal-head"><div><div class="eyebrow" style="color:#667085">New record</div><h2 style="margin:6px 0 3px">Create Asset Passport</h2><div class="sub">Create the passport with asset-specific identity details. Documents and service history can be added later.</div></div><button class="close" onclick="closeCreate()">×</button></div>
 <div class="two"><div class="field"><label>Asset type</label><select id="assetType"><option value="electronics">Electronics</option><option value="car">Car</option><option value="bike">Bike</option><option value="property">Property</option><option value="furniture">Furniture</option><option value="watch">Watch</option><option value="machinery">Machinery</option><option value="other">Other</option></select></div><div class="field"><label>Status</label><select id="status"><option value="active">Active</option><option value="sold">Sold</option><option value="transferred">Transferred</option><option value="archived">Archived</option></select></div></div>
@@ -645,7 +645,7 @@ async function addReminder(){const a=window.currentAsset;if(!a)return;const type
 async function collectActivity(){if(!sb)return[];const {data:{user}}=await sb.auth.getUser();if(!user)return[];const out=[];const er=await sb.from('asset_events').select('id,asset_id,event_type,event_date,event_text,created_at').order('created_at',{ascending:false}).limit(8);if(!er.error){const ids=[...new Set((er.data||[]).map(x=>x.asset_id).filter(Boolean))];let amap=new Map();if(ids.length){const ar=await sb.from('assets').select('id,name,passport_code').in('id',ids);amap=new Map((ar.data||[]).map(x=>[x.id,x]))}for(const e of (er.data||[])){const a=amap.get(e.asset_id)||{};out.push({kind:'event',title:(e.event_type||'event').replaceAll('_',' '),text:(a.name? a.name+' · ':'')+(e.event_text||''),date:e.created_at||e.event_date,icon:(e.event_type||'E')[0].toUpperCase()})}}const sr=await sb.from('asset_sales').select('id,asset_id,sale_price,currency,sale_date,created_at').order('created_at',{ascending:false}).limit(6);if(!sr.error){const ids=[...new Set((sr.data||[]).map(x=>x.asset_id).filter(Boolean))];let amap=new Map();if(ids.length){const ar=await sb.from('assets').select('id,name,passport_code').in('id',ids);amap=new Map((ar.data||[]).map(x=>[x.id,x]))}for(const x of (sr.data||[])){const a=amap.get(x.asset_id)||{};out.push({kind:'sale',title:'Sale recorded',text:(a.name||'Asset Passport')+' · '+String(x.currency||'QAR')+' '+Number(x.sale_price||0).toFixed(2),date:x.created_at||x.sale_date,icon:'$'})}}const tr=await sb.from('asset_transfer_requests').select('id,asset_id,recipient_email,status,created_at').eq('status','pending').order('created_at',{ascending:false}).limit(6);if(!tr.error){const ids=[...new Set((tr.data||[]).map(x=>x.asset_id).filter(Boolean))];let amap=new Map();if(ids.length){const ar=await sb.from('assets').select('id,name,passport_code').in('id',ids);amap=new Map((ar.data||[]).map(x=>[x.id,x]))}for(const t of (tr.data||[])){const a=amap.get(t.asset_id)||{};out.push({kind:'transfer',title:'Transfer request',text:(a.name||'Asset Passport')+' · pending transfer',date:t.created_at,icon:'↔'})}}return out.sort((a,b)=>new Date(b.date||0)-new Date(a.date||0).getTime()).slice(0,12)}
 function activityHtml(rows,limit){const data=limit?rows.slice(0,limit):rows;if(!data.length)return '<div class="empty activity-empty">No recent activity yet.</div>';return data.map(x=>`<div class="activity-row"><div class="activity-icon">${esc(x.icon||'•')}</div><div class="activity-copy"><b>${esc(x.title)}</b><span>${esc(x.text)}</span><small>${esc(new Date(x.date).toLocaleString())}</small></div></div>`).join('')}
 async function loadActivity(){const rows=await collectActivity();$('activityPreview').innerHTML=activityHtml(rows,4);$('topNotifBadge').textContent=Math.min(rows.length,9);$('topNotifBadge').classList.toggle('hidden',!rows.length);return rows}
-async function openActivity(){$('activityModal').classList.add('open');$('activityList').innerHTML='<div class="empty">Loading activity…</div>';const rows=await collectActivity();$('activityList').innerHTML=activityHtml(rows)}function closeActivity(){$('activityModal').classList.remove('open');document.documentElement.classList.remove('v112-activity-mode','v113-activity-mode','v113-verify-mode')}
+async function openActivity(){$('activityModal').classList.add('open');$('activityList').innerHTML='<div class="empty">Loading activity…</div>';const rows=await collectActivity();$('activityList').innerHTML=activityHtml(rows)}function closeActivity(){$('activityModal').classList.remove('open');document.documentElement.classList.remove('v112-activity-mode')}
 
 function verifyUrl(code){if(CONFIG.publicVerifyBase)return CONFIG.publicVerifyBase.replace(/\/$/,'')+'/verify.html?code='+encodeURIComponent(code);return location.origin+location.pathname.replace(/[^/]*$/,'')+'verify.html?code='+encodeURIComponent(code)}async function copyText(code){try{await navigator.clipboard.writeText(code);msg('verifyStatus','Passport code copied: '+code,'ok')}catch(e){msg('verifyStatus','Copy failed. Code: '+code,'err')}}
 async function verifyPassport(){clear('verifyStatus');$('verifyResult').innerHTML='';const code=$('verifyCode').value.trim().toUpperCase();if(!code)return msg('verifyStatus','Enter a Passport Code.','err');try{const u=new URL(CONFIG.verifyFunctionUrl);u.searchParams.set('code',code);const res=await fetch(u);const json=await res.json();if(!res.ok||!json.verified)return msg('verifyStatus',json.error||'Passport not verified.','err');const p=json.passport||json;if(!p||!p.name||!p.passport_code)return msg('verifyStatus','Verification response is invalid.','err');msg('verifyStatus','Verified successfully.','ok');$('verifyResult').innerHTML='<div class="verifybox"><span class="pill green">✓ VERIFIED</span><b>'+esc(p.name)+'</b><div class="asset-meta">'+esc(p.asset_type)+' · '+esc(p.status)+'</div><div class="asset-meta code" style="margin-top:6px">'+esc(p.passport_code)+'</div></div>'}catch(e){msg('verifyStatus','Verification request failed. Check your connection.','err')}}
@@ -1244,74 +1244,83 @@ init();
   const oldHome=window.v110Home;
   window.v112Home=function(){
     if(oldHome)oldHome();
-    document.documentElement.classList.remove('v112-activity-mode','v113-activity-mode','v113-verify-mode');
+    document.documentElement.classList.remove('v112-activity-mode');
     const b=document.getElementById('mobileHomeBtn');if(b)b.classList.add('active');
   };
 })();
 </script>
 
-<style id="v113-mobile-focus-fix">
-/* V113 — force mobile focused modes without relying on pointer detection. */
+<style id="v114-mobile-focus-css">
 @media (max-width:1100px){
-  html.v113-activity-mode{background:#f7f9fc!important}
-  html.v113-activity-mode body{overflow:hidden!important;background:#f7f9fc!important}
-  html.v113-activity-mode .mobile-nav{display:none!important}
-  html.v113-activity-mode #activityModal{display:flex!important;position:fixed!important;inset:0!important;z-index:200000!important;padding:0!important;margin:0!important;background:#f7f9fc!important;align-items:stretch!important;justify-content:stretch!important;backdrop-filter:none!important}
-  html.v113-activity-mode #activityModal .detail-card{width:100%!important;max-width:none!important;height:100dvh!important;max-height:none!important;min-height:100dvh!important;margin:0!important;border-radius:0!important;padding:0 14px 24px!important;overflow:auto!important;box-shadow:none!important;background:#fff!important}
-  html.v113-activity-mode #activityModal .modal-head{position:sticky!important;top:0!important;z-index:20!important;margin:0 -14px 8px!important;padding:16px 14px 12px!important;background:rgba(255,255,255,.98)!important;border-bottom:1px solid #e6edf5!important}
-  html.v113-activity-mode #activityModal .registry-tools{position:sticky!important;top:76px!important;z-index:15!important;background:#fff!important;padding:8px 0 10px!important}
-  html.v113-activity-mode #activitySearch{height:46px!important}
-  html.v113-activity-mode #activityFilter{height:46px!important}
-  html.v113-verify-mode{background:#f7f9fc!important}
-  html.v113-verify-mode body{overflow:hidden!important;background:#f7f9fc!important}
-  html.v113-verify-mode .mobile-nav{display:none!important}
-  html.v113-verify-mode .premium-hero,
-  html.v113-verify-mode .premium-kpis,
-  html.v113-verify-mode .registry-card,
-  html.v113-verify-mode .activity-mini,
-  html.v113-verify-mode .quick-card,
-  html.v113-verify-mode .secure-strip{display:none!important}
-  html.v113-verify-mode .dashboard-grid{display:block!important}
-  html.v113-verify-mode .verify-panel{display:block!important;min-height:calc(100dvh - 82px)!important;margin:10px 0 0!important;border-radius:24px!important;padding:18px!important}
-  html.v113-verify-mode .verify-panel .card-head h2{font-size:24px!important}
-  html.v113-verify-mode #verifyInput{height:50px!important;font-size:15px!important}
-  html.v113-verify-mode #verifyCard .primary{min-height:50px!important}
+  html.v114-activity-mode,html.v114-verify-mode{background:#f7f9fc!important}
+  html.v114-activity-mode body,html.v114-verify-mode body{overflow:hidden!important;background:#f7f9fc!important}
+  html.v114-activity-mode .mobile-nav,html.v114-verify-mode .mobile-nav{display:none!important}
+  html.v114-activity-mode .auth-wrap,
+  html.v114-activity-mode .premium-hero,
+  html.v114-activity-mode .premium-kpis,
+  html.v114-activity-mode .registry-card,
+  html.v114-activity-mode .activity-mini,
+  html.v114-activity-mode .quick-card,
+  html.v114-activity-mode .verify-panel,
+  html.v114-activity-mode .secure-strip,
+  html.v114-verify-mode .premium-hero,
+  html.v114-verify-mode .premium-kpis,
+  html.v114-verify-mode .registry-card,
+  html.v114-verify-mode .activity-mini,
+  html.v114-verify-mode .quick-card,
+  html.v114-verify-mode .secure-strip{display:none!important}
+  html.v114-activity-mode #activityModal{display:flex!important;position:fixed!important;inset:0!important;z-index:999999!important;width:100vw!important;height:100dvh!important;margin:0!important;padding:0!important;background:#f7f9fc!important;align-items:stretch!important;justify-content:stretch!important;backdrop-filter:none!important}
+  html.v114-activity-mode #activityModal .detail-card{display:block!important;width:100vw!important;max-width:none!important;height:100dvh!important;max-height:none!important;min-height:100dvh!important;margin:0!important;border-radius:0!important;padding:0 14px 24px!important;overflow:auto!important;box-shadow:none!important;background:#fff!important}
+  html.v114-activity-mode #activityModal .modal-head{position:sticky!important;top:0!important;z-index:30!important;margin:0 -14px 8px!important;padding:16px 14px 12px!important;background:#fff!important;border-bottom:1px solid #e6edf5!important}
+  html.v114-activity-mode #activityModal .registry-tools{position:sticky!important;top:75px!important;z-index:25!important;background:#fff!important;padding:8px 0 10px!important}
+  html.v114-activity-mode #activitySearch,html.v114-activity-mode #activityFilter{height:46px!important}
+  html.v114-verify-mode .dashboard-grid{display:block!important}
+  html.v114-verify-mode #verifyCard{display:block!important;min-height:calc(100dvh - 20px)!important;margin:10px 0 0!important;border-radius:24px!important;padding:18px!important;overflow:auto!important}
+  html.v114-verify-mode #verifyCard .card-head h2{font-size:24px!important}
+  html.v114-verify-mode #verifyCode{height:50px!important;font-size:15px!important}
+  html.v114-verify-mode #verifyCard .primary{min-height:50px!important}
 }
 </style>
-<script id="v113-mobile-focus-js">
+<script id="v114-mobile-focus-js">
 (function(){
-  window.v113Activity=function(){
-    document.documentElement.classList.remove('v110-assets-mode','v111-verify-mode','v113-verify-mode');
-    document.documentElement.classList.add('v113-activity-mode');
+  function clearModes(){
+    document.documentElement.classList.remove('v110-assets-mode','v111-verify-mode','v112-activity-mode','v114-activity-mode','v114-verify-mode');
+  }
+  window.v114Activity=function(){
+    clearModes();
+    document.documentElement.classList.add('v114-activity-mode');
     document.querySelectorAll('.mobile-nav-item').forEach(function(b){b.classList.remove('active')});
-    var b=document.getElementById('mobileActivityBtn'); if(b)b.classList.add('active');
-    var m=document.getElementById('activityModal'); if(m)m.classList.add('open');
-    var list=document.getElementById('activityList'); if(list)list.innerHTML='<div class="empty">Loading activity…</div>';
-    if(typeof collectActivity==='function') collectActivity().then(function(rows){if(list)list.innerHTML=typeof activityHtml==='function'?activityHtml(rows):''}).catch(function(){if(list)list.innerHTML='<div class="empty">Unable to load activity.</div>'});
+    var b=document.getElementById('mobileActivityBtn');if(b)b.classList.add('active');
+    var m=document.getElementById('activityModal');if(m)m.classList.add('open');
+    var list=document.getElementById('activityList');
+    if(list)list.innerHTML='<div class="empty">Loading activity…</div>';
+    if(typeof collectActivity==='function'){
+      collectActivity().then(function(rows){if(list)list.innerHTML=typeof activityHtml==='function'?activityHtml(rows):'';}).catch(function(){if(list)list.innerHTML='<div class="empty">Unable to load activity.</div>';});
+    }
     window.scrollTo(0,0);
   };
-  window.v113Verify=function(){
-    document.documentElement.classList.remove('v110-assets-mode','v113-activity-mode');
-    document.documentElement.classList.add('v113-verify-mode');
+  window.v114Verify=function(){
+    clearModes();
+    document.documentElement.classList.add('v114-verify-mode');
     document.querySelectorAll('.mobile-nav-item').forEach(function(b){b.classList.remove('active')});
-    var buttons=document.querySelectorAll('.mobile-nav-item'); if(buttons[3])buttons[3].classList.add('active');
-    window.scrollTo(0,0);
-    var input=document.getElementById('verifyInput'); if(input)setTimeout(function(){input.focus()},120);
-  };
-  window.v113Home=function(){
-    document.documentElement.classList.remove('v110-assets-mode','v112-activity-mode','v113-activity-mode','v111-verify-mode','v113-verify-mode');
-    var m=document.getElementById('activityModal'); if(m)m.classList.remove('open');
-    document.querySelectorAll('.mobile-nav-item').forEach(function(b){b.classList.remove('active')});
-    var b=document.getElementById('mobileHomeBtn'); if(b)b.classList.add('active');
+    var b=document.getElementById('mobileVerifyBtn');if(b)b.classList.add('active');
+    var input=document.getElementById('verifyCode');if(input)setTimeout(function(){input.focus();},120);
     window.scrollTo(0,0);
   };
-  window.closeActivityV113=function(){
-    document.documentElement.classList.remove('v113-activity-mode');
-    var m=document.getElementById('activityModal'); if(m)m.classList.remove('open');
-    var b=document.getElementById('mobileActivityBtn'); if(b)b.classList.remove('active');
+  window.v114Home=function(){
+    clearModes();
+    var m=document.getElementById('activityModal');if(m)m.classList.remove('open');
+    document.querySelectorAll('.mobile-nav-item').forEach(function(b){b.classList.remove('active')});
+    var b=document.getElementById('mobileHomeBtn');if(b)b.classList.add('active');
+    window.scrollTo(0,0);
   };
+  // Make Home leave any focused V114 mode while preserving the existing home behavior.
+  document.addEventListener('DOMContentLoaded',function(){
+    var h=document.getElementById('mobileHomeBtn');if(h)h.onclick=function(){if(typeof v110Home==='function')v110Home();v114Home();};
+  });
 })();
 </script>
+
 </body></html><style id="v99-action-hierarchy">
 /* V99 — action hierarchy: each tool has a distinct visual role instead of identical buttons. */
 .v97-tool-grid{
