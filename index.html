@@ -2062,3 +2062,49 @@ body{background:
   };
 })();
 </script>
+
+<style id="v134-pax-chat-scroll-fix">
+/* V134 — give PAX conversation real scroll space instead of clipping the chat */
+@media(max-width:700px){
+  .pax-panel.open{
+    max-height:min(680px,72dvh)!important;
+  }
+  .pax-chat{
+    max-height:230px!important;
+    min-height:60px!important;
+    overflow-y:auto!important;
+    overscroll-behavior:contain!important;
+    -webkit-overflow-scrolling:touch!important;
+    padding:2px 2px 5px!important;
+  }
+  .pax-body{overflow:hidden!important;display:flex!important;flex-direction:column!important;min-height:0!important}
+  .pax-chat{flex:1 1 auto!important;min-height:0!important}
+  html.pax-keyboard-open .pax-panel{
+    max-height:430px!important;
+    bottom:6px!important;
+  }
+  html.pax-keyboard-open .pax-chat{
+    max-height:185px!important;
+    min-height:0!important;
+    flex:1 1 185px!important;
+  }
+  html.pax-keyboard-open .pax-body{overflow:hidden!important}
+}
+@media(max-width:380px){
+  .pax-panel.open{max-height:74dvh!important}
+  .pax-chat{max-height:220px!important}
+  html.pax-keyboard-open .pax-chat{max-height:170px!important;flex-basis:170px!important}
+}
+</style>
+<script id="v134-pax-chat-scroll-js">
+(function(){
+  function bind(){
+    var c=document.getElementById('paxChat');
+    if(!c)return;
+    c.addEventListener('wheel',function(e){e.stopPropagation()},{passive:true});
+    var mo=new MutationObserver(function(){c.scrollTop=c.scrollHeight});
+    mo.observe(c,{childList:true,subtree:true});
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bind);else bind();
+})();
+</script>
