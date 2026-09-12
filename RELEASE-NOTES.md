@@ -1,8 +1,7 @@
-# Asset Passport V138
+# Asset Passport V139
 
-- Changed plan pricing display from QAR to USD for worldwide positioning.
-- Free: $0 / forever
-- Pro: $7 / month or $70 / year
-- Business: $19 / month or $190 / year
-- Kept monthly and yearly prices clearly visible on mobile.
-- Actual recurring payment checkout is not connected yet.
+- Refined global USD pricing presentation.
+- Added clear annual-value messaging: annual plans are priced at the equivalent of 10 monthly payments, i.e. 2 months free.
+- Added a compact “2 months free” badge to Pro and Business annual pricing.
+- Kept Free / forever, monthly, and yearly pricing readable on mobile.
+- No payment checkout is falsely represented as live.
