@@ -1312,6 +1312,38 @@ init();
   };
 })();
 </script>
+
+<style id="v116-modal-nav-fix">
+@media(max-width:1100px){
+  /* V116: hide the fixed mobile bottom navigation whenever any modal is open. */
+  html.v116-modal-open .mobile-nav{display:none!important;visibility:hidden!important;pointer-events:none!important}
+  html.v116-modal-open body{padding-bottom:0!important}
+}
+</style>
+<script id="v116-modal-nav-fix-js">
+(function(){
+  function syncModalNav(){
+    var nav=document.querySelector('.mobile-nav');
+    var open=document.querySelector('.modal.open');
+    var on=!!open;
+    document.documentElement.classList.toggle('v116-modal-open',on);
+    if(nav){
+      nav.style.setProperty('display',on?'none':'','important');
+      nav.style.setProperty('visibility',on?'hidden':'','important');
+      nav.style.setProperty('pointer-events',on?'none':'','important');
+    }
+  }
+  function boot(){
+    syncModalNav();
+    document.querySelectorAll('.modal').forEach(function(m){
+      new MutationObserver(syncModalNav).observe(m,{attributes:true,attributeFilter:['class']});
+    });
+    document.addEventListener('click',function(){setTimeout(syncModalNav,0)},true);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot); else boot();
+})();
+</script>
+
 </body></html><style id="v99-action-hierarchy">
 /* V99 — action hierarchy: each tool has a distinct visual role instead of identical buttons. */
 .v97-tool-grid{
