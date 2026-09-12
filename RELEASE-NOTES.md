@@ -8,3 +8,5 @@
 - V125 moved Verify back control into the mobile app header for a clean premium layout.
 - Verify back button no longer floats over ASSET COMMAND CENTER.
 - Existing Verify history/back behavior preserved.
+
+V126 — premium mobile Home hero: fixed action spacing, improved Create/Verify button contrast, reduced artwork interference, and kept controls inside the hero with consistent premium sizing.
