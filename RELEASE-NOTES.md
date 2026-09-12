@@ -9,3 +9,8 @@
 - Polished the public verification page for mobile and desktop.
 - Added clearer Verified / Not verified states and structured public-safe asset details.
 - Preserved V105/V106 Overview, Workspace, and Ownership improvements.
+
+V113
+- Fixed mobile Activity navigation so it opens as a true focused full-screen screen instead of the desktop-style modal.
+- Fixed mobile Verify navigation to open a focused Verify screen instead of only scrolling the Home page.
+- Mobile Home now reliably exits focused modes.
