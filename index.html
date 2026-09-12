@@ -1778,6 +1778,26 @@ body{background:
 }
 @media(max-width:380px){.pax-chips{grid-template-columns:1fr}.pax-panel{bottom:154px;max-height:calc(100vh - 195px)}}
 </style>
+<style id="v128-pax-premium-polish">
+/* V128 — compact premium PAX panel */
+.pax-launcher.pax-open-hidden{opacity:0!important;visibility:hidden!important;pointer-events:none!important;transform:scale(.9)!important}
+.pax-panel{width:min(365px,calc(100vw - 32px));max-height:min(560px,calc(100vh - 150px));border-radius:24px;box-shadow:0 28px 80px rgba(5,18,38,.28),0 8px 24px rgba(5,18,38,.12);animation:paxIn .18s ease-out}
+@keyframes paxIn{from{opacity:0;transform:translateY(10px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
+.pax-head{padding:14px 16px 13px}
+.pax-head-left{gap:10px}.pax-head-orb{width:40px;height:40px;border-radius:13px;font-size:20px}.pax-head b{font-size:16px}.pax-head small{font-size:9px}
+.pax-close{width:36px;height:36px;border-radius:11px;font-size:18px}
+.pax-body{padding:14px 15px 12px}.pax-welcome{padding:1px 1px 11px}.pax-welcome b{font-size:17px;letter-spacing:-.02em}.pax-welcome p{font-size:10.5px;line-height:1.4;margin-top:4px}
+.pax-chips{gap:7px;margin-bottom:11px}.pax-chip{min-height:48px;padding:10px 11px;border-radius:14px;font-size:10px;transition:transform .15s ease,background .15s ease,border-color .15s ease,box-shadow .15s ease}.pax-chip:active{transform:scale(.985)}
+.pax-chat{gap:7px;max-height:105px;overflow:auto}.pax-msg{font-size:10.5px;padding:9px 11px;border-radius:13px}
+.pax-input-row{padding-top:10px;margin-top:10px;gap:7px}.pax-input{height:42px;border-radius:13px;font-size:10.5px}.pax-send{width:42px;height:42px;border-radius:13px}
+.pax-foot{padding:0 15px 11px;font-size:8px}
+@media(max-width:650px){
+  .pax-launcher{right:16px;bottom:92px;width:56px;height:56px;border-radius:18px}
+  .pax-panel{right:10px;bottom:158px;width:calc(100vw - 20px);max-height:calc(100vh - 190px);border-radius:22px}
+  .pax-head{padding:14px 14px 12px}.pax-body{padding:12px 13px 10px}.pax-chip{padding:9px 10px;min-height:46px}
+}
+@media(max-width:380px){.pax-panel{bottom:154px;max-height:calc(100vh - 180px)}}
+</style>
 
 <div id="paxRoot" aria-live="polite">
   <button id="paxLauncher" class="pax-launcher" type="button" onclick="togglePax()" aria-label="Open PAX assistant">
@@ -1807,7 +1827,7 @@ body{background:
 (function(){
   function appIsVisible(){var a=document.getElementById('appView');return !!(a&&!a.classList.contains('hidden'))}
   function sync(){var b=document.getElementById('paxLauncher');if(b)b.classList.toggle('pax-visible',appIsVisible())}
-  window.togglePax=function(force){var p=document.getElementById('paxPanel');if(!p)return;var open=typeof force==='boolean'?force:!p.classList.contains('open');p.classList.toggle('open',open);if(open){var i=document.getElementById('paxInput');if(i)setTimeout(function(){i.focus()},80)}};
+  window.togglePax=function(force){var p=document.getElementById('paxPanel');if(!p)return;var b=document.getElementById('paxLauncher');var open=typeof force==='boolean'?force:!p.classList.contains('open');p.classList.toggle('open',open);if(b)b.classList.toggle('pax-open-hidden',open);if(open){var i=document.getElementById('paxInput');if(i)setTimeout(function(){i.focus()},80)}};
   function add(text,who){var c=document.getElementById('paxChat');if(!c)return;var d=document.createElement('div');d.className='pax-msg '+(who==='user'?'pax-user':'pax-bot');d.textContent=text;c.appendChild(d);c.scrollTop=c.scrollHeight}
   function assets(){return Array.isArray(window.assetData)?window.assetData:[]}
   function money(x){return String(x.currency||'QAR')+' '+Number(x.sale_price||0).toFixed(2)}
