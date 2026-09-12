@@ -10,9 +10,9 @@
 - Added clearer Verified / Not verified states and structured public-safe asset details.
 - Preserved V105/V106 Overview, Workspace, and Ownership improvements.
 
+V113
+- Fixed mobile Activity navigation so it opens as a true focused full-screen screen instead of the desktop-style modal.
+- Fixed mobile Verify navigation to open a focused Verify screen instead of only scrolling the Home page.
+- Mobile Home now reliably exits focused modes.
 
-## V114
-- Mobile Activity now uses a true full-screen focused view on narrow screens.
-- Mobile Verify now opens as a true focused view instead of scrolling into the dashboard.
-- Home exits focused modes cleanly.
-- Focus CSS/JS is inserted before the closing body tag for predictable loading.
+- V114 fixed the mobile Asset Details screen so the fixed bottom navigation / + button is hidden while a passport detail is open, and restored automatically after closing the detail.
