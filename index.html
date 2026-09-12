@@ -2000,3 +2000,26 @@ body{background:
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bind);else bind();
 })();
 </script>
+
+<style id="v132-pax-premium">
+/* V132 — premium PAX conversation feedback */
+.pax-typing{display:flex;align-items:center;gap:5px;width:max-content;max-width:78%;padding:10px 13px!important;background:#f1f6fc;border:1px solid #dce8f4;border-radius:15px 15px 15px 5px!important;margin:5px 0 8px!important}
+.pax-typing i{width:6px;height:6px;border-radius:50%;background:#6d8aa8;display:block;animation:paxDot 1s infinite ease-in-out}
+.pax-typing i:nth-child(2){animation-delay:.14s}.pax-typing i:nth-child(3){animation-delay:.28s}
+@keyframes paxDot{0%,60%,100%{transform:translateY(0);opacity:.45}30%{transform:translateY(-4px);opacity:1}}
+.pax-msg.pax-user{box-shadow:0 4px 12px rgba(7,91,180,.10)}
+@media(max-width:700px){.pax-typing{max-width:72%;padding:8px 11px!important}.pax-chat{scroll-behavior:smooth!important}}
+</style>
+<script id="v132-pax-premium-js">
+(function(){
+  var oldAsk=window.paxAsk;
+  if(typeof oldAsk!=='function')return;
+  window.paxAsk=function(q){
+    q=String(q||'').trim();if(!q)return;
+    var chat=document.getElementById('paxChat');
+    if(chat){var old=chat.querySelector('.pax-typing');if(old)old.remove();var t=document.createElement('div');t.className='pax-typing';t.setAttribute('aria-label','PAX is thinking');t.innerHTML='<i></i><i></i><i></i>';chat.appendChild(t);chat.scrollTop=chat.scrollHeight;}
+    oldAsk(q);
+    setTimeout(function(){if(chat){var t2=chat.querySelector('.pax-typing');if(t2)t2.remove()}},210);
+  };
+})();
+</script>

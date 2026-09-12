@@ -9,3 +9,8 @@ V131 — PAX keyboard stability polish
 - Keeps PAX as a compact card when the Android keyboard opens instead of allowing the sheet to jump too far upward.
 - Detects keyboard state with visualViewport and reduces PAX content to the chat/input essentials while typing.
 - Preserves the normal premium bottom-sheet layout when the keyboard is closed.
+
+V132 — PAX premium conversation polish
+- Added a lightweight animated thinking indicator when PAX receives a question.
+- Improved mobile chat feel without changing the stable keyboard layout from V131.
+- Preserved existing PAX workspace-data answers and navigation behavior.
